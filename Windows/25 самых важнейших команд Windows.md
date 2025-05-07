@@ -19,11 +19,11 @@
 
 ---
 
-### 3. msinfo
+### 3. msinfo32
 
 Приложение System Information предоставляет обширную информацию об оборудовании и программном обеспечении вашего ПК. Это обязательная команда для просмотра спецификаций любого ПК. Информация разделена на категории, что облегчает поиск нужной информации. Здесь можно экспортировать информацию в файл, что идеально подходит для получения технической помощи в Интернете.
 
-[![msinfo](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/3.jpeg "msinfo")](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/3.jpeg)
+![[Pasted image 20250507142402.png]]
 
 ---
 
@@ -31,7 +31,7 @@
 
 Данная команда открывает окно "Резервного копирования и восстановления системы".
 
-[![sdclt](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/4.png "sdclt")](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/4.png)
+![[Pasted image 20250507142501.png]]
 
 ---
 
@@ -39,9 +39,7 @@
 
 Все настройки относительно мыши можно сделать в этом окне: поменять роли кнопок, скорость реакции т.п.
 
-[![Настройки мыши - main.cpl](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/5.jpeg "Настройки мыши - main.cpl")](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/5.jpeg)
-
-Кстати, идея чтобы пошутить с другом: поменяйте роли кнопок мыши. Это прикольно.
+![[Pasted image 20250507142543.png]]
 
 ---
 
@@ -51,21 +49,20 @@
 
 > **Внимание!** Все изменения в реестре влияют на работоспособность системы, потому крайне не рекомендуется редактировать его, если не знаете чего хотите.
 
-[![regedit](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/6.jpeg "regedit")](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/6.jpeg)
-
 ---
-
-### 7. sysadm.cpl
+### 7. sysdm.cpl
 
 Нет - это не команда быстрого вызова сисадмина. Она запускает параметры системы, где можно настроить производительность, переменные среды и т.п.
 
-[![sysadm.cpl](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/7.jpeg "sysadm.cpl")](https://wiki.merionet.ru/images/25-samyx-vazhnejshix-komand-windows/7.jpeg)
+![[Pasted image 20250507142657.png]]
 
 ---
 
 ### 8. powercfg.cpl
 
-Быстрый доступ к настройкам питания. Именно здесь настраивается поведение компьютера в зависимости от режима питания, таймоут до спящего режима и т.п.
+Быстрый доступ к настройкам питания. Именно здесь настраивается поведение компьютера в зависимости от режима питания, таймaут до спящего режима и т.п.
+
+![[Pasted image 20250507142904.png]]
 
 ---
 
