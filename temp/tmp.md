@@ -6,6 +6,9 @@
 
 ![[Pasted image 20250508163132.png]]
 
+**Отзывы** - иероглиф "стрелка вверх" в конце 
+![[Pasted image 20250508163305.png]]
+
 
 ![](https://img1.teletype.in/files/45/ab/45aba997-d1f3-41c4-84f8-eb85b2912229.png)
 
