@@ -21,3 +21,6 @@
 | pen — pens   | pet — pets   |
 | bell — bells | step — steps |
 | bed — beds   | test — tests |
+
+### Слово please [pli:z]  — пожалуйста для выражения просьбы в  конце неполных повелительных предложений
+
