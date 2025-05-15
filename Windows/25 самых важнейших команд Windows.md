@@ -168,6 +168,17 @@
 ![[Pasted image 20250507143744.png]]
 
 ---
+### 23. netstat
+
+```
+netstat -anobv
+
+netstat -r
+
+netstat -se
+
+ipconfig -all
+```
 
 ### Заключение
 
