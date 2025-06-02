@@ -1,3 +1,3 @@
 ### Как работает HTTPS
 
-Hypertext Transfer Protocol Secure (`HTTPS`) - это расширение HTTP, передающее зашифрованные данные используя Transport Layer Security (TLS). 
+Hypertext Transfer Protocol Secure (`HTTPS`) - это расширение HTTP, передающее зашифрованные данные используя Transport Layer Security (TLS). Если данные перехватываются в режиме онлайн, все, что получает злоумышленник, — это двоичный код.
