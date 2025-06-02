@@ -5,6 +5,6 @@ Hypertext Transfer Protocol Secure (`HTTPS`) - это расширение HTTP,
 ![[Pasted image 20250602094034.png]]
 **Как данные зашифровываются и расшифровываются**
 
-
+1. **Шаг 1** - 
 
 
