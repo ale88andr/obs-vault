@@ -46,9 +46,64 @@
 
 ![[Pasted image 20250619111713.png]]
 
+---
 
+![[Pasted image 20250619111833.png]]
 
+---
 
+![[Pasted image 20250619111914.png]]
+
+![[Pasted image 20250619111932.png]]
+
+![[Pasted image 20250619112011.png]]
+
+---
+
+![[Pasted image 20250619112107.png]]
+
+---
+
+![[Pasted image 20250619112146.png]]
+
+---
+
+![[Pasted image 20250619112204.png]]
+
+---
+
+![[Pasted image 20250619112250.png]]
+
+![[Pasted image 20250619112309.png]]
+
+![[Pasted image 20250619112326.png]]
+
+![[Pasted image 20250619112343.png]]
+
+---
+
+![[Pasted image 20250619112407.png]]
+
+![[Pasted image 20250619112426.png]]
+
+![[Pasted image 20250619112439.png]]
+
+![[Pasted image 20250619112457.png]]
+
+![[Pasted image 20250619112521.png]]
+
+---
+
+![[Pasted image 20250619112550.png]]
+![[Pasted image 20250619112602.png]]
+
+![[Pasted image 20250619112624.png]]
+
+![[Pasted image 20250619112644.png]]
+
+---
+
+![[Pasted image 20250619112716.png]]
 
 
 
