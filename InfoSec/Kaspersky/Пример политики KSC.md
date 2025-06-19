@@ -104,8 +104,21 @@
 ---
 
 ![[Pasted image 20250619112716.png]]
+![[Pasted image 20250619112907.png]]
 
+---
 
+![[Pasted image 20250619112927.png]]
+
+![[Pasted image 20250619113005.png]]
+
+![[Pasted image 20250619113025.png]]
+
+![[Pasted image 20250619113046.png]]
+
+![[Pasted image 20250619113108.png]]
+
+![[Pasted image 20250619113201.png]]
 
 
 
