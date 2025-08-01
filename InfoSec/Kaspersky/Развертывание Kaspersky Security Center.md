@@ -325,3 +325,5 @@ sudo systemctl restart KSC*
 |Управление сторонними лицензиями|+|-|
 Полное сравнение вы можете посмотреть в онлайн справке на сайте Лаборатории Касперского: [Сравнение версий Kaspersky Security Center: на базе Windows и на базе Linux](https://support.kaspersky.com/help/KSCLinux/14.2/ru-RU/211055.htm)
 
+> `journalctl -u kladminserver_srv` - журналы KSCL
+
