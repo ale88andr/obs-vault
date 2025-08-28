@@ -106,3 +106,7 @@ git hash-object -w hello.txt
 git cat-file -p <blob_hash>
 ```
 
+cd
+
+
+
