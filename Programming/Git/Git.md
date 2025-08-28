@@ -203,3 +203,6 @@ git branch
 
 
 
+## Commit Messages
+
+![[Pasted image 20250828175644.png]]
