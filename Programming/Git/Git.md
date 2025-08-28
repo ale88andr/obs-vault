@@ -98,7 +98,7 @@ echo "Hello Git World" > hello.txt
 git hash-object -w hello.txt
 ```
 
-**Git** вернёт `SHA-1` хеш — это `ID` blob-объекта.
+**Git** вернёт `SHA-1` хеш — это `ID` blob-объекта. И создаст `blob` объект в директории `.git/objects`
 
 Посмотреть содержимое:
 
@@ -106,7 +106,29 @@ git hash-object -w hello.txt
 git cat-file -p <blob_hash>
 ```
 
-cd
+##### Шаг 3: Создаём tree-объект
+
+Создаем индекс вручную:
+
+```shell
+git update-index --add hello.txt
+```
+
+Создай tree:
+
+```shell
+git write-tree
+```
+
+Это создаёт **snapshot** текущего состояния файлов. 
+
+Посмотреть дерево:
+
+```shell
+git ls-tree <tree_hash>
+```
+
+
 
 
 
