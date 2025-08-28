@@ -189,3 +189,13 @@ sudo nano .git/refs/heads/new
 
 и занесем туда хеш коммита из существующей ветки, например, `main`
 
+проверяем ветки:
+
+```shell
+git branch 
+* main
+  new
+```
+
+
+
