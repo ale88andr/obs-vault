@@ -179,5 +179,13 @@ git update-ref HEAD <commit_hash>
 | Tree   | `git write-tree`      | Структура файлов             |
 | Commit | `git commit-tree`     | Снимок состояния + сообщение |
 | HEAD   | `git update-ref HEAD` | Указатель на текущий коммит  |
-Создадим ветку вручную
+Создадим ветку вручную:
+
+Создадим новый файл в директории `.git/refs/heads`
+
+```
+sudo nano .git/refs/heads/new
+```
+
+и занесем туда хеш коммита из существующей ветки, например, `main`
 
