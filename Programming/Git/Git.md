@@ -171,9 +171,11 @@ committer Alexandr <ale88andr@gmail.com> 1756380844 +0000
 git update-ref HEAD <commit_hash>
 ```
 
-|Объект|Команда|Назначение|
-|---|---|---|
-|Blob|`git hash-object -w`|Содержимое файла|
-|Tree|`git write-tree`|Структура файлов|
-|Commit|`git commit-tree`|Снимок состояния + сообщение|
-|HEAD|`git update-ref HEAD`|Указатель на текущий коммит|
+при этом в `.git/refs/heads/main` изменится `SHA-1` коммита на `<commit_hash>`
+
+| Объект | Команда               | Назначение                   |
+| ------ | --------------------- | ---------------------------- |
+| Blob   | `git hash-object -w`  | Содержимое файла             |
+| Tree   | `git write-tree`      | Структура файлов             |
+| Commit | `git commit-tree`     | Снимок состояния + сообщение |
+| HEAD   | `git update-ref HEAD` | Указатель на текущий коммит  |
