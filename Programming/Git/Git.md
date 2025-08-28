@@ -138,8 +138,23 @@ git ls-tree <tree_hash>
 100644 blob ea701271a58054773256b0ff0dbf2fde425f19d6    hello.txt
 ```
 
+##### Шаг 4: Создаём commit вручную
 
 
+```shell
+git commit-tree <tree_hash> -m "Мой ручной коммит"
+```
 
+**Git** вернёт хеш коммита.
+
+```
+565c1e81e364d72767d6c0c95ae0513473cdb237
+```
+
+Посмотреть:
+
+```shell
+git cat-file -p <commit_hash>
+```
 
 
