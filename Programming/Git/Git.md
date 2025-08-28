@@ -157,4 +157,17 @@ git commit-tree <tree_hash> -m "Мой ручной коммит"
 git cat-file -p <commit_hash>
 ```
 
+```shell
+tree e497723a6beb377202329333c7fa5b074f298fb7
+author Alexandr <ale88andr@gmail.com> 1756380844 +0000
+committer Alexandr <ale88andr@gmail.com> 1756380844 +0000
 
+Мой ручной коммит
+```
+
+|Объект|Команда|Назначение|
+|---|---|---|
+|Blob|`git hash-object -w`|Содержимое файла|
+|Tree|`git write-tree`|Структура файлов|
+|Commit|`git commit-tree`|Снимок состояния + сообщение|
+|HEAD|`git update-ref HEAD`|Указатель на текущий коммит|
