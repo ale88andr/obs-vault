@@ -197,5 +197,9 @@ git branch
   new
 ```
 
+## Области **Git**
+
+![[Pasted image 20250828175325.png]]
+
 
 
