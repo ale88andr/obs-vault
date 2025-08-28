@@ -165,6 +165,12 @@ committer Alexandr <ale88andr@gmail.com> 1756380844 +0000
 Мой ручной коммит
 ```
 
+##### Шаг 5: Привязываем HEAD
+
+```shell
+git update-ref HEAD <commit_hash>
+```
+
 |Объект|Команда|Назначение|
 |---|---|---|
 |Blob|`git hash-object -w`|Содержимое файла|
