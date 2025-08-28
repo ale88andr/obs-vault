@@ -96,6 +96,7 @@ echo "Hello Git World" > hello.txt
 
 ```shell
 git hash-object -w hello.txt
+ea701271a58054773256b0ff0dbf2fde425f19d6
 ```
 
 **Git** вернёт `SHA-1` хеш — это `ID` blob-объекта. И создаст `blob` объект в директории `.git/objects`
