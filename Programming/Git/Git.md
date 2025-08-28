@@ -8,7 +8,7 @@ branches  config  description  HEAD  hooks  info  objects  refs
 Из них наиболее важными являются:
 - `objects`
 - `refs`
-- `HEAD`
+- `HEAD` - указатель на текущую 
 
 
 
