@@ -98,7 +98,13 @@ echo "Hello Git World" > hello.txt
 git hash-object -w hello.txt
 ```
 
-**Git** вернёт `SHA-1` хеш — это `ID` blob-объекта. И создаст `blob` объект в директории `.git/objects`
+**Git** вернёт `SHA-1` хеш — это `ID` blob-объекта. 
+
+```
+ea701271a58054773256b0ff0dbf2fde425f19d6
+```
+
+И создаст `blob` объект в директории `.git/objects`
 
 Посмотреть содержимое:
 
@@ -127,6 +133,11 @@ git write-tree
 ```shell
 git ls-tree <tree_hash>
 ```
+
+```shell
+100644 blob ea701271a58054773256b0ff0dbf2fde425f19d6    hello.txt
+```
+
 
 
 
