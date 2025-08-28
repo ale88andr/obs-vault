@@ -179,3 +179,5 @@ git update-ref HEAD <commit_hash>
 | Tree   | `git write-tree`      | Структура файлов             |
 | Commit | `git commit-tree`     | Снимок состояния + сообщение |
 | HEAD   | `git update-ref HEAD` | Указатель на текущий коммит  |
+Создадим ветку вручную
+
