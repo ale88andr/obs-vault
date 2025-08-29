@@ -234,7 +234,7 @@ git branch
 - `core` - core functior>lity
 - `db` - database, migrations
 - `deps` - dependencies
-- `confiq` - configuration files
+- `config` - configuration files
 - `ui` - user interface
 - `ux` - user experience
 - `i18n` - internationalization
@@ -248,3 +248,14 @@ git branch
 - `ci` - continuous integration
 - `docker` - Docker configuration
 - `k8s` - Kubernetes configs
+
+**Examples**
+- feat(auth): Add 0Auth2 integration 
+- fix(api): handle null in user response 
+- docs(readme): update installation steps 
+- style(ui): format button components 
+- refactor(core): extract validation logic 
+- test(api): add user endpoint tests 
+- build(deps): upgrade React to vl8 
+- chore(config): update eslint rules
+
