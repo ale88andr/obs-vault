@@ -228,3 +228,23 @@ git branch
 - `chore` - other changes (tooling, configs)
 - `revert` - revert previous commit
 
+**Common Scopes**
+- `арi` - API endpoints, contracts
+- `auth` - authentication, authorization
+- `core` - core functior>lity
+- `db` - database, migrations
+- `deps` - dependencies
+- `confiq` - configuration files
+- `ui` - user interface
+- `ux` - user experience
+- `i18n` - internationalization
+- `a11y` -accessibility
+- `security` - security fixes
+- `utils` - utilities, helpers
+- `types` - type definitions
+- `tests` - test infrastructure
+- `docs` - documentation
+- `build` - build scripts
+- `ci` - continuous integration
+- `docker` - Docker configuration
+- `k8s` - Kubernetes configs
