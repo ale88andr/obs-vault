@@ -201,13 +201,13 @@ git branch
 
 ![[Pasted image 20250828175325.png]]
 
-
-
 ## Commit Messages
 
-![[Pasted image 20250829092356.png]]
 
+![[Pasted image 20250829092356.png]]
 ## Conventional commits
+
+![[Pasted image 20250829121125.png]]
 
 ```
 <type>(<scope>): <subject>
