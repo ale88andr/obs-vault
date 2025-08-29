@@ -206,3 +206,25 @@ git branch
 ## Commit Messages
 
 ![[Pasted image 20250829092356.png]]
+
+## Conventional commits
+
+```
+<type>(<scope>): <subject>
+<body>
+<footer>
+```
+
+**Types**
+- `feat` - new feature
+- `fix` - bug fix
+- `docs` - documentation only
+- `style` - formatting, no code change
+- `refactor` - code restructuring, no functional change
+- `perf` - performance improvements
+- `test` - adding tests
+- `build` - build system or dependencies
+- `ci` - Cl configuration files
+- `chore` - other changes (tooling, configs)
+- `revert` - revert previous commit
+
