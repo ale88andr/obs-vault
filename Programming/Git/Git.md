@@ -346,6 +346,47 @@ git rebase main
 |Подготовка ветки перед пушем|`rebase`|
 |Нужно сохранить историю|`merge`|
 |Хочешь чистую линейную историю|`rebase`|
+Пример `rebase`
+
+перепишем историю последних 3-х коммитов
+
+```bash
+# Первый коммит
+echo "console.log('Hello');" > script.js
+git add script.js
+git commit -m "Добавил скрипт"
+
+# Второй коммит
+echo "console.log('World');" >> script.js
+git add script.js
+git commit -m "Дописал вывод"
+
+# Третий коммит
+sed -i '' 's/World/WORLD/g' script.js  # Меняем 'World' на 'WORLD' 
+git add script.js
+git commit -m "Исправил регистр"
+
+git rebase -i HEAD~3
+```
+
+`rebase` предлагает переписать историю:
+
+![[Pasted image 20250901133741.png]]
+
+переписываем используя нужные нам команды, следующим образом
+
+```bash
+reword fcfdbb1 Добавил скрипт
+reword 7444a9f Дописал вывод
+reword a145834 Исправил регистр
+```
+
+и выходим из редактора `rebase`, который сразу же предлагает нам изменить коммит `fcfdbb1` (изменить его коммит-сообщение)
+
+
+
+
+
 ### Стратегии ветвления
 
 ![[Pasted image 20250901122342.png]]
