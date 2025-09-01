@@ -390,3 +390,37 @@ Change Flow:
 (4) Release → created from develop, merged into master after testing
 (5) Master → stable releases only, never direct commits
 ```
+
+## 2. GitHub Flow - Simple Pipeline
+
+```
+time →   0----1----2----3----4----5----6----7----8----9----10---11---12
+         |    |    |    |    |    |    |    |    |    |    |    |    |
+
+main     *----*----*----*----*----*----*----*----*----*----*----*----*    ← Main branch (always deployable)
+         │(1) ↑(2) ↑(3) ↑(4) ↑(5) ↑(6) ↑(7) ↑(8) ↑(9) ↑(10)↑(11)↑(12)
+         │    merge│   merge │   merge │   merge │   merge │   merge │   merge
+         │    │    │    │    │    │    │    │    │    │    │    │    │
+         │    │    │    │    │    │    │    │    │    │    │    │    │
+         ↓    │    │    │    │    │    │    │    │    │    │    │    │
+         
+feature1 *----*PR  |    |    |    |    |    |    |    |    |    |    |    ← Short-lived feature branches
+feature2 |    *----*PR  |    |    |    |    |    |    |    |    |    |
+feature3 |    |    *----*PR  |    |    |    |    |    |    |    |    |
+bugfix1  |    |    |    *----*PR  |    |    |    |    |    |    |    |
+feature4 |    |    |    |    *----*----*PR  |    |    |    |    |    |    ← Sometimes slightly longer
+hotfix1  |    |    |    |    |    *PR  |    |    |    |    |    |    |    ← Quick fixes
+feature5 |    |    |    |    |    |    *----*PR  |    |    |    |    |
+feature6 |    |    |    |    |    |    |    *----*----*PR  |    |    |
+feature7 |    |    |    |    |    |    |    |    *----*PR  |    |    |
+feature8 |    |    |    |    |    |    |    |    |    *----*----*PR  |
+
+Change Flow:
+(1) Create feature branch from main
+(2) Pull Request → Code Review → Merge into main
+(3) Every merge into main = potential release
+(4) Deploy directly from main (often automatic)
+(5) Hotfix = regular feature branch but with priority
+
+PR = Pull Request (Code Review mandatory)
+```
