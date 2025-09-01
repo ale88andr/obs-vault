@@ -350,3 +350,43 @@ git rebase main
 
 ![[Pasted image 20250901122342.png]]
 
+## 1. GitFlow
+
+```
+time →   0----1----2----3----4----5----6----7----8----9----10---11---12
+         |    |    |    |    |    |    |    |    |    |    |    |    |
+
+master   *----*----*---------*-----------------*----*---------*----*     ← Releases only
+         |    |    |         ↑                 ↑    ↑         ↑    ↑
+         |    |    |         │(4)              │(9) │(11)     │    │(12)
+         |    |    |       merge            merge merge    merge  merge
+                             
+hotfix   |    |    |    *----*                 |    |         |    |     ← Emergency fixes
+         |    |    |    ↑    │(3)              |    |         |    |
+         |    |    |  branch │fix              |    |         |    |
+         |    |    |    │    ↓                 |    |         |    |
+         
+release  |    |    |----*----*----*----*----*  |    *----*----*    |     ← Release preparation
+         |    |    ↑    │(2) │    │    │    │  |    ↑    │    │    |
+         |    |  branch │test│bug │test│ ok │  |  branch│test│ ok │
+         |    |    │    ↓    ↓    ↓    ↓    ↓  |    │    ↓    ↓    |
+         
+develop  *----*----*----*----*----*----*----*--*----*----*----*----*     ← Main development
+         │(1) │    ↑    │    │    │    │    │  │    │    │    │    │
+         │    │  merge  │    │    │    │    │  │    │    │    │    │
+         ↓    ↓    │    ↓    ↓    ↓    ↓    ↓  ↓    ↓    ↓    ↓    ↓
+         
+feature1 *----*----*    |    |    |    |    |  |    |    |    |    |     ← Features developed in parallel
+feature2 |    *----*----*    |    |    |    |  |    |    |    |    |
+feature3 |    |    |    *----*----*    |    |  |    |    |    |    |
+feature4 |    |    |    |    |    *----*----*  |    |    |    |    |
+feature5 |    |    |    |    |    |    |    |  *----*----*    |    |
+feature6 |    |    |    |    |    |    |    |  |    |    *----*----*
+
+Change Flow:
+(1) Create feature branches from develop
+(2) Feature → merge into develop after completion  
+(3) Hotfix → created from master, merged into master AND develop
+(4) Release → created from develop, merged into master after testing
+(5) Master → stable releases only, never direct commits
+```
