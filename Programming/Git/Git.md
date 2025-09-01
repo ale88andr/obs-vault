@@ -299,3 +299,5 @@ git branch
 
 - Modern alternative (detached HEAD state, but safer)
 
+## ВЕТКИ И УПРАВЛЕНИЕ ИСТОРИЕЙ
+
