@@ -368,7 +368,7 @@ hotfix   |    |    |    *----*                 |    |         |    |     ← Eme
          
 release  |    |    |----*----*----*----*----*  |    *----*----*    |     ← Release preparation
          |    |    ↑    │(2) │    │    │    │  |    ↑    │    │    |
-         |    |  branch │test│bug │test│ ok │  |  branch│test│ ok │
+         |    |  branch │test│bug │test│ ok │  |  branch │test│ ok │
          |    |    │    ↓    ↓    ↓    ↓    ↓  |    │    ↓    ↓    |
          
 develop  *----*----*----*----*----*----*----*--*----*----*----*----*     ← Main development
