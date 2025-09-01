@@ -419,6 +419,8 @@ git rebase --continue
 
 Повторяем `--continue` до завершения rebase.
 
+![[Pasted image 20250901153438.png]]
+
 ### Стратегии ветвления
 
 ![[Pasted image 20250901122342.png]]
