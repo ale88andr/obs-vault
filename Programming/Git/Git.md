@@ -233,7 +233,7 @@ git branch
 **Common Scopes**
 - `арi` - API endpoints, contracts
 - `auth` - authentication, authorization
-- `core` - core functior>lity
+- `core` - core functionality
 - `db` - database, migrations
 - `deps` - dependencies
 - `config` - configuration files
