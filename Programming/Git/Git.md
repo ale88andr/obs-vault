@@ -586,3 +586,5 @@ PR = Pull Request (Code Review mandatory)
 
 Все хуки располагаются в директории `.git/hooks`
 
+![[Pasted image 20250905152928.png]]
+
