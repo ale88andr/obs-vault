@@ -584,4 +584,5 @@ PR = Pull Request (Code Review mandatory)
 
 Хуки - это `bash` скрипты
 
-Все хуки располагаются в дирректории `.git/hooks`
+Все хуки располагаются в директории `.git/hooks`
+
