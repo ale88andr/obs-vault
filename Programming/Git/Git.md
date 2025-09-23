@@ -610,3 +610,4 @@ PR = Pull Request (Code Review mandatory)
 
 - **pre-applypatch**, **push-to-checkout.sample**, **sendemail-validate.sample** → нишевые случаи, наследие прошлого.
 
+1:25
