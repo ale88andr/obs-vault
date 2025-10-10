@@ -230,18 +230,15 @@ User-Agent: Mozilla/5.0
 - `Host` — домен
 - `User-Agent` — информация о клиенте
 
-## Структура HTTP-ответа
+Структура HTTP-ответа
 
-http
-
-```
+```http
 HTTP/1.1 200 OK
 Content-Type: text/html
 Content-Length: 1234
 ```
 
 - `200 OK` — статус ответа
-    
 - `Content-Type` — тип содержимого
-    
 - `Content-Length` — размер тела
+
