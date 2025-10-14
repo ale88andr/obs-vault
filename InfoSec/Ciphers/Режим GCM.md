@@ -81,8 +81,8 @@ nonce = os.urandom(12)
 aesgcm = AESGCM(key)
 
 # Данные для шифрования
-data = b"секретное сообщение"
-aad = b"дополнительные данные"  # необязательные аутентифицируемые данные
+data = bytes("секретное сообщение", "utf-8")
+aad = bytes("дополнительные данные", "utf-8")  # необязательные аутентифицируемые данные
 
 # Шифрование
 ciphertext = aesgcm.encrypt(nonce, data, aad)
@@ -90,4 +90,6 @@ ciphertext = aesgcm.encrypt(nonce, data, aad)
 print("Nonce:", nonce.hex())
 print("Зашифрованные данные:", ciphertext.hex())
 ```
+
+
 
