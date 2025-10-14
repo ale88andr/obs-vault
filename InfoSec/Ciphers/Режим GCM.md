@@ -91,7 +91,16 @@ ciphertext = aesgcm.encrypt(nonce, data, aad)
 print("Nonce:", int.from_bytes(nonce, "big"))
 print("Nonce hex:", nonce.hex())
 print("Зашифрованные данные:", ciphertext.hex())
+
+# Дешифрование
+decrypted = aesgcm.decrypt(nonce, ciphertext, aad)
+
+print("Открытый текст:", plaintext.decode())
+print("Зашифрованный текст (hex):", ciphertext.hex())
+print("Расшифрованный текст:", decrypted.decode())
 ```
+
+
 
 
 
