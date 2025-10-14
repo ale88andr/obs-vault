@@ -69,6 +69,7 @@ Plaintext: "Hello, world!"
 
 ```python
 import os
+import base64
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 # Генерация 256-битного ключа (32 байта)
@@ -87,9 +88,12 @@ aad = bytes("дополнительные данные", "utf-8")  # необя�
 # Шифрование
 ciphertext = aesgcm.encrypt(nonce, data, aad)
 
-print("Nonce:", nonce.hex())
+print("Nonce:", int.from_bytes(nonce, "big"))
+print("Nonce hex:", nonce.hex())
 print("Зашифрованные данные:", ciphertext.hex())
 ```
+
+
 
 
 
