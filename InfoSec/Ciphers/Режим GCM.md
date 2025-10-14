@@ -100,6 +100,40 @@ print("Зашифрованный текст (hex):", ciphertext.hex())
 print("Расшифрованный текст:", decrypted.decode())
 ```
 
+## Пояснения
+
+- `AESGCM.generate_key()` — безопасная генерация ключа.
+- `os.urandom(12)` — безопасный способ получить уникальный nonce.
+- `encrypt()` — возвращает шифротекст с тегом аутентификации.
+- `decrypt()` — проверяет целостность и расшифровывает данные.
+
+Если тег аутентификации не совпадает (например, данные были изменены), `decrypt()` вызовет исключение.
+
+##### Сохранение ключа и nonce в файл:
+
+```python
+import os
+
+# Генерация ключа и nonce
+key = os.urandom(32)     # 256-битный ключ
+nonce = os.urandom(12)   # 96-битный одноразовый номер
+
+# Сохранение в файл
+with open("crypto_data.bin", "wb") as f:
+    f.write(key)
+    f.write(nonce)
+
+# Чтение из файла
+with open("crypto_data.bin", "rb") as f:
+    key = f.read(32)     # первые 32 байта — ключ
+    nonce = f.read(12)   # следующие 12 байт — nonce
+
+print("Ключ:", key.hex())
+print("Nonce:", nonce.hex())
+```
+
+
+
 
 
 
