@@ -64,3 +64,30 @@ Key:   256-битный AES ключ
 Plaintext: "Hello, world!"
 → GCM использует nonce + счётчик → шифрует → добавляет тег аутентификации
 ```
+
+##### Пример: генерация nonce для AES-GCM
+
+```python
+import os
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+# Генерация 256-битного ключа (32 байта)
+key = AESGCM.generate_key(bit_length=256)
+
+# Генерация одноразового номера (nonce) — 12 байт (96 бит), как рекомендует NIST
+nonce = os.urandom(12)
+
+# Создание объекта шифра AES-GCM
+aesgcm = AESGCM(key)
+
+# Данные для шифрования
+data = b"секретное сообщение"
+aad = b"дополнительные данные"  # необязательные аутентифицируемые данные
+
+# Шифрование
+ciphertext = aesgcm.encrypt(nonce, data, aad)
+
+print("Nonce:", nonce.hex())
+print("Зашифрованные данные:", ciphertext.hex())
+```
+
