@@ -1806,4 +1806,3 @@ SELECT AVG(salary) FROM employees WHERE department = 'Finance';
 ##### Постквантовая криптография (Post-Quantum Cryptography, PQC)
 
 - Трудно предсказать, когда квантовые вычисления сделают текущие методы шифрования устаревшими (или уже сделали)
-- **Угроза "Собери сейчас — расшифруй позже" (Harvest Now,
