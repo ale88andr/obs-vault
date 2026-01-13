@@ -10,5 +10,10 @@ sudo /opt/kaspersky/kesl/bin/kesl-control --get-task-list
 Выгружаем файл настроек задачи обновления для задачи:
 
 ```shell
-sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings ID
+sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings ID --file ./update.xml
 ```
+
+```shell
+sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings 6 --file ./update.xml
+```
+
