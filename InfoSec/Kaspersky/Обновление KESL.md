@@ -13,7 +13,12 @@ sudo /opt/kaspersky/kesl/bin/kesl-control --get-task-list
 sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings ID --file ./update.xml
 ```
 
+Для задачи №6:
+
 ```shell
 sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings 6 --file ./update.xml
 ```
+
+
+
 
