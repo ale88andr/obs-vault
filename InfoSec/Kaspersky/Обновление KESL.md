@@ -32,6 +32,17 @@ ConnectionTimeout=10
 ApplicationUpdateMode=DownloadOnly
 ```
 
+```plain
+SourceType=Custom
+UseKLServerWhenUnavailable=Yes
+ConnectionTimeout=10
+ApplicationUpdateMode=Disabled
+[CustomSources.item_0000]
+URL=/var/update
+Enabled=Yes
+```
+
+
 
 
 
