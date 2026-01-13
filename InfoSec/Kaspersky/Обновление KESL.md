@@ -19,6 +19,19 @@ sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings ID --file ./update.xml
 sudo /opt/kaspersky/kesl/bin/kesl-control --get-settings 6 --file ./update.xml
 ```
 
+Открываем файл настроек:
+
+```shell
+sudo nano update.xml
+```
+
+```plain
+SourceType=KLServers
+UseKLServerWhenUnavailable=Yes
+ConnectionTimeout=10
+ApplicationUpdateMode=DownloadOnly
+```
+
 
 
 
