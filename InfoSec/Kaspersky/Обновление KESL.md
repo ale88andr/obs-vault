@@ -63,6 +63,3 @@ sudo /opt/kaspersky/kesl/bin/kesl-control --app-info
 ```
 
 
-
-
-
