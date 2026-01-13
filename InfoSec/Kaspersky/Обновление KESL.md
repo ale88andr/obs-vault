@@ -32,6 +32,8 @@ ConnectionTimeout=10
 ApplicationUpdateMode=DownloadOnly
 ```
 
+меняем файл настроек задачи:
+
 ```plain
 SourceType=Custom
 UseKLServerWhenUnavailable=Yes
@@ -40,6 +42,12 @@ ApplicationUpdateMode=Disabled
 [CustomSources.item_0000]
 URL=/var/update
 Enabled=Yes
+```
+
+импортируем настройки задачи
+
+```shell
+
 ```
 
 
