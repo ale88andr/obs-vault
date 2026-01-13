@@ -56,7 +56,11 @@ sudo /opt/kaspersky/kesl/bin/kesl-control --set-settings 6 --file ./update.xml
 sudo /opt/kaspersky/kesl/bin/kesl-control --start-task 6
 ```
 
+проверяем статус обновления
 
+```shell
+sudo /opt/kaspersky/kesl/bin/kesl-control --app-info
+```
 
 
 
