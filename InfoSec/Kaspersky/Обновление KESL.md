@@ -47,8 +47,16 @@ Enabled=Yes
 импортируем настройки задачи
 
 ```shell
-
+sudo /opt/kaspersky/kesl/bin/kesl-control --set-settings 6 --file ./update.xml
 ```
+
+запускаем задачу
+
+```shell
+sudo /opt/kaspersky/kesl/bin/kesl-control --start-task 6
+```
+
+
 
 
 
