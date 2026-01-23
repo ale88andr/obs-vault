@@ -258,7 +258,7 @@ sudo ufw logging on
 
 Чтобы задать уровень, укажите его как параметр:
 
- ```
+```
 sudo ufw logging high
 ```
 
