@@ -102,3 +102,5 @@
 - /var/log/audit - 2 ГБ
 - swap - 1 ГБ
 
+# Установка zVirt 4.5
+
