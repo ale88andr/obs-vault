@@ -118,3 +118,9 @@ ovirt-hosted-engine-c1eanup
 engine-cleanup
 ```
 
+Установка
+
+```
+hosted-engine --deploy
+```
+
