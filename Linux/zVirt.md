@@ -146,3 +146,6 @@ hosted-engine --deploy
 
 ![[Pasted image 20260210094142.png]]
 
+## Типы сетевых подключений на виртуальных машинах
+
+![[Pasted image 20260210111310.png]]
