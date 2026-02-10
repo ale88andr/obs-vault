@@ -142,3 +142,7 @@ hosted-engine --deploy
 
 ![[Pasted image 20260210091610.png]]
 
+##### Управление хостами
+
+![[Pasted image 20260210094142.png]]
+
