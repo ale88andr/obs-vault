@@ -53,3 +53,7 @@
 **SQL-сервер**:
 Имя базы — KAV
 
+### Web Console
+
+Web Console представляет собой веб-сервер на платформе `Node.js`. Серверная часть Web Console подключается к Kaspersky Security Center по новому протоколу `KSC Open API` на базе HTTPs.
+
