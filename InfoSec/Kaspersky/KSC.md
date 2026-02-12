@@ -101,3 +101,8 @@ Cканирование сети средствами Windows. Этот тип �
 
 ### Kaspersky Security для Windows Server
 
+У Лаборатории Касперского есть несколько приложений класса ЕРР для защиты физических конечных узлов:
+- Kaspersky Endpoint Security для Windows
+- Kaspersky Security для Windows Server
+- Kaspersky Embedded Systems Security
+
