@@ -312,8 +312,11 @@
 - Запущенные процессы и объекты автозапуска
 - Загрузочные секторы
 - `%systemroot%`\
-- %systemroot%\system\
-— %systemroot%\system32\
-— %system root%\system32\d rivers\
-— %systemroot%\syswow64\
-— %system root%\syswow64\d rivers\
+- `%systemroot%\system\`
+- `%systemroot%\system32\`
+- `%system root%\system32\drivers\`
+- `%systemroot%\syswow64\`
+- `%system root%\syswow64\drivers\`
+
+###### Учетная запись
+
