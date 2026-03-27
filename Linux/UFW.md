@@ -270,6 +270,18 @@ sudo ufw logging high
 ls /var/log/ufw*
 ```
 
+Проверить, включена ли функция ведения логов UFW
+
+```
+sudo ufw status verbose
+```
+
+Как только вы включили журналирование UFW, вы можете использовать команду less для проверки логов брандмауэра UFW в вашей системе:
+
+```
+
+```
+
 ## Отключение IPv6
 
 Disable IPV6 in `/etc/default/ufw` change `IPV6=yes` to `IPV6=no`
