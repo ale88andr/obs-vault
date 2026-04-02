@@ -43,7 +43,7 @@
 
 ## Настройка политик защиты от вирусов и программ-шпионов
 
-Настройте политики в Kaspersky Security Center в соответствии с [таблицей 1](https://cloud.vk.com/docs/on-premises/private-cloud-knowledge-base/best-practices/kesl_settings#tab_policy_settings).
+Настройте политики в Kaspersky Security Center в соответствии с таблицей 1.
 
 Таблица 1 — Настройки политик защиты
 
