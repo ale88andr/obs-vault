@@ -161,7 +161,8 @@ func printer(ch chan bool) {
 	ch <- true 
 }
 
-func main() { 
+func main() {
+	// Этот канал имеет буфер с размером 1
 	c := make(chan int, 1)
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(1)
@@ -182,11 +183,28 @@ func main() {
 	
 	waitGroup.Wait() 
 	
+	// Здесь мы создадим небуферизованный канал и пять горутин без 
+	// синхронизации, поскольку не будем использовать вызовы Add()
 	var ch chan bool = make(chan bool) 
 	for i := 0; i < 5; i++ { 
 		go printer(ch) 
 	}
 	
+	n := 0 
+	for i := range ch {
+		fmt.Println(i) 
+		if i == true { 
+			n++ 
+		} 
+		if n > 2 { 
+			fmt.Println("n:", n) 
+			close(ch) 
+			break 
+		}
+	}
 	
-
+	for i := 0; i < 5; i++ { 
+		fmt.Println(<-ch)
+	}
+}
 ```
