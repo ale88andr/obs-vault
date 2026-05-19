@@ -157,10 +157,15 @@ SignWith: yes
 	- Выполнить команду  `sudo gpg --gen-key` ﻿
 	- На запрос имени указать его (например, MyOrg).
 	- На запрос адреса электронной почты, указать его, например test@astralinux.ru.
+
 >   Сгенерированные ключи размещаются в каталоге `/root/.gnupg`.
+
 9. Создать структуру для репозитория. Для создания собственного репозитория используется утилита `reprepro`:
 
-﻿ ```
-﻿ sudo reprepro --ask-passphrase -b /srv/ftp/astra/ export
-﻿ ```
+﻿```
+﻿sudo reprepro --ask-passphrase -b /srv/ftp/astra/ export
+﻿```
+
+10. Поместить предварительно скачанный deb-пакет в репозиторий:  `sudo reprepro --ask-passphrase -b /srv/ftp/astra/ includedeb 1.8_x86-64 /home/res/Загрузки/zoom_amd64.deb`  где:
+	﻿ `--ask-passphrase`  — фраза-пароль , заданная при генерации ключа (может быть опущена);  `/srv/ftp/astra/`  — имя каталога для репозитория;  `1.8_x86-64`  — кодовое имя_репо (см. файл distributions);  `zoom_amd64.deb`  — имя программного пакета.
 
