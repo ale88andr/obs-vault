@@ -367,3 +367,4 @@ sudo journalctl -e
 | `sudo journalctl --list-boots`                              | Показ списка сохраненных сессий загрузок                                  |
 | `sudo SYSTEMD_LESS=FRXMK journalctl`                        | Просмотр без переноса длинных строк (убрана опция S)                      |
 
+##
