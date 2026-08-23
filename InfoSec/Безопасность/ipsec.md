@@ -13,7 +13,6 @@ related:
   - "[[Firewall]]"
   - "[[Атака Man-In-The-Middle]]"
 ---
-
 # IPsec
 
 > [!abstract] О чём это
