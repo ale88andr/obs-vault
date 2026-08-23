@@ -147,7 +147,3 @@ Destination Port = ANY
 - [[CIA]] — почему одного брандмауэра мало
 - [[Домен 05. Телекоммуникации и сетевая безопасность.]] — теория: поколения МЭ, архитектуры (бастион, dual-homed, screened host), DMZ
 - [[nmap]] — практическое зондирование фаерволов при аудите
-
-## Источник
-
-Адаптировано из статьи [Что такое firewall](https://wiki.merionet.ru/seti/64/chto-takoe-firewall/) на wiki.merionet.ru.
