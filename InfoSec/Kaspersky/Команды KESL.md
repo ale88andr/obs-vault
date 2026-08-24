@@ -1,4 +1,9 @@
-
+---
+tags:
+  - kaspersky
+topic: kesl
+status: stable
+---
 Просмотр информации о работе приложения в командной строке
 
 ```shell

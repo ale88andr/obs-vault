@@ -1,14 +1,12 @@
 filters:
   and:
-    - 'file.ext == "md"'
-    - 'file.inFolder("InfoSec/Kaspersky")'
-
+    - file.ext == "md"
+    - file.inFolder("InfoSec/Kaspersky")
 properties:
   topic:
     displayName: Тема
   status:
     displayName: Статус
-
 views:
   - type: table
     name: Все заметки
@@ -18,17 +16,17 @@ views:
       - status
   - type: table
     name: По темам
-    order:
-      - file.name
-      - status
     groupBy:
       property: topic
       direction: ASC
+    order:
+      - file.name
+      - status
   - type: table
     name: Черновики (доработать)
     filters:
       and:
-        - 'status == "draft"'
+        - status == "draft"
     order:
       - file.name
       - topic

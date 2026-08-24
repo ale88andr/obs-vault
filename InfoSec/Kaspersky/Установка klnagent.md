@@ -1,4 +1,9 @@
-
+---
+tags:
+  - kaspersky
+topic: ksc
+status: stable
+---
 # Подготовка Astra Linux для удаленной установки
 
 https://support.kaspersky.ru/ksc-linux/14.2/137593

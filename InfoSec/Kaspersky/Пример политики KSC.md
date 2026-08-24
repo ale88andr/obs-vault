@@ -1,4 +1,9 @@
-
+---
+tags:
+  - kaspersky
+topic: kes
+status: stable
+---
 ![[Pasted image 20250619110832.png]]
 ![[Pasted image 20250619110904.png]]
 ![[Pasted image 20250619110934.png]]

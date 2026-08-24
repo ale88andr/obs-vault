@@ -1,3 +1,9 @@
+---
+tags:
+  - kaspersky
+topic: ksc
+status: stable
+---
 ### 1. Как поддерживать защиту
 
 | Как часто           | Что делать                                                                                                            |

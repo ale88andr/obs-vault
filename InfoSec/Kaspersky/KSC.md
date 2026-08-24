@@ -1,4 +1,9 @@
-
+---
+tags:
+  - kaspersky
+topic: ksc
+status: stable
+---
 ### Компоненты KSC
 
 - Сервер администрирования

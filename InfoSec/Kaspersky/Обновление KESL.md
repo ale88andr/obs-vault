@@ -1,4 +1,9 @@
-
+---
+tags:
+  - kaspersky
+topic: kesl
+status: stable
+---
 Проверить задачу обновления:
 
 ```shell
