@@ -81,7 +81,7 @@ status: stable
 
 ![[Pasted image 20250619112309.png]]
 
-![[Pasted image 20250619112326.png]]
+%% Скриншот `Pasted image 20250619112326.png` отсутствует в attachments (потерян). Если найдётся — вернуть эмбед сюда. %%
 
 ![[Pasted image 20250619112343.png]]
 
