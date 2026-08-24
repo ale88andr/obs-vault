@@ -14,6 +14,11 @@ views:
       - file.name
       - topic
       - status
+    sort:
+      - property: topic
+        direction: ASC
+      - property: status
+        direction: ASC
   - type: table
     name: По темам
     groupBy:
