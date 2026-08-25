@@ -2,11 +2,12 @@
 epoch: 1787630388109
 mode: agent
 backendId: opencode
-projectId: "2e9a8132-8bdd-4a71-bdc4-1f57e842f310"
-sessionId: "ses_fc8eed09effeff9jwwfwsASiyD"
+projectId: 2e9a8132-8bdd-4a71-bdc4-1f57e842f310
+sessionId: ses_fc8eed09effeff9jwwfwsASiyD
 usage: '{"usedTokens":92466,"contextWindow":200000,"updatedAt":1787632393078}'
 tags:
   - copilot-conversation
+lastAccessedAt: 1787632674797
 ---
 
 **user**: Я собираюсь изучать VipNet Prime, помоги мне составить структуру проекта с основными этапами обучения, предложи обязательные темы для изучения, расставь приоритеты
