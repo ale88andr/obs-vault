@@ -1,0 +1,15 @@
+---
+epoch: 1787630388109
+mode: agent
+backendId: opencode
+projectId: "2e9a8132-8bdd-4a71-bdc4-1f57e842f310"
+sessionId: "ses_fc8eed09effeff9jwwfwsASiyD"
+tags:
+  - copilot-conversation
+---
+
+**user**: Я собираюсь изучать VipNet Prime, помоги мне составить структуру проекта с основными этапами обучения, предложи обязательные темы для изучения, расставь приоритеты
+[Timestamp: 2026/08/25 06:59:48]
+
+**ai**: 
+[Timestamp: 2026/08/25 06:59:48]
