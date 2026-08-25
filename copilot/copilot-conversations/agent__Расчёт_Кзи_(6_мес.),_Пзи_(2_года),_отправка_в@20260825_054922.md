@@ -3,7 +3,7 @@ epoch: 1787626162619
 mode: agent
 backendId: opencode
 sessionId: "ses_fc93b3a4fffeTfOyo7snfH8z8p"
-usage: '{"usedTokens":88868,"contextWindow":200000,"updatedAt":1787628138926}'
+usage: '{"usedTokens":0,"contextWindow":200000,"updatedAt":1787628649269}'
 tags:
   - copilot-conversation
 ---
@@ -94,3 +94,15 @@ tags:
 
 Единственное, что стоит периодически перепроверять вручную — блок про Пзи: когда ФСТЭК опубликует отдельную методику уровня зрелости, этот подраздел нужно будет обновить.
 [Timestamp: 2026/08/25 06:19:56]
+
+**user**: подготовь наименования локальных нормативных актов которые необходимы для реализации приказа 117 в организации
+[Timestamp: 2026/08/25 06:30:43]
+
+**ai**: **Error:** Internal error: unknown certificate verification error
+[Timestamp: 2026/08/25 06:30:43]
+
+**user**: подготовь наименования локальных нормативных актов которые необходимы для реализации приказа 117 в организации
+[Timestamp: 2026/08/25 06:30:59]
+
+**ai**: 
+[Timestamp: 2026/08/25 06:30:59]
