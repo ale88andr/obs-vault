@@ -15,7 +15,7 @@ source-doc: Синтаксис языка запросов PDQL (ред. от 28
 
 > [!info] Источник
 > [!pdqlsyntax.pdf](pdqlsyntax.pdf) — MaxPatrol VM, версия 2.0, документ «Синтаксис языка запросов PDQL», дата редакции 28.07.2023, © Positive Technologies.
-> Заметка — выжимка этого документа: полный перечень операций, предикатов, псевдонимов, операторов, типов данных и математических функций.
+> Заметка — выжимка этого документа: полный перечень операций, предикатов, псевдонимов, операторов, типов данных и математических функций. Дополнительно сверено с локальной документацией **MaxPatrol VM 2.8** (раздел «Справочник по языку запросов PDQL») — расхождения исправлены по ней.
 
 PDQL (Positive Data Query Language) — язык запросов MaxPatrol VM для фильтрации активов, настройки представления данных, объединения активов в динамические группы и построения виджетов. Условие на PDQL — это логическое выражение (предикат) над объектами модели активов.
 
@@ -37,6 +37,10 @@ PDQL (Positive Data Query Language) — язык запросов MaxPatrol VM �
 | Ограничение | `Limit(<Кол-во записей>)` | ограничение выборки |
 | Уникальность | `Unique()` | только уникальные записи |
 | Объединение | `Join(<Условие> as <Псевдоним>, <Условие объединения>)` | объединение двух запросов |
+| Быстрый поиск | `qsearch(<Строка>)` | поиск по заданной строке (например, FQDN или IP актива) |
+
+> [!note] Операции по списку зарезервированных слов
+> В [[Зарезервированные слова]] как операции перечислены: `qsearch, select, filter, sort, limit, unique, group, join, calc`. `Timepoint` и `Timeseries` в этом списке не названы, но описаны в [[Фильтрация активов в таблице]] и используются в конвейере так же, как остальные операции.
 
 ```mermaid
 graph LR
@@ -108,9 +112,12 @@ Host [not Softs.Name = "Kaspersky"]
 > [!warning] Операнды должны быть одного типа
 > В предикатах нельзя смешивать типы операндов: `@WindowsHost`, `WindowsHost.@CumulativeVulnerability`, `WindowsHost.@UpdateTime`, `WindowsHost.Groups.Name` — не взаимозаменяемы.
 
+> [!warning] Полный модельный путь — через двоеточия
+> В предикатах, которые обращаются к полному модельному пути (`@FullType`), вместо точек используются двоеточия: `WindowsHost.Softs<Software:Kaspersky:KasperskySecurityCenter>.Plugins`.
+
 ### 2.5 Значение `null`
 
-`<Операнд> = null` проверяет отсутствие значения. Удобная замена: `<Операнд> != null`.
+`<Операнд> = null` проверяет отсутствие значения, `<Операнд> != null` — наличие. Вместо `<Операнд> != null` можно писать просто `<Операнд>`.
 
 > [!warning] Ограничение
 > `= null` **не применяется к псевдонимам**.
@@ -128,7 +135,7 @@ Host [not Softs.Name = "Kaspersky"]
 ## 3. Фильтрация по времени
 
 ```text
-Синтаксис: <Атрибут актива или его псевдоним> <Оператор> <Момент времени> <Арифметическая операция> <Период>
+Синтаксис: <Атрибут актива или его псевдоним> <Оператор> <Момент времени>() <Арифметическая операция> <Период>
 ```
 
 - сложение `+` — период **в будущем** (например, скорое устаревание актива)
@@ -173,7 +180,7 @@ Host [not Softs.Name = "Kaspersky"]
 
 ```text
 # Активы, которые устареют в течение недели
-Select(@Host) | Filter(Host.@DeletionTime <= Now() + 7days)
+Select(@Host, Host.@DeletionTime) | Filter(Host.@DeletionTime <= Now() + 7days)
 
 # Учётные записи, у которых за месяц сменился пароль
 Select(UnixHost.User<UnixUser>.Name, UnixHost.User<UnixUser>.PasswordLastChanged as "Смена пароля")
@@ -226,6 +233,14 @@ Filter(Host.HostRoles.Role = 'Domain Controller')
 | Select(fqdn, ip, id)
 ```
 
+`Calc` используется не только для смены регистра, но и для вычислений, в том числе с условным оператором `if / then / else` (входит в [[Зарезервированные слова]]). Пример из документации — расчёт уровня критичности уязвимости:
+
+```text
+calc(if total > 8 then "Critical" else if total >= 5 then "High" else if total >= 2 then "Medium" else "Low" as criticality)
+```
+
+Источник: [[Оценка уровня опасности уязвимостей на активах по методике ФСТЭК]].
+
 ---
 
 ## 6. Псевдонимы
@@ -238,6 +253,7 @@ Filter(Host.HostRoles.Role = 'Domain Controller')
 | --- | --- | --- |
 | `@HOST` | узлы (отображаемое имя, ID, тип актива, тип устройства) | ✅ |
 | `@ACTIVEDIRECTORY` | службы каталогов Active Directory | ✅ |
+| `@WEBSITE` | веб-приложения | ✅ |
 | `@NAME` | атрибут `DisplayName` | ✅ |
 | `@ID` | атрибут `GUID` | ✅ |
 | `@TYPE` | тип актива (полное или краткое наименование) | ✅ |
@@ -262,7 +278,10 @@ Filter(Host.HostRoles.Role = 'Domain Controller')
 | `@IPLIST` | список IP через разделитель `" | "` |
 | `@MACLIST` | список MAC через разделитель `" | "` |
 | `@IPENDPOINTLIST` | список IP целей межсетевого взаимодействия |
-| `@ETHERNETIPENDPOINTLIST` | список MAC целей межсетевого взаимодействия |
+| `@ETHERNETENDPOINTLIST` | адреса целей межсетевого взаимодействия, разделитель `" | "` |
+
+> [!warning] Имена списков адресов
+> В документации MaxPatrol VM 2.8 приведены `@IPENDPOINTLIST` и `@ETHERNETENDPOINTLIST` (адреса целей межсетевого взаимодействия) — записи вида `@ETHERNETIPENDPOINTLIST` не существует. Псевдоним `@MACLIST` в документации 2.8 не описан; при ошибке используйте `@MACADDRESSES` / `@MACADDRESSES.ITEM`.
 
 ```text
 Host.@IpAddresses contains 192.0.2.10
@@ -339,15 +358,24 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 | `@VULNERS.STATUS` / `.STATUSUPDATETIME` | статус уязвимости / время его изменения | ✅ |
 | `@VULNERS.STATUSREASON` | уточнение к статусу | ✅ |
 | `@VULNERS.STATUSCOMMENT` | комментарий к статусу | ✅ |
+| `@VULNERS.TYPE` | тип уязвимости | ✅ |
+| `@VULNERS.THREATID` | идентификатор экземпляра веб-уязвимости, заданный в модуле WebEngine | ✅ |
 | `@VULNERS.FIXTYPE` | тип устранения | ✅ |
 | `@VULNERS.LASTFIXTIME` | время последнего устранения | ✅ |
 | `@VULNERS.DUETIME` | срок устранения или исключения | ✅ |
 | `@VULNERS.METRICS` | метрики уязвимости | ✅ |
 | `@VULNERS.METRICS.EXPLOITABLE` | возможность эксплуатации | ✅ |
 | `@VULNERS.METRICS.HASFIX` | возможность устранения | ✅ |
+| `@VULNERS.METRICS.HASPATCH` | наличие патча для устранения | ✅ |
 | `@VULNERS.METRICS.HASNETWORKATTACKVECTOR` | эксплуатация по сети | ✅ |
+| `@VULNERS.PATCH` + `.DISPLAYNAME`, `.PATCHTYPE`, `.PATCHDATE`, `.PATCHLINK` | патч: название, тип, дата, ссылка | ✅ |
 | `@VULNERS.ISTREND` / `.ISTRENDSINCE` | трендовая уязвимость / дата попадания в список | ✅ |
 | `@VULNERS.PACKAGEID` / `.PACKAGEVERSION` / `.PACKAGEDESCRIPTION` | пакет уязвимостей | ✅ |
+
+> [!note] Значения статусов
+> `@VULNERS.STATUS` — `null`, `new`, `excluded`, `inProgress`, `awaitingFix`, `fixed`, `overdue`, `stale`.
+> `@VULNERS.STATUSREASON` — `AcceptedAsLowRisk`, `CannotFix`, `CompensatingControl`, `FalsePositive`, `FalsePositiveResolved`, `OfficialFix`.
+> См. [[Псевдонимы уязвимостей]].
 
 ### 6.7 Псевдонимы полей паспорта уязвимости
 
@@ -357,12 +385,13 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 | --- | --- |
 | `@VULNERPASSPORT` | поля паспорта уязвимости |
 | `@VULNERPASSPORT.NAME` / `.DESCRIPTION` | название / описание |
+| `@VULNERPASSPORT.TYPE` | тип уязвимости (для поиска по типу) |
 | `@VULNERPASSPORT.SEVERITYRATING` | уровень опасности |
 | `@VULNERPASSPORT.ISSUETIME` | дата публикации паспорта |
 | `@VULNERPASSPORT.HOWTOFIX` / `.LINKS` | устранение / ссылки |
 | `@VULNERPASSPORT.HASPENTESTCHECK` | наличие пентест-проверки |
 | `@VULNERPASSPORT.ID` | ID паспорта |
-| `@VULNERPASSPORT.KB` | ID в Knowledge Base |
+| `@VULNERPASSPORT.KB` | ID в Knowledge Base (в примерах документации встречается в обращении `Host.Softs.@Vulners.KB`) |
 | `@VULNERPASSPORT.IDS` | ID из публичных баз (кроме KB) |
 | `@VULNERPASSPORT.CVES` | идентификаторы CVE |
 | `@VULNERPASSPORT.SCORE` | общая оценка (берётся из CVSS3, иначе CVSS2) |
@@ -384,14 +413,16 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 Синтаксис запроса: <Запрос> as <Псевдоним>
 ```
 
-- Псевдоним колонки: только латинские буквы, цифры, `_` и `.`
+- Псевдоним колонки может содержать любые символы стандарта UTF-8 и не может начинаться либо заканчиваться пробелом; в кавычки (одинарные или двойные) заключается, если: содержит символы, отличные от латиницы, кириллицы, цифр и `_`; начинается с цифры; совпадает с зарезервированным словом или нестроковой константой
 - Псевдоним запроса: латинские или русские буквы, цифры, `_` и `-`; не может состоять только из цифр и не может начинаться с дефиса
 - Псевдоним запроса добавляется ко всем колонкам: `1, 2, …, n, A.1, A.2, …, A.n`
 
 ```text
 Select(Host.IpAddress as Ip, Host.FQDN as FQDN, Host.IsVirtual as IsVirtual)
-| Group(count(*) as Total)
+| Group(count(*) as "Count")
 ```
+
+`Count` — зарезервированное слово, поэтому заключено в кавычки (пример из [[Псевдонимы колонок таблицы]]).
 
 ---
 
@@ -449,6 +480,7 @@ Select(Host.IpAddress as Ip, Host.FQDN as FQDN, Host.IsVirtual as IsVirtual)
 | Тип | Описание | Пример |
 | --- | --- | --- |
 | `Bool` | логическое значение | `True`, `False` |
+| `Buffer` | массив байтов | `[0x68, 0x65, 0x6c, 0x6c, 0x6f]` |
 | `DateTime` | время для фильтрации активов | `2020-07-22T18:08:38` |
 | `Enum` | один из элементов предопределённого списка | — |
 | `IPAddress` | IPv4 или IPv6 | `192.0.2.235`, `1080:0:0:0:8:800:200C:417A` |
@@ -467,7 +499,7 @@ Select(Host.IpAddress as Ip, Host.FQDN as FQDN, Host.IsVirtual as IsVirtual)
 
 ## 9. Математические функции (приложение Б)
 
-Все функции: `Avg`, `Count`, `Countunique`, `Max`, `Median`, `Min`, `Sum`.
+Все функции агрегации: `Avg`, `Compact`, `Compactunique`, `Count`, `Countunique`, `Max`, `Median`, `Min`, `Sum` (см. [[Математические функции для работы с данными в системе]], [[Зарезервированные слова]]).
 
 ```text
 Select [Поле 1], …, [Поле N] <Функция>(<Аргумент> [Поле]) Where [Условие фильтрации] Group by [Поле 2] Over time [Период]
@@ -476,6 +508,8 @@ Select [Поле 1], …, [Поле N] <Функция>(<Аргумент> [По
 | Функция | Аргументы | Что считает |
 | --- | --- | --- |
 | `Avg` | `All [Поле 1]` | среднее по колонке (только `Number`) |
+| `Compact` | `Compact [Поле 1]` | компактная строка: значение объекта (`String`) + количество (`Number`); к данным любого типа |
+| `Compactunique` | `Compactunique [Поле 1]` | то же, но по уникальным значениям |
 | `Count` | — | количество значений за период (любой тип) |
 | `Count` | `All [Поле 1]` | количество всех значений, кроме `Null` |
 | `Count` | `Distinct [Поле 1]` | количество уникальных значений, кроме `Null` |
@@ -488,6 +522,9 @@ Select [Поле 1], …, [Поле N] <Функция>(<Аргумент> [По
 
 > [!note] Пустые значения
 > `Avg`, `Max`, `Median`, `Min`, `Sum` игнорируют значения типа `Null`. Если все значения `Null` — возвращается `0`.
+
+> [!note] Оговорка про `median` в зарезервированных словах
+> В [[Зарезервированные слова]] пункт `median` помечен как зарезервированный для использования в следующих версиях, но функция `Median` описана в документации и используется в примерах запросов.
 
 ---
 
@@ -502,8 +539,10 @@ Select [Поле 1], …, [Поле N] <Функция>(<Аргумент> [По
 | `asa` | межсетевой экран Cisco ASA |
 | `bsd` | BSD, FreeBSD, macOS, OS X |
 | `checkpoint` | Check Point Gaia и SPLAT |
+| `eos` | ОС Arista EOS |
 | `esxi` | VMware ESX/ESXi |
 | `fortigate` | Fortinet FortiGate |
+| `ftd` | межсетевой экран Cisco FTD |
 | `fwsm` | Cisco FWSM |
 | `hp_ux` | HP-UX |
 | `ios` | Cisco IOS и Cisco IOS XE |
@@ -542,7 +581,7 @@ Host [not Softs.Name = "Kaspersky"]                              — без ПО
 Select(@Host, Host.OsName, Host.OsVersion) | Sort(Host.OsName ASC, Host.OsVersion ASC)
 
 # Сетевые устройства с моделями
-Filter(NetworkDeviceHost) | Select(@NetworkDeviceHost, NetworkDeviceHost.ModelNumber) | Sort(@NetworkDeviceHost ASC)
+Select(@NetworkDeviceHost, NetworkDeviceHost.ModelNumber) | Sort(@NetworkDeviceHost ASC) | Filter(NetworkDeviceHost)
 
 # Учётные записи на узлах
 Select(@Host, Host.User.Name) | Filter(Host.User.Name) | Group(@Host) | Sort(@Host ASC)
@@ -555,7 +594,7 @@ Select(@UnixHost, UnixHost.Groups.Name, UnixHost.Groups.Users)
 
 # Учётные записи Windows, где пароль менялся за последний месяц
 Select(WindowsHost.User<WindowsUser>.Name, WindowsHost.User<WindowsUser>.PasswordLastChanged as t)
-| Filter(t > Now() - 1M)
+| Filter(t > Now() - 1Mo)
 
 # Уникальное ПО, которое есть в системе
 Select(Host.Softs.Name as name, Host.Softs.Version as version, Host.Softs.Vendor as vendor, Host.Softs.@Type as t)
@@ -570,12 +609,35 @@ Select(@Computer, Computer.Processes.Name, Computer.Processes.PID, Computer.Proc
 | Select(@Computer, Computer.Processes.Name as child_proc, P.Computer.Processes.Name as parent_proc)
 ```
 
+### Быстрый поиск (`qsearch`)
+
+```text
+qsearch("<FQDN актива>") | select(@Host, Host.OsName, Host.@CreationTime, Host.@UpdateTime,
+  Host.Softs.@Id, Host.Softs, Host.Softs.Name, Host.Softs.Version, Host.Softs.InstallPath,
+  Host.Softs.@Vulners, Host.Softs.@Vulners.KB) | sort(Host.Softs.@Vulners.KB DESC)
+```
+
+Источник — [[Выявление дублирования уязвимостей]]: в источнике также приведены варианты с `qsearch("<FQDN актива> (<IP-адрес актива>)")` и `qsearch("<IP-адрес актива>")`.
+
+### Сводка колонок и оценок
+
+```text
+# Опасные уязвимости
+Host.@Vulners.SeverityRating in ['Critical', 'High']
+
+# Расчёт критичности
+calc(if total > 8 then "Critical" else if total >= 5 then "High" else if total >= 2 then "Medium" else "Low" as criticality)
+```
+
 ---
 
 ## 12. Что важно знать
 
 > [!important] Общие правила
 > - Все атрибуты модели активов, псевдонимы, названия и описания активов, идентификаторы CVE, поля и значения пользовательских полей — **регистронезависимы**.
+> - Зарезервированные слова (операции, функции, операторы) тоже **регистронезависимы**: `COUNT(*)` и `Count(*)` — одно и то же.
+> - `<Операнд> = null` не применяется к псевдонимам — используйте `<Операнд> != null`.
+> - В динамических группах нельзя использовать `@Importance`, `@CumulativeVulnerability`, `@Vulners.Score`, контекстные метрики и векторы CVSS (`@Vulners.CVSS2ENVIRONMENTALSCORE`, `@VULNERS.CVSS2VECTOR` и им подобные); можно `@Vulners.CVSS2SCORE` / `@VULNERS.CVSS3SCORE`, временные оценки и `@VULNERS.SEVERITYRATING`.
 > - Операторы фильтрации применяются к **моменту времени или периоду**, а не ко всей истории.
 > - `Timepoint` — срез на момент; `Timeseries` — срез за период, нужен для виджетов с распределением по времени.
 > - Условие фильтрации вставляется в поле «Фильтр» или в поле «Указать на языке PDQL».
@@ -598,3 +660,25 @@ Select(@Computer, Computer.Processes.Name, Computer.Processes.PID, Computer.Proc
 - [PDQL-запросы для анализа активов](https://help.ptsecurity.com/ru-RU/projects/vm/2.8/help/1517373339)
 - [first.org](https://www.first.org) — описание метрик и векторов CVSS
 - [mitre.org](https://www.mitre.org) — база уязвимостей CVE
+
+### Локальная документация MaxPatrol VM 2.8
+
+- [[Фильтрация активов в таблице]] — операции конвейера и примеры запросов
+- [[Фильтрация активов с помощью PDQL-запроса]] — фильтрация по заданному запросу
+- [[Фильтрация активов по времени]] — моменты времени и периоды
+- [[Создание динамической группы активов]] — примеры условий и ограничения псевдонимов
+- [[Предикаты для создания условия фильтрации]] — виды предикатов
+- [[Зарезервированные слова]] — операции, функции, операторы
+- [[Типы данных]] — типы данных PDQL
+- [[Математические функции для работы с данными в системе]] — функции агрегации
+- [[Общие псевдонимы активов]] — псевдонимы корневых сущностей
+- [[Псевдонимы уязвимостей]] — статусы, метрики, патчи
+- [[Псевдонимы полей паспорта уязвимости]] — поля `VulnerPassport.*`
+- [[Псевдонимы времени]] — `@CreationTime`, `@UpdateTime` и др.
+- [[Псевдонимы адресов узлов]] — IP/MAC-псевдонимы
+- [[Псевдонимы колонок таблицы]] — правила записи псевдонима колонки
+- [[Значения псевдонима TypeAlias]] — значения типа актива
+- [[Выявление дублирования уязвимостей]] — пример с `qsearch`
+- [[Оценка уровня опасности уязвимостей на активах по методике ФСТЭК]] — пример с `calc(if …)`
+- [[Оптимизация выполнения PDQL-запросов для высоконагруженных систем]] — режимы оптимизации
+- [[Справочник PDQL-запросов для анализа активов]] — описания запросов без литерального синтаксиса
