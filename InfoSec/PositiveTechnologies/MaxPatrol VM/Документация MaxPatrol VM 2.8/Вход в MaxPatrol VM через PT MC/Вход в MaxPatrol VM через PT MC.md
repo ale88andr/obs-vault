@@ -1,14 +1,12 @@
 ---
 tags:
-  - "maxpatrol-vm"
-  - "pt-documentation"
-  - "vm-2.8"
-  - "pt/Вход-в-MaxPatrol-VM-через-PT-MC"
+  - maxpatrol-vm
+  - pt-documentation
 doc_id: "986400651"
 reuse_id: "2176386059"
-source: "https://help.ptsecurity.com/ru-RU/projects/vm/2.8/help/986400651"
-section: "Вход в MaxPatrol VM через PT MC"
-breadcrumb: "Вход в MaxPatrol VM через PT MC"
+source: https://help.ptsecurity.com/ru-RU/projects/vm/2.8/help/986400651
+section: Вход в MaxPatrol VM через PT MC
+breadcrumb: Вход в MaxPatrol VM через PT MC
 product: MaxPatrol VM 2.8
 mirrored: 2026-10-05
 ---
