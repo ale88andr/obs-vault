@@ -34,9 +34,9 @@ PDQL (Positive Data Query Language) — язык запросов MaxPatrol VM �
 | Группировка и агрегация | `Group(<Поле 1>, …, <Поле N>, <Матем. функция>(<Поле>))` | группировка + агрегат |
 | Сортировка | `Sort(<Поле 1> ASC)` / `Sort(<Поле N> DESC)` | порядок записей |
 | Вычисляемые колонки | `Calc(<Условие>)` | вычисляемое поле, смена регистра |
-| Ограничение | `Limit(<Кол-во записей>)` | ограничение выборки |
+| Ограничение | `Limit(<Количество записей в таблице>)` | ограничение выборки |
 | Уникальность | `Unique()` | только уникальные записи |
-| Объединение | `Join(<Условие> as <Псевдоним>, <Условие объединения>)` | объединение двух запросов |
+| Объединение | `Join(<Условие фильтрации> as <Псевдоним>, <Условие объединения>)` | объединение двух запросов |
 | Быстрый поиск | `qsearch(<Строка>)` | поиск по заданной строке (например, FQDN или IP актива) |
 
 > [!note] Операции по списку зарезервированных слов
@@ -104,10 +104,12 @@ UnixHost.Softs.Name like '%Apache%'
 Для сложных условий используются квадратные скобки `[ ]`, логические операторы `AND` / `OR` / `NOT` и круглые скобки `()` для приоритета.
 
 ```text
-Host[HostRoles.Role = 'File Service' and OsCandidates.Family = 'Windows' and OsName != 'Windows 7']
+Host[HostRoles.Role = 'File Service' and Host.OsCandidates.Family = 'Windows' and Host.OsName != 'Windows 7']
 WindowsHost.Endpoints<TransportEndpoint>[Status = 'Open' and Protocol = 'tcp' and Port = 3389]
 Host [not Softs.Name = "Kaspersky"]
 ```
+
+Из запросов документации: `Filter(Host.HostRoles.Role = 'File Service' and Host.OsCandidates.Family = 'Windows' and Host.OsName != 'Windows 7') | Select(@Host)` — файловые службы на ОС, отличных от Windows 7 (см. [[Предикаты для создания условия фильтрации]]).
 
 > [!warning] Операнды должны быть одного типа
 > В предикатах нельзя смешивать типы операндов: `@WindowsHost`, `WindowsHost.@CumulativeVulnerability`, `WindowsHost.@UpdateTime`, `WindowsHost.Groups.Name` — не взаимозаменяемы.
@@ -264,8 +266,8 @@ calc(if total > 8 then "Critical" else if total >= 5 then "High" else if total >
 | `@IMPORTANCE` | значимость: High / Medium / Low / Undefined | ❌ |
 | `@CUMULATIVEVULNERABILITY` | интегральная уязвимость актива | ❌ |
 
-> [!note] `@ACTIVEDIRECTORY`
-> Активы этого типа доступны в таблице активов только после создания динамической группы с фильтром `ActiveDirectory`.
+> [!note] `@ACTIVEDIRECTORY` и `@WEBSITE`
+> Активы служб каталогов Active Directory доступны в таблице активов только после создания динамической группы с фильтром `ActiveDirectory`, а активы веб-приложений — после создания группы с фильтром на основе корневой сущности `WebSite` (см. [[Общие псевдонимы активов]]).
 
 ### 6.2 Адреса узлов
 
@@ -275,13 +277,13 @@ calc(if total > 8 then "Critical" else if total >= 5 then "High" else if total >
 | `@IPADDRESSES.ITEM` | отдельный IP — только в условии фильтрации **до выбора полей** |
 | `@MACADDRESSES` | MAC-адреса: `Host.MacAddress`, `Host.Interfaces.L2Settings.MacAddress`, `Host<Computer>.NetworkCard.Mac` |
 | `@MACADDRESSES.ITEM` | отдельный MAC — только до выбора полей |
-| `@IPLIST` | список IP через разделитель `" | "` |
-| `@MACLIST` | список MAC через разделитель `" | "` |
-| `@IPENDPOINTLIST` | список IP целей межсетевого взаимодействия |
-| `@ETHERNETENDPOINTLIST` | адреса целей межсетевого взаимодействия, разделитель `" | "` |
+| `@IPLIST` | список IP через разделитель `" \| "` |
+| `@MACLIST` | список MAC через разделитель `" \| "` — *в документации 2.8 не описан* |
+| `@IPENDPOINTLIST` | список IP-адресов целей межсетевого взаимодействия |
+| `@ETHERNETENDPOINTLIST` | список MAC-адресов целей межсетевого взаимодействия |
 
 > [!warning] Имена списков адресов
-> В документации MaxPatrol VM 2.8 приведены `@IPENDPOINTLIST` и `@ETHERNETENDPOINTLIST` (адреса целей межсетевого взаимодействия) — записи вида `@ETHERNETIPENDPOINTLIST` не существует. Псевдоним `@MACLIST` в документации 2.8 не описан; при ошибке используйте `@MACADDRESSES` / `@MACADDRESSES.ITEM`.
+> В документации MaxPatrol VM 2.8 приведены `@IPENDPOINTLIST` (список IP-адресов целей) и `@ETHERNETENDPOINTLIST` (список MAC-адресов целей) — записи вида `@ETHERNETIPENDPOINTLIST` не существует. Псевдоним `@MACLIST` в документации 2.8 не описан; при ошибке используйте `@MACADDRESSES` / `@MACADDRESSES.ITEM`. См. [[Псевдонимы адресов узлов]].
 
 ```text
 Host.@IpAddresses contains 192.0.2.10
@@ -344,7 +346,7 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 | `@VULNERS.IMPACT` | тип последствий эксплуатации | ✅ |
 | `@VULNERS.ID` | идентификатор уязвимости | ✅ |
 | `@VULNERS.CVES` / `.CVES.ITEM` | идентификаторы CVE | ✅ |
-| `@VULNERS.KB` | ID в базе Knowledge Base MaxPatrol VM | ✅ |
+| `@VULNERS.KB` | ID в базе Knowledge Base MaxPatrol VM (встречается в примерах запросов документации, например `Host.Softs.@Vulners.KB`) | ✅ |
 | `@VULNERS.IDS` | любые ID из публичных баз (CVE, банк данных угроз ФСТЭК), кроме KB | ✅ |
 | `@VULNERS.SCORE` | общая оценка | ❌ |
 | `@VULNERS.CVSS2SCORE` / `@VULNERS.CVSS3SCORE` | оценки CVSS v2 / v3 | ✅ |
@@ -375,6 +377,11 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 > [!note] Значения статусов
 > `@VULNERS.STATUS` — `null`, `new`, `excluded`, `inProgress`, `awaitingFix`, `fixed`, `overdue`, `stale`.
 > `@VULNERS.STATUSREASON` — `AcceptedAsLowRisk`, `CannotFix`, `CompensatingControl`, `FalsePositive`, `FalsePositiveResolved`, `OfficialFix`.
+>
+> Пример запроса из документации:
+> ```text
+> Host.@Vulners.Status in ['new', 'inProgress', 'awaitingFix', 'stale', 'overdue', 'fixed', 'excluded']
+> ```
 > См. [[Псевдонимы уязвимостей]].
 
 ### 6.7 Псевдонимы полей паспорта уязвимости
@@ -391,7 +398,7 @@ Host.@IpAddresses.Item in 192.0.2.0/24
 | `@VULNERPASSPORT.HOWTOFIX` / `.LINKS` | устранение / ссылки |
 | `@VULNERPASSPORT.HASPENTESTCHECK` | наличие пентест-проверки |
 | `@VULNERPASSPORT.ID` | ID паспорта |
-| `@VULNERPASSPORT.KB` | ID в Knowledge Base (в примерах документации встречается в обращении `Host.Softs.@Vulners.KB`) |
+| `@VULNERPASSPORT.KB` | *в документации 2.8 не описан*; в примерах запросов используется обращение `Host.Softs.@Vulners.KB` (см. 6.6) |
 | `@VULNERPASSPORT.IDS` | ID из публичных баз (кроме KB) |
 | `@VULNERPASSPORT.CVES` | идентификаторы CVE |
 | `@VULNERPASSPORT.SCORE` | общая оценка (берётся из CVSS3, иначе CVSS2) |
