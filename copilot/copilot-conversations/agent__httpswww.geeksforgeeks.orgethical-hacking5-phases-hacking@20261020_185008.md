@@ -4,7 +4,7 @@ mode: agent
 backendId: opencode
 sessionId: "ses_ea5ff6ab2ffeHPFZnF71z5ijCE"
 agentLabel: "We need answer only title. Need infer conversation? User provided URL only. Need generate brief t..."
-usage: '{"usedTokens":20339,"contextWindow":200000,"updatedAt":1792511960289}'
+usage: '{"usedTokens":25449,"contextWindow":200000,"updatedAt":1792512303166}'
 tags:
   - copilot-conversation
 ---
@@ -230,5 +230,30 @@ Want me to save this as a note in your vault?
 **user**: "модель не поддерживает ввод изображений" - как её добавить?
 [Timestamp: 2026/10/20 19:03:50]
 
-**ai**: 
+**ai**: Поддержка ввода изображений зависит не от OpenCode, а от выбранной модели — у текущей (`opencode/big-pickle`) нет vision-возможностей. Нужно переключиться на мультимодальную модель. Два способа:
+
+**1. прямо в OpenCode (проще всего)**
+
+В интерфейсе OpenCode выполните команду `/models` и выберите модель с поддержкой изображений, например:
+
+- `anthropic/claude-sonnet-4-6` (и другие Claude 4.x)
+- `openai/gpt-4o`, `openai/o3`
+- `google/gemini-2.5-pro`
+
+После этого перезапустите сессию — и можно вставлять картинки.
+
+**2. через конфигурацию (постоянно)**
+
+Создайте файл `opencode.json` в корне хранилища (сейчас у вас ни проектного, ни глобального конфига нет):
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-sonnet-4-6"
+}
+```
+
+Либо в глобальном конфиге `~/.config/opencode/opencode.json`, чтобы действовало во всех проектах. После сохранения — перезапуск OpenCode (конфиг не подгружается на лету).
+
+Учтите: для моделей Anthropic/OpenAI/Google нужен API-ключ (или подписка, оформленная через `opencode auth`). Если хотите остаться в экосистеме OpenCode Zen, посмотрите в `/models`, какие из доступных моделей там помечены как vision — не все поддерживают изображения.
 [Timestamp: 2026/10/20 19:03:50]
