@@ -1,329 +1,329 @@
-# [Domain-8](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#domain-8-software-development-security) **Software Development Security**
+# [Домен-8](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#domain-8-software-development-security) **Безопасность разработки ПО**
 
-- Domain 8 has a ~10% exam weighting, and is focused on helping security professionals understand and apply software or application security
+- Домен 8 составляет ~10% экзамена и ориентирован на то, чтобы специалисты по безопасности понимали и применяли принципы безопасности программного и прикладного обеспечения
     
-    - Applications can present significant risks, and we need to understand and balance these risks with business requirements and implement appropriate risk mitigation; if a company develops custom software, the custom solution can present additional, unique risks and vulns
-        - orgs with custom solutions should be on the lookout for logic weaknesses (e.g. buffer overflow vulns), and guard against malicious changes (e.g. backdoors) that can leave the system vulnerable to attacks
-    - As software development environments have become increasingly complex, it's important to review this area -- one of the biggest threats to an organization's security
-- In this domain you'll learn the basic principles behind securely designing, building, testing, operating and even decommissioning enterprise apps
+    - Приложения могут представлять значительные риски, и нам нужно понимать эти риски, уравновешивать их с бизнес-требованиями и внедрять соответствующую митигацию рисков; если компания разрабатывает ПО на заказ, собственное решение может нести дополнительные, уникальные риски и уязвимости
+        - организации с кастомными решениями должны следить за логическими слабостями (например, уязвимостями к переполнению буфера) и защищаться от вредоносных изменений (например, бэкдоров), которые могут сделать систему уязвимой для атак
+    - Поскольку среды разработки ПО становятся всё сложнее, важно уделять этому внимание — это одна из величайших угроз безопасности организации
+- В этом домене вы изучите основные принципы безопасного проектирования, создания, тестирования, эксплуатации и даже вывода из эксплуатации корпоративных приложений
     
-- Security should be part of the design, and incorporated into the architecture, with the level of protection based on requirements and operating environment
+- Безопасность должна закладываться на этапе проектирования и интегрироваться в архитектуру, а уровень защиты определяться требованиями и средой эксплуатации
     
-- **Acceptance**: formal, structured hand-off of the completed software system to the customer org; usually involves test, analysis and assessment activities
+- **Acceptance (приёмка)**: формальная, структурированная передача завершённой системы заказчику; обычно включает тестирование, анализ и оценку
     
-- **Accreditation**: AKA Security Accreditation a formal declaration by a designated accrediting authority (DAA) that an information system is approved to operate at an acceptable level of risk, based on the implementation of an approved set of technical, managerial, and procedural safeguards
+- **Accreditation (аккредитация)**: также Security Accreditation — формальное заявление уполномоченного органа аккредитации (DAA) о том, что информационная система одобрена к эксплуатации на приемлемом уровне риска на основе внедрённого одобренного набора технических, управленческих и процедурных средств защиты
     
-- **ACID Test**: data integrity provided by means of enforcing atomicity, consistency, isolation, and durability policies
+- **ACID-тест**: обеспечение целостности данных путём применения политик атомарности, согласованности, изоляции и долговечности (Atomicity, Consistency, Isolation, Durability)
     
-- **Aggregation**: ability to combine non-sensitive data from separate sources to create sensitive info; note that aggregation is a "security issue", where as inference is an attack (where an attacker can pull together pieces of less sensitive info to derive info of greater sensitivity)
+- **Агрегация (Aggregation)**: способность объединять нечувствительные данные из разных источников для получения конфиденциальной информации; обратите внимание: агрегация — это «проблема безопасности», в то время как инференция (вывод) — это атака (когда злоумышленник собирает фрагменты менее конфиденциальной информации, чтобы получить информацию большей значимости)
     
-- **Arbitrary code**: alternate set of instructions and data that an attacker attempts to trick a processor into executing
+- **Произвольный код (Arbitrary code)**: альтернативный набор инструкций и данных, который злоумышленник пытается подставить процессору на исполнение
     
-- **Buffer overflow**: source code vulnerability allowing access to data locations outside of the storage space allocated to the buffer; can be triggered by attempting to input data larger than the size of the buffer
+- **Переполнение буфера (Buffer overflow)**: уязвимость исходного кода, дающая доступ к областям данных за пределами выделенного буферу пространства хранения; может быть вызвана попыткой ввести данных больше, чем размер буфера
     
-- **Bypass attack**: attempt to bypass front-end controls of a database to access information
+- **Атака обходом (Bypass attack)**: попытка обойти средства контроля интерфейса базы данных для доступа к информации
     
-- **Certification**: comprehensive technical security analysis of a system to ensure it meets all applicable security requirements
+- **Сертификация (Certification)**: комплексный технический анализ безопасности системы с целью подтверждения её соответствия всем применимым требованиям безопасности
     
-- **CAB**: Change Advisory Board purpose is to review and approve/reject proposed code changes
+- **CAB (Change Advisory Board, совет по изменениям)**: его цель — рассмотрение и одобрение/отклонение предлагаемых изменений кода
     
-- **Citizen programmers**: organizational members who codify work-related knowledge, insights, and ideas into (varying degrees of) usable software; the process and result is ad hoc, difficult to manage, and usually bereft of security considerations
+- **Гражданские программисты (Citizen programmers)**: сотрудники организации, которые кодируют свои профессиональные знания, опыт и идеи в (разной степени) пригодное для использования ПО; процесс и результат носят ad hoc характер, ими трудно управлять, и обычно они лишены соображений безопасности
     
-- **Code protection/logic hiding**: prevents one software unit from reading/altering the source/intermediate/executable code of another software unit
+- **Защита кода/сокрытие логики (Code protection/logic hiding)**: не позволяет одному программному модулю читать/изменять исходный/промежуточный/исполняемый код другого программного модуля
     
-- **Code reuse**: reuse of code rather than re-inventing it means units of software (procedures/objects) provide higher productivity toward development requirements using correct, complete, safe code
+- **Повторное использование кода (Code reuse)**: использование уже существующего кода вместо его изобретения заново означает, что модули ПО (процедуры/объекты) обеспечивают более высокую производительность при разработке за счёт корректного, полного и безопасного кода
     
-- **Complete coverage**: testing all of the functions of software
+- **Полное покрытие (Complete coverage)**: тестирование всех функций программного обеспечения
     
-- **Concurrency**: the ability of a system to handle multiple simultaneous operations; managed through locking mechanisms that allow an authorized user to make changes and unlock the data element after changes are complete, preventing conflicts
+- **Конкурентность (Concurrency)**: способность системы обрабатывать множество одновременных операций; управление осуществляется посредством механизмов блокировки, позволяющих авторизованному пользователю вносить изменения и разблокировать элемент данных после их завершения, что предотвращает конфликты
     
-- **Object/Memory reuse**: systems allocate/release and reuse memory/resources as objects to requesting processes; data remaining in the object when it is reused is a potential security violation (i.e. data remanence)
+- **Переиспользование объектов/памяти (Object/Memory reuse)**: системы выделяют/освобождают и переиспользуют память/ресурсы в виде объектов для запрашивающих процессов; данные, остающиеся в объекте при его переиспользовании, — потенциальное нарушение безопасности (т.е. остаточные данные, data remanence)
     
-- **CORBA**: Common Object Request Broker Architecture is a set of standards addressing interoperability between software and hardware products, residing on different machines across a network; providing object location and use across a network
+- **CORBA**: Common Object Request Broker Architecture — набор стандартов, обеспечивающих совместимость между программными и аппаратными продуктами, расположенными на разных машинах в сети; определяет размещение и использование объектов по сети
     
-- **Configuration Control**: process of controlling modifications to hardware, firmware, software, and documentation to protect the information system against improper modifications prior to, during, and after system implementation
+- **Конфигурационный контроль (Configuration Control)**: процесс управления изменениями аппаратного обеспечения, прошивки, программного обеспечения и документации для защиты информационной системы от ненадлежащих изменений до, во время и после внедрения системы
     
-- **Covert Channels/Paths**: a method used to pass information over a path that is not normally used for communication; communication pathways that violate security policy or requirement (deliberately or unwittingly); basic types are timing and storage
+- **Скрытные каналы/пути (Covert Channels/Paths)**: метод передачи информации по каналу, который обычно не используется для связи; коммуникационные пути, нарушающие политику или требования безопасности (сознательно или по незнанию); основные типы — временно́й и хранилищный
     
-- **Data Contamination**: attackers attempt to use malformed inputs, at the field, record, transaction, or file level, in an attempt to disrupt the proper functioning of the system
+- **Контаминация данных (Data Contamination)**: злоумышленники пытаются использовать некорректные (malformed) входные данные на уровне полей, записей, транзакций или файлов с целью нарушить нормальное функционирование системы
     
-- **Data Lake**: a centralized repository that stores large volumes of raw data in its native format, including structured, semi-structured, and unstructured data; unlike a data warehouse, data in a data lake is not processed or structured at the time of storage
+- **Озеро данных (Data Lake)**: централизованное хранилище, хранящее большие объёмы необработанных данных в их исходном формате, включая структурированные, полуструктурированные и неструктурированные данные; в отличие от хранилища данных (data warehouse), данные в озере не обрабатываются и не структурируются на момент сохранения
     
-- **Data Mining**: analysis and decision-making technique that relies on extracting deeper meanings from many different instances and types of data; often applied to data warehouse content
+- **Добыча данных (Data Mining)**: метод анализа и принятия решений, основанный на извлечении более глубоких смыслов из множества различных примеров и типов данных; часто применяется к содержимому хранилищ данных
     
-- **Data Modeling**: design process that identifies all data elements that the system will need to input, create, store, modify, output, and destroy during operational use; should be one of the first steps in analysis and design
+- **Моделирование данных (Data Modeling)**: процесс проектирования, определяющий все элементы данных, которые понадобятся системе для ввода, создания, хранения, изменения, вывода и уничтожения в ходе эксплуатации; должно быть одним из первых шагов в анализе и проектировании
     
-- **Data Protection and Data Hiding**: restricts or prevents one software unit from reading or altering the private data of another software unit or in preventing data from being discovered or accessed by a subject
+- **Защита и сокрытие данных (Data Protection and Data Hiding)**: ограничивает или запрещает одному программному модулю чтение или изменение частных данных другого модуля, а также препятствует обнаружению или доступу к данным субъектом
     
-- **Data Type Enforcement**: how a language protects a developer from trying to perform operations on dissimilar types of data, or in ways that would lead to erroneous results
+- **Проверка типов данных (Data Type Enforcement)**: то, каким образом язык защищает разработчика от попыток выполнять операции над данными разных типов или таким образом, который привёл бы к ошибочным результатам
     
-- **Data Warehouse**: collection of data sources such as separate internal databases to provide a broader base of info for analysis, trending and reference; may also involve databases from outside the org
+- **Хранилище данных (Data Warehouse)**: набор источников данных, например отдельных внутренних баз данных, обеспечивающий более широкую базу информации для анализа, построения трендов и справочных целей; может также включать базы данных извне организации
     
-- **Data-centric Threat Modeling**: methodology and framework focusing on the authorized movements and data input/output into and from a system; corresponds with protecting data in transit, at rest, and in use when classifying organizational data
+- **Моделирование угроз на основе данных (Data-centric Threat Modeling)**: методология и рамки, сфокусированные на авторизованных перемещениях данных и вводе/выводе данных в систему и из неё; соответствует защите данных в передаче, в покое и в обработке при классификации данных организации
     
-- **Defensive Programming**: design/coding allowing acceptable but sanitized data inputs to a system; lack of defensive programming measures can result in arbitrary code execution, misdirection of the program to other resources/locations, or reveal info useful to an attacker
+- **Защитное программирование (Defensive Programming)**: проектирование/программирование, допускающее приемлемые, но очищенные (санитизированные) входные данные; отсутствие мер защитного программирования может привести к выполнению произвольного кода, перенаправлению программы к другим ресурсам/местам или раскрытию информации, полезной злоумышленнику
     
-- **Design Reviews**: should take place after the development of functional and control specifications but before the creation of code
+- **Обзоры проектирования (Design Reviews)**: должны проводиться после разработки функциональных и контрольных спецификаций, но до создания кода
     
-- **Dirty read**: occurs when one transaction reads a value from a database that was written by another transaction that didn't commit; this is a concurrency control issue that violates the **Isolation** property of ACID
+- **Грязное чтение (Dirty read)**: возникает, когда одна транзакция считывает из базы данных значение, записанное другой транзакцией, которая не была зафиксирована (commit); это проблема управления конкурентностью, нарушающая свойство **изоляции** (Isolation) в модели ACID
     
-- **Emergent Properties**: an alternate/more powerful way of looking at systems-level behavior characteristics such as safety and security; helps provide a more testable, measurable answer to questions such as "how secure is our system?"
+- **Эмерджентные свойства (Emergent Properties)**: альтернативный/более мощный способ рассматривать поведение системного уровня, такие как безопасность (safety) и защищённость (security); помогает получить более тестируемый и измеримый ответ на вопрос «насколько безопасна наша система?»
     
-- **Encapsulation**: note see network Encapsulation in [Domain 4](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-4-2024+Objectives) (disambiguation); enforcement of data/code hiding during all phases of software development and operational use; bundling together data and methods is the process of encapsulation (opposite of unpacking/revealing)
+- **Инкапсуляция**: см. сетевую инкапсуляцию в [Домене 4](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-4-2024+Objectives) (различение понятий); обеспечение сокрытия данных/кода на всех этапах разработки и эксплуатации ПО; объединение данных и методов в единый модуль — процесс инкапсуляции (противоположность распаковке/раскрытию)
     
-- **Executable/Object Code**: binary representation of the machine language instruction set that the CPU and other hardware of the target computer can directly execute
+- **Исполняемый/объектный код (Executable/Object Code)**: двоичное представление набора инструкций машинного языка, которое ЦП и другое аппаратное обеспечение целевого компьютера могут исполнять напрямую
     
-- **XML**: Extensible Markup Language is a set of HTML extensions providing for data storage and transport in networked environments; frequently used to integrate web pages with databases; XML is often embedded in the HTML files making up elements of a web page
+- **XML**: Extensible Markup Language (расширяемый язык разметки) — набор расширений HTML, обеспечивающий хранение и передачу данных в сетевых средах; часто используется для интеграции веб-страниц с базами данных; XML часто встроен в HTML-файлы, составляющие элементы веб-страницы
     
-- **Functional requirements**: describes a finite task or process the system must perform; often directly traceable to specific elements in the final system's design and construction
+- **Функциональные требования**: описывают конечную задачу или процесс, который должна выполнять система; часто напрямую прослеживаются до конкретных элементов проектирования и построения итоговой системы
     
-- **Hierarchical database model**: data elements and records are arranged in tree-like parent-child structures
+- **Иерархическая модель базы данных**: элементы данных и записи расположены в древовидных структурах «родитель — потомок»
     
-- **Instance**: in object-oriented programming, an "instance of a class" refers to a specific object created from that class, which is a blueprint or template defining the characteristics and behaviors of objects
+- **Экземпляр (Instance)**: в объектно-ориентированном программировании «экземпляр класса» — это конкретный объект, созданный из этого класса, который является чертежом или шаблоном, определяющим характеристики и поведение объектов
     
-- **Integrated Product and Process Development (IPPD)**: management technique that simultaneously integrates essential acquisition activities through the use of multidisciplinary teams to optimize the design, manufacturing, and supportability processes
+- **Интегрированная разработка продукции и процессов (IPPD, Integrated Product and Process Development)**: метод управления, одновременно интегрирующий основные закупочные мероприятия с использованием междисциплинарных команд для оптимизации процессов проектирования, производства и поддержки
     
-- **Infrastructure as Code (IaC)**: instead of viewing hardware config as a manual, direct hands-on, one-on-one admin hassle, it is viewed as just another collection of elements to be managed in the same way that software and code are managed under DevSecOps
+- **Инфраструктура как код (IaC, Infrastructure as Code)**: вместо восприятия конфигурации аппаратного обеспечения как ручного «один-к-одному» администраторского удовольствия, она рассматривается просто как ещё один набор элементов, которыми управляют так же, как ПО и кодом управляют в DevSecOps
     
-- **Knowledge Discovery in Database (KDD)**: mathematical, statistical, and visualization method of identifying valid and useful patterns in data
+- **Обнаружение знаний в базах данных (KDD, Knowledge Discovery in Database)**: математический, статистический и визуализационный метод выявления действительных и полезных закономерностей в данных
     
-- **Knowledge Management**: efficient/effective management of info and associated resources in an enterprise to drive business intelligence and decision-making; may include workflow management, business process modeling, doc management, db and info systems and knowledge-based systems
+- **Управление знаниями (Knowledge Management)**: эффективное управление информацией и связанными ресурсами в предприятии для обеспечения бизнес-аналитики и принятия решений; может включать управление рабочими процессами, моделирование бизнес-процессов, управление документами, базы данных и информационные системы, а также экспертные системы
     
-- **Level of abstraction**: how closely a source-code/design doc represents the details of the underlying object/system/component; lower-level abstractions generally have more detail than high-level ones
+- **Уровень абстракции (Level of abstraction)**: насколько точно документ с исходным кодом/проектом отражает детали базового объекта/системы/компонента; абстракции нижнего уровня, как правило, содержат больше деталей, чем высшего
     
-- **Living off the land** (non-malware based ransom attack): system attack where the system/resources compromised are used in pursuit of additional attacks (i.e. the attacker's agenda); anti-malware defense doesn't detect/prevent the attack given the attacker's methodology
+- **Living off the land** (атака на выкуп без вредоносного ПО): атака на систему, при которой скомпрометированная система/ресурсы используются для проведения дальнейших атак (т.е. в интересах злоумышленника); анти-вредоносная защита не обнаруживает/не предотвращает такую атаку из-за методологии злоумышленника
     
-- **Malformed input attack**: incorrectly handling input data is a common source of code errors that can result in arbitrary code exec, or misdirection of the program to other resources/locations
+- **Атака некорректным вводом (Malformed input attack)**: неправильная обработка входных данных — распространённый источник ошибок кода, которые могут привести к выполнению произвольного кода или перенаправлению программы к другим ресурсам/местам
     
-- **Markup Language**: non-programming language used to express formatting or arrangement of data on a page/screen; usually extensible, allowing users to define additional/other operations to be performed
+- **Язык разметки (Markup Language)**: непрограммистический язык, используемый для описания форматирования или размещения данных на странице/экране; обычно расширяемый, позволяет пользователям определять дополнительные/другие операции для выполнения
     
-- **Metadata**: info that describes the format or meaning of other data, which can be used to provide a systematic method for describing resources and improving info retrieval
+- **Метаданные (Metadata)**: информация, описывающая формат или значение других данных, которая может служить систематическим методом описания ресурсов и улучшения поиска информации
     
-- **Mobile code (executable content)**: file(s) sent by a system to others, that will either control the execution of systems/applications on that client or be directly executed
+- **Мобильный код (исполняемое содержимое)**: файл(ы), отправляемые системой другим, которые либо будут управлять выполнением систем/приложений на этом клиенте, либо исполнятся напрямую
     
-- **Modified prototype model**: approach to system design/build that starts with a simplified version of the application; feedback from stakeholders is used to improve design of a second version; this is repeated until owners/stakeholders are satisfied with the final product
+- **Модель изменённого прототипа (Modified prototype model)**: подход к проектированию/созданию системы, начинающийся с упрощённой версии приложения; обратная связь от заинтересованных сторон используется для улучшения дизайна второй версии; это повторяется, пока владельцы/стейкхолдеры не будут удовлетворены итоговым продуктом
     
-- **Network database model**: database model in which data elements and records are arranged in arbitrary linked fashion (e.g. lists, clusters, or other network forms)
+- **Сетевая модель базы данных**: модель базы данных, в которой элементы данных и записи расположены произвольным связанным образом (например, списками, кластерами или другими сетевыми формами)
     
-- **Nonfunctional requirements**: broad characteristics that do not clearly align with system elements; many safety, security, privacy, and resiliency requirements can be deemed nonfunctional
+- **Нефункциональные требования**: широкие характеристики, которые не очевидно связаны с элементами системы; многие требования к безопасности (safety), защищённости (security), конфиденциальности и устойчивости можно отнести к нефункциональным
     
-- **Object**: encapsulation of a set of data and methods that can be used to manipulate that data
+- **Объект**: инкапсуляция набора данных и методов, которые можно использовать для работы с этими данными
     
-- **Object-oriented database model**: database model that uses object-oriented programming concepts like classes, instances, and objects to organize, structure, and store data and methods; schemas define the structure of the data, views specify table, rows, and columns that meet user/security requirements
+- **Объектно-ориентированная модель базы данных**: модель БД, использующая концепции ООП, такие как классы, экземпляры и объекты, для организации, структурирования и хранения данных и методов; схемы определяют структуру данных, представления (views) задают таблицы, строки и столбцы, отвечающие требованиям пользователей/безопасности
     
-- **Object-oriented security**: systems security designs that make use of object-oriented programming characteristics such as encapsulation, inheritance, polymorphism, and polyinstantiation
+- **Объектно-ориентированная безопасность**: методы проектирования системной безопасности, использующие характеристики объектно-ориентированного программирования, такие как инкапсуляция, наследование, полиморфизм и полиинстанцирование (polyinstantiation)
     
-- **Open-source software**: source code and design info is made public, and often using licenses that allow modification and refactoring
+- **Программное обеспечение с открытым исходным кодом (Open-source software)**: исходный код и проектная информация сделаны общедоступными, часто с лицензиями, допускающими модификацию и рефакторинг
     
-- **Pair programming**: requires two devs to work together, one writing code, and the other reviewing and tracking progress
+- **Парное программирование (Pair programming)**: два разработчика работают вместе — один пишет код, другой проверяет и отслеживает прогресс
     
-- **Pass-around reviews**: often done via email or code review system, allows devs to review code asynchronously
+- **Сквозные обзоры (Pass-around reviews)**: часто выполняются по электронной почте или через систему ревью кода, позволяют разработчикам проверять код асинхронно
     
-- **PERT**: chart that uses nodes to represent milestones or deliverables, showing the estimated time to move between milestones
+- **PERT**: диаграмма, использующая узлы для представления вех или результатов, показывающая расчётное время перемещения между вехами
     
-- **Polyinstantiation**: (literally "many versions") creates a new instance (copy) of a data item, with the same identifier or key, allowing each process to have its own version of that data; allows a system to store multiple versions of the same data item at different security levels to prevent unauthorized users from "inferring" the existence of sensitive information; by showing users only the version that matches their clearance, it ensures that a low-level user can’t detect the presence of higher-level data through system errors or duplicate conflicts
+- **Полиинстанцирование (Polyinstantiation)**: (буквально «много версий») создаёт новый экземпляр (копию) элемента данных с тем же идентификатором или ключом, позволяя каждому процессу иметь собственную версию этих данных; позволяет системе хранить несколько версий одного элемента данных на разных уровнях безопасности, чтобы не дать неавторизованным пользователям «вывести» существование конфиденциальной информации; показывая пользователям только версию, соответствующую их допуску, система гарантирует, что пользователь низкого уровня не сможет обнаружить наличие данных более высокого уровня посредством ошибок системы или конфликтов дубликатов
     
-- **Procedural programming**: emphasizes the logical sequence of steps to be performed, where a procedure is a set of software that performs a particular function, requiring specific input data, producing a specific set of outputs, and procedures can invoke other procedures
+- **Процедурное программирование**: делает упор на логической последовательности выполняемых шагов, где процедура — это набор программного обеспечения, выполняющего определённую функцию, требующий конкретных входных данных, производящий определённый набор выходных данных; процедуры могут вызывать другие процедуры
     
-- **Query attack**: use of query tools to access data not normally allowed by the trusted front end, including the views controlled by the query application; could also result from malformed queries using SQL to bypass security controls; improper/incomplete checks on queries can be used in a similar way to bypass access controls
+- **Атака запросом (Query attack)**: использование инструментов запросов для доступа к данным, которые обычно не разрешены доверенным интерфейсом, включая представления, контролируемые запросным приложением; может также возникать из-за некорректных запросов с использованием SQL для обхода средств контроля; некорректная/неполная проверка запросов может использоваться аналогичным образом для обхода контроля доступа
     
-- **Ransom attack**: form of attack that threatens destruction, denial, or unauthorized public release/remarketing of private information assets; usually involves encrypting assets and withhold the decryption key until a ransom is paid by the victim
+- **Атака с выкупом (Ransom attack)**: форма атаки, угрожающая уничтожением, отказом в доступе или неавторизованным публичным раскрытием/перепродажей частных информационных активов; обычно включает шифрование активов и удержание ключа до оплаты выкупа жертвой
     
-- **Refactoring**: partial or complete rewrite of a set of software to perform the same functions, but in a more straightforward, more efficient, or more maintainable form
+- **Рефакторинг (Refactoring)**: частичная или полная переработка набора ПО для выполнения тех же функций, но в более простой, эффективной или поддерживаемой форме
     
-- **Regression testing**: test a system to understand whether recently approved modifications have changed performance of other approved functions or introduced other unauthorized behavior; testing that runs a set of known inputs against an app and compares to results previously produced (by an earlier version of the software)
+- **Регрессионное тестирование**: тестирование системы с целью понять, не изменили ли недавно одобренные модификации работу других одобренных функций и не ввели ли иного нежелательного поведения; тестирование, запускающее набор известных входных данных на приложении и сравнивающее результаты с ранее полученными (ранней версией ПО)
     
-- **Relational database model**: AKA relational database management system (RDBMS), data elements and records arranged in tables which are related or linked to each other to implement business logic, where data records of different structures or types are needed together in the same activity
+- **Реляционная модель базы данных**: также RDBMS (система управления реляционными базами данных) — элементы данных и записи расположены в таблицах, связанных или сцепленных между собой для реализации бизнес-логики, когда записи данных разных структур или типов необходимы вместе в одной деятельности
     
-- **Representational State Transfer (REST)**: software architectural style for synchronizing the activities of two or more apps running on different systems on a network; REST facilitates these processes exchanging state information, usually via HTTP/S
+- **Представительский перевод состояния (REST, Representational State Transfer)**: архитектурный стиль программного обеспечения для синхронизации действий двух и более приложений, работающих на разных системах в сети; REST упрощает процессы обмена информацией о состоянии, обычно по HTTP/S
     
-- **Reputation monitoring**: defensive tactic that uses the trust reputation of a website or IP address as a means of blocking an org's users, processes or systems from connecting to a possible source of malware or exploitations; possibly the only real defense against zero-day exploits; involves monitoring URLs, domains, IP addresses or other similar info to separate untrustworthy traffic
+- **Мониторинг репутации (Reputation monitoring)**: защитная тактика, использующая репутацию доверия веб-сайта или IP-адреса как средство блокировки подключений пользователей, процессов или систем организации к возможному источнику вредоносного ПО или эксплойтов; возможно, единственная реальная защита от нулевых уязвимостей (zero-day); включает мониторинг URL, доменов, IP-адресов или другой подобной информации для отделения недоверенного трафика
     
-- **Runtime Application Security Protection (RASP)**: security agents comprised of small code units built into an app which can detect set of security violations; upon detection, the RASP agent can cause the app to terminate, or take other protective actions
+- **Защита приложения в среде выполнения (RASP, Runtime Application Security Protection)**: агенты безопасности, состоящие из небольших модулей кода, встроенных в приложение и способных обнаруживать набор нарушений безопасности; при обнаружении агент RASP может вызвать завершение приложения или предпринять другие защитные действия
     
-- **Security Assessment**: testing, inspection, and analysis to determine the degree to which a system meets or exceeds the required security posture; may assess whether an as-built system meets the requirements in its specs, or whether an in-use system meets the current perception of the real-world security threats
+- **Оценка безопасности (Security Assessment)**: тестирование, инспекция и анализ для определения степени, в которой система соответствует или превышает требуемый уровень защищённости; может оценивать, отвечает ли построенная система требованиям её спецификаций или соответствует ли система в эксплуатации текущему представлению об реальных угрозах безопасности
     
-- **Software Quality Assurance**: variety of formal and informal processes that attempt to determine whether a software app or system meets all of its intended functions, doesn't perform unwanted functions, is free from known security vulns, and is free from insertion or other errors in design and function
+- **Гарантия качества программного обеспечения (Software Quality Assurance)**: совокупность формальных и неформальных процессов, стремящихся определить, соответствует ли приложение или система всем своим предполагаемым функциям, не выполняет ли нежелательных функций, свободна ли от известных уязвимостей безопасности и свободна ли от ошибок в проектировании и функционировании
     
-- **SDLC**: Software Development LifeCycle is a framework and systematic associated with tasks that are performed in a series of steps for building, deploying, and supporting software apps; begins with planning and requirements gathering, and ends with decommissioning and sunsetting; there are many different SDLCs, such as agile, DevSecOps, rapid prototyping, offering different approaches to defining and managing the software lifecycle;
+- **SDLC**: жизненный цикл разработки ПО (Software Development LifeCycle) — рамка и систематический подход, связанный с задачами, выполняемыми в серии шагов для построения, развёртывания и поддержки приложений; начинается с планирования и сбора требований и заканчивается выводом из эксплуатации и прекращением поддержки (sunset); существует множество различных SDLC, таких как Agile, DevSecOps, быстрое прототипирование, предлагающих разные подходы к определению и управлению жизненным циклом ПО;
     
-    - the SDLC consists of the following steps:
-        - Requirements gathering: why create the software, what it will do, and for whom it will be created
-        - Design: encapsulating how the software will meet requirements
-        - Development: creating/coding the software to meet spec, and integrating with other systems as required
-        - Testing: verifying/validating software meets requirements
-        - Operations and Maintenance: deploying, and ensuring it's appropriately configured, patched, and monitored
-- **Source code**: program statements in human-readable form using a formal programming language's rules for syntax and semantics
+    - SDLC состоит из следующих шагов:
+        - Сбор требований: зачем создавать ПО, что оно будет делать и для кого оно создаётся
+        - Проектирование: формулирование того, как ПО будет удовлетворять требованиям
+        - Разработка: создание/написание ПО в соответствии со спецификацией и интеграция с другими системами по мере необходимости
+        - Тестирование: верификация/валидация соответствия ПО требованиям
+        - Эксплуатация и обслуживание: развёртывание, обеспечение корректной конфигурации, патчинга и мониторинга
+- **Исходный код (Source code)**: операторы программы в человекочитаемой форме, использующие правила синтаксиса и семантики формального языка программирования
     
-- **Spyware/Adware**: software that performs a variety of monitoring and data gathering functions; AKA potentially unwanted programs/applications (PUP/PUA), may be used in monitoring employee activities/use of resources (spyware), or advertising efforts (adware); both may be legit/authorized by system owners or unwanted intruders
+- **Шпионское/рекламное ПО (Spyware/Adware)**: программное обеспечение, выполняющее разнообразные функции мониторинга и сбора данных; также известно как потенциально нежелательные программы/приложения (PUP/PUA); может использоваться для мониторинга активности сотрудников/использования ресурсов (шпионское ПО) или рекламных целей (рекламное ПО); оба могут быть легитимными/авторизованными владельцами системы или нежелательными злоумышленниками
     
-- **Strong data typing**: feature of a programming language preventing data type mismatch errors; strongly typed languages will generate errors at compile time
+- **Строгая типизация данных (Strong data typing)**: возможность языка программирования, предотвращающая ошибки несоответствия типов данных; в строго типизированных языках ошибки генерируются на этапе компиляции
     
-- **Threat surface**: total set of penetrations of a boundary or perimeter that surrounds or contains system elements
+- **Поверхность угроз (Threat surface)**: полный набор проникновений через границу или периметр, окружающий или содержащий элементы системы
     
-- **TOCTOU attack**: time of check vs time of use (TOCTOU) attack takes advantage of the time delay between a security check (such as authentication or authorization) being performed and actual use of the asset
+- **Атака TOCTOU**: атака «время проверки — время использования» (time of check vs time of use) использует временную задержку между выполнением проверки безопасности (например, аутентификацией или авторизацией) и реальным использованием актива
     
-- **Trapdoor/backdoor**: AKA maintenance hook; hidden mechanism that bypasses access control measures; an entry point into an architecture or system that is inserted in software by devs during development to provide a method of gaining access for modification/support; can also be inserted by an attacker, bypassing access control measures designed to prevent unauthorized software changes
+- **Лазейка/бэкдор (Trapdoor/backdoor)**: также maintenance hook (крючок обслуживания) — скрытый механизм, обходящий средства контроля доступа; точка входа в архитектуру или систему, внедряемая в ПО разработчиками при разработке для обеспечения доступа к модификации/поддержке; может также быть внедрена злоумышленником, обходя средства контроля доступа, призванные предотвратить неавторизованные изменения ПО
     
-- **UAT**: User Acceptance Testing typically the last phase of the testing process; verifies that the solution developed meets user requirements, and validates against use cases
+- **UAT**: приёмочное тестирование пользователей (User Acceptance Testing) — как правило, последняя фаза процесса тестирования; подтверждает, что разработанное решение отвечает потребностям пользователей, и проводит валидацию по сценариям использования (use cases)
     
 
-## [8.1](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#81-understand-and-integrate-security-in-the-software-development-life-cycle-sdlc-osg-10-chpt-20) Understand and integrate security in the Software Development Life Cycle (SDLC) (OSG-10 Chpt 20)
+## [8.1](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#81-understand-and-integrate-security-in-the-software-development-life-cycle-sdlc-osg-10-chpt-20) Понимание и интеграция безопасности в жизненный цикл разработки ПО (SDLC) (OSG-10 гл. 20)
 
 [](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#81-understand-and-integrate-security-in-the-software-development-life-cycle-sdlc-osg-10-chpt-20)
 
-- 8.1.1 Development methodologies (e.g., Agile, Waterfall, DevOps, DevSecOps, Scaled Agile Framework)
+- 8.1.1 Методологии разработки (например, Agile, Waterfall, DevOps, DevSecOps, Scaled Agile Framework)
     
-    - **Agile methodology**: a project management approach to development that involves breaking the project into phases and emphasizes continuous collaboration and improvement; teams follow a cycle of planning, executing, and evaluating; focus is on iterative development and frequent feedback, collab between small self-organizing cross-functional teams
+    - **Методология Agile**: подход к управлению проектами, предполагающий разбиение проекта на фазы и делающий упор на постоянное сотрудничество и совершенствование; команды следуют циклу планирования, выполнения и оценки; акцент на итеративной разработке и частой обратной связи, сотрудничестве небольших самоорганизующихся кросс-функциональных команд
         
-        - Agile development emphasizes:
-            - the delivery of working software in short iterations, helping to get the software to market faster
-            - reduced risk by frequently testing and providing feedback, helping to identify and resolve issues earlier in the development process
-        - Agile was started by 17 pioneers in 2001, producing the "Manifesto for Agile Software Development" ([agilemanifesto.org](https://agilemanifesto.org)) that lays out the core philosophy of the Agile approach:
-            - **individuals and interactions** over processes and tools
-            - **working software** over comprehensive documentation
-            - **customer collaboration** over contract negotiation
-            - **responding to change** over following a plan
-        - Agile Manifesto also defines 12 principles:
-            - the highest priority is to satisfy the customer through early and continuous delivery of valuable software
-            - welcome changing requirements, even late in development; Agile processes harness change for the customer’s competitive advantage
-            - deliver working software frequently, from a couple of weeks to a couple of months, with a preference for the shorter timescale
-            - business people and developers must work together daily throughout the project
-            - build projects around motivated individuals; give them the environment, support, and tools and trust them to build
-            - emphasizing face-to-face conversation
-            - working software is the primary measure of progress
-            - agile processes promote sustainable development; the team should be able to maintain a constant pace indefinitely
-            - continuous attention to technical excellence and good design enhances agility
-            - simplicity, or the art of maximizing the amount of work not done, is essential
-            - the best architectures, requirements, and designs emerge from self-organizing teams
-            - at regular intervals, the team reviews their effectiveness and adjusts for improvement
-        - Several methodologies have emerged that take these Agile principles and define specific processes around them:
-            - **Scrum**: a management framework that teams use to self-organize and work towards a common goal; it describes a set of meetings, tools, and roles for efficient project delivery, allowing teams to self-manage, learn from experience, and adapt to change; named from the daily team meetings, called scrums; development focuses on short sprints that deliver finished products; integrated product teams (IPTs) were an early effort of this approach
-            - **Kanban**: a visual system used to manage and keep track of work as it moves through a process; the word kanban is Japanese for "card you can see"; Kanban teams focus on reducing the time a project (or user story) takes from start to finish, using a kanban board and continuously improving their flow of work
-            - **Rapid Application Development (RAD)**: an agile software development approach that focuses more on ongoing software projects and user feedback and less on following a strict plan, emphasizing rapid prototyping over planning; RAD uses four phases: requirements planning, user design, construction, and cutover
-            - **Rational Unified Process (RUP)**: an agile software development methodology that splits the project life cycle into four phases:
-                - inception: which defines the scope of the project and develop business case
-                - elaboration: Plan project, specify features, and baseline the architecture
-                - construction: Building the product
-                - transition: providing the product to its users
-                - during each of the phases, all six core development disciplines take place: business modeling, requirements, analysis and design, implementation, testing, and deployment
-            - **Agile Unified Process (AUP)**: a simplified version of the rational unified process, it describes a simple, easy to understand approach to developing business application software using agile techniques and concepts yet still remaining true to the RUP
-            - **Dynamic Systems Development Model (DSDM)**: an agile project delivery framework, initially used as a software development method; key principles:
-                - focus on the business need: DSDM teams establish a valid business case and ensure organizational support throughout the project
-                - deliver on time: work should be time-boxed and predictable, to build confidence in the development team
-            - **Extreme Programming (XP)**: an Agile project management methodology that targets speed and simplicity with short development cycles, [using five guiding values, and five rules](http://www.extremeprogramming.org); the goal of the rigid structure, focused sprints and continuous integrations is higher quality product
-            - **Scaled Agile Framework® (SAFe)**: a set of org and workflow patterns for implementing agile practices at an enterprise scale; the framework is a body of knowledge that includes structured guidance on roles and responsibilities, how to plan and manage the work, and values to uphold
-    - **Waterfall**:
+        - Agile-разработка подчёркивает:
+            - поставку работающего ПО короткими итерациями, что помогает быстрее вывести продукт на рынок
+            - снижение рисков за счёт частого тестирования и предоставления обратной связи, что помогает выявлять и решать проблемы раньше в ходе разработки
+        - Agile был начат 17 пионерами в 2001 году, ими был создан «Манифест гибкой разработки ПО» ([agilemanifesto.org](https://agilemanifesto.org)), излагающий основную философию подхода Agile:
+            - **индивидуальные люди и взаимодействие** важнее процессов и инструментов
+            - **работающее ПО** важнее всеобъемлющей документации
+            - **сотрудничество с заказчиком** важнее договорных переговоров
+            - **реагирование на изменения** важнее следования плану
+        - Манифест Agile также определяет 12 принципов:
+            - высший приоритет — удовлетворение заказчика посредством ранней и непрерывной поставки ценного ПО
+            - приветствовать меняющиеся требования, даже поздно в разработке; процессы Agile используют изменения в интересах конкурентного преимущества заказчика
+            - часто поставлять работающее ПО — от пары недель до пары месяцев, предпочитая более короткий временно́й интервал
+            - бизнес-лица и разработчики должны работать вместе ежедневно в течение всего проекта
+            - строить проекты вокруг мотивированных людей; давать им среду, поддержку и инструменты и доверять им
+            - делать упор на разговоре лицом к лицу
+            - работающее ПО — основная мера прогресса
+            - процессы Agile способствуют устойчивой разработке; команда должна иметь возможность поддерживать постоянный темп неограниченно долго
+            - постоянное внимание к техническому совершенству и хорошему дизайну повышает гибкость
+            - простота, или искусство максимизировать объём невыполненной работы, необходима
+            - лучшие архитектуры, требования и решения рождаются из самоорганизующихся команд
+            - регулярно команда пересматривает свою эффективность и корректирует работу для улучшения
+        - Появилось несколько методологий, которые берут эти принципы Agile и определяют вокруг них конкретные процессы:
+            - **Scrum**: рамка управления, которую команды используют для самоорганизации и работы к общей цели; описывает набор встреч, инструментов и ролей для эффективной поставки проекта, позволяя командам самоуправляться, учиться на опыте и адаптироваться к изменениям; назван в честь ежедневных встреч команды, называемых scrums; разработка фокусируется на коротких спринтах, поставляющих готовые продукты; интегрированные продуктовые команды (IPT) были ранним воплощением этого подхода
+            - **Kanban**: визуальная система для управления и отслеживания работы по мере её продвижения через процесс; слово kanban на японском означает «карту, которую можно увидеть»; команды Kanban сосредоточены на сокращении времени, необходимого проекту (или пользовательской истории) от начала до конца, используя канбан-доску и непрерывно совершенствуя свой рабочий поток
+            - **Быстрая разработка приложений (RAD, Rapid Application Development)**: гибкий подход к разработке ПО, делающий больший упор на текущие проекты и обратную связь пользователей и меньший — на строгое следование плану, подчёркивая быстрое прототипирование вместо планирования; RAD использует четыре фазы: планирование требований, проектирование пользователем, построение и переход (cutover)
+            - **Rational Unified Process (RUP)**: гибкая методология разработки ПО, разделяющая жизненный цикл проекта на четыре фазы:
+                - inception (зачатие): определение области проекта и разработка обоснования бизнеса
+                - elaboration (разработка): планирование проекта, спецификация функций и фиксация базовой архитектуры
+                - construction (построение): создание продукта
+                - transition (переход): предоставление продукта его пользователям
+                - в течение каждой фазы реализуются все шесть основных дисциплин разработки: моделирование бизнеса, требования, анализ и проектирование, реализация, тестирование и развёртывание
+            - **Agile Unified Process (AUP)**: упрощённая версия Rational Unified Process; описывает простой, легко понимаемый подход к разработке корпоративных приложений с использованием гибких техник и концепций, оставаясь верным RUP
+            - **Dynamic Systems Development Model (DSDM)**: рамка поставки гибких проектов, изначально использовавшаяся как метод разработки ПО; ключевые принципы:
+                - сосредоточиться на бизнес-потребности: команды DSDM обосновывают бизнес-кейс и обеспечивают поддержку организации на протяжении проекта
+                - соблюдать сроки: работа должна быть ограничена по времени (time-boxed) и предсказуемой, чтобы сформировать уверенность в команде разработки
+            - **Extreme Programming (XP)**: методология гибкого управления проектами, нацеленная на скорость и простоту с короткими циклами разработки, [использующая пять руководящих ценностей и пять правил](http://www.extremeprogramming.org); цель жёсткой структуры, сфокусированных спринтов и непрерывной интеграции — продукт более высокого качества
+            - **Scaled Agile Framework® (SAFe)**: набор организационных и рабочих шаблонов для внедрения гибких практик в масштабе предприятия; рамка представляет собой корпус знаний, включающий структурированное руководство по ролям и обязанностям, планированию и управлению работой, а также поддерживаемым ценностям
+    - **Waterfall (водопад)**:
         
-        - A linear approach to development, where each phase needs to be completed fully before the next one begins (e.g. water only flows downhill or in one direction); developed by Winston Royce in 1970, the waterfall model uses a linear sequential life-cycle approach; all project requirements are gathered up front, and there is no formal way to integrate changes as more information becomes available
-        - Traditional model has 7 stages, as each stage is completed, the project moves into the next phase; the iterative waterfall model does allow development to return to the previous phase to correct defects
-            - System requirements
-            - Software requirements
-            - Preliminary design
-            - Detailed design
-            - Code and debug
-            - Testing
-            - Operations and maintenance
-        - A major criticism of this model is that it's very rigid, and not ideal for most complex projects which often contain many variables that affect the scope throughout the project's lifecycle
-    - **Spiral model**: improved waterfall, (developed by Barry Boehm) that has its own phases: (1) determine objectives, (2) identify and resolve risks, (3) develop and test, (4) plan the next iteration; it is a risk-driven development process that follows an iterative model while also including waterfall elements
+        - Линейный подход к разработке, где каждая фаза должна быть полностью завершена, прежде чем начнётся следующая (например, вода течёт только вниз или в одном направлении); разработан Уинстоном Ройсом в 1970 году, модель водопада использует линейный последовательный жизненный цикл; все требования к проекту собираются заранее, и нет формального способа интегрировать изменения по мере появления новой информации
+        - Традиционная модель имеет 7 этапов; по завершении каждого этапа проект переходит к следующей фазе; итеративная модель водопада допускает возврат к предыдущей фазе для исправления дефектов
+            - Системные требования
+            - Требования к программному обеспечению
+            - Предварительное проектирование
+            - Детальное проектирование
+            - Кодирование и отладка
+            - Тестирование
+            - Эксплуатация и обслуживание
+        - Основная критика этой модели заключается в том, что она очень жёсткая и не идеальна для большинства сложных проектов, которые часто содержат множество переменных, влияющих на область работ на протяжении жизненного цикла
+    - **Спиральная модель**: улучшенный водопад (разработана Барри Боэмом) со своими фазами: (1) определение целей, (2) выявление и устранение рисков, (3) разработка и тестирование, (4) планирование следующей итерации; это управляемый рисками процесс разработки, следующий итеративной модели и одновременно включающий элементы водопада
         
-        - following defined phases to completion and then repeats the process, resembling a spiral
-        - the spiral model provides a solution to the major criticism of the waterfall model in that it allows devs to return to planning stages as technical demands and customer requirements iterate
-    - **V-Model** (Verification and Validation model), which extends the waterfall model by pairing each development phase with a corresponding testing phase; the V-Model illustrates the parallel relationship between development and verification activities
+        - прохождение определённых фаз до завершения и затем повторение процесса, напоминающее спираль
+        - спиральная модель решает основную критику модели водопада, позволяя разработчикам возвращаться к этапам планирования по мере итерирования технических требований и требований заказчика
+    - **V-модель** (модель верификации и валидации), расширяющая модель водопада путём сопоставления каждой фазы разработки с соответствующей фазой тестирования; V-модель иллюстрирует параллельную связь между деятельностью разработки и верификацией
         
-    - **DevOps (Development and Operations)**: an approach to software development, quality assurance, and technology operations that unites siloed staff, and bring the three functions together in a single operational model; DevOps goal is to shorten the systems development lifecycle and provide continuous delivery
+    - **DevOps (Development and Operations)**: подход к разработке ПО, гарантии качества и технологической эксплуатации, объединяющий работающих в изоляции сотрудников и сводящий эти три функции в единую операционную модель; цель DevOps — сократить жизненный цикл разработки систем и обеспечить непрерывную поставку
         
-        - closely aligned with lean and the Agile development approach, DevOps aims to dramatically decrease the time required to develop, test, and deploy software changes
-        - using the DevOps model, and continuous integration/continuous delivery (CI/CD), orgs strive to roll out code dozens or even hundreds of times per day
-        - this requires a high degree of automation, including integrating code repositories, the software configuration management process, and the movement of code between development, testing and production environments
-        - the tight integration of development and operations also calls for the simultaneous integration of security controls
-        - security must be tightly integrated and move with the same agility
-    - **DevSecOps**: refers to the integration of development, security, and operations; extends DevOps by integrating security practices
+        - тесно связанный с бережливым производством и подходом Agile, DevOps нацелен на радикальное сокращение времени, необходимого для разработки, тестирования и развёртывания изменений ПО
+        - используя модель DevOps и непрерывную интеграцию/непрерывную поставку (CI/CD), организации стремятся выпускать код десятки и даже сотни раз в день
+        - это требует высокой степени автоматизации, включая интеграцию репозиториев кода, процесса управления конфигурацией ПО и перемещения кода между средами разработки, тестирования и продакшена
+        - тесная интеграция разработки и эксплуатации также требует одновременной интеграции средств контроля безопасности
+        - безопасность должна быть тесно интегрирована и двигаться с той же гибкостью
+    - **DevSecOps**: интеграция разработки, безопасности и эксплуатации; расширяет DevOps путём интеграции практик безопасности
         
-        - provides for a merger of phased review (as in the waterfall SDLC) with the DevOps method, to incorporate the needs for security, safety, resilience or other emerging properties in the final system, at each turn of the cycle of development
-        - DevSecOps supports the concept of software-defined security, where security controls are actively managed into the CI/CD pipeline
-- 8.1.2 Maturity models (e.g., Capability Maturity Model (CMM), Software Assurance Maturity Model (SAMM))
+        - предусматривает объединение пофазного контроля (как в SDLC «водопад») с методом DevOps, чтобы воплотить потребности в безопасности, защищённости (safety), устойчивости или других эмерджентных свойствах в итоговой системе на каждом витке цикла разработки
+        - DevSecOps поддерживает концепцию определяемого программным обеспечением безопасности (software-defined security), при которой средства контроля безопасности активно управляются в конвейере CI/CD
+- 8.1.2 Модели зрелости (например, Capability Maturity Model (CMM), Software Assurance Maturity Model (SAMM))
     
-    - Maturity models help organizations move from inconsistent, unstructured software processes to more reliable and well-managed ones
+    - Модели зрелости помогают организациям перейти от несистемных, неструктурированных процессов разработки к более надёжным и хорошо управляемым
         
-    - NOTE: be able to describe the SW-CMM, IDEAL, and SAMM models
+    - ПРИМЕЧАНИЕ: уметь описывать модели SW-CMM, IDEAL и SAMM
         
-    - Software Engineering Institute (SEI) (Carnegie Mellon University) created the Capability Maturity Model for Software (AKA Software Capability Maturity Model, abbreviated SW-CMM, CMM, or SCMM)
+    - Институт инженерии программного обеспечения (SEI) (Университет Карнеги-Меллона) создал модель зрелости возможностей для ПО (Capability Maturity Model for Software, также Software Capability Maturity Model, сокращённо SW-CMM, CMM или SCMM)
         
-        - **SW-CMM**: a management process to foster the ongoing and continuous improvement of an org's processes and workflows for developing, maintaining and using software
-        - all software development moves through a set of maturity phases in sequential fashion, and CMM describes the principles and practices underlying software process maturity, intended to help improve the maturity and quality of software processes
-        - note that CMM doesn't explicitly address security
-        - stages of the CMM:
-            - **Level 1: Initial**: process is disorganized; usually little or no defined software development process
-                - no KPIs
-                - processes are ad-hoc, and immature
-                - no basis for predicting project quality, time to completion etc
-                - limited project management
-                - limited software dev tools or automation
-                - highly dependent on individual's skills and knowledge
-            - **Level 2: Repeatable**: in this phase, basic lifecycle management processes are introduced
-                - focus on establishing basic project management policies
-                - project planning
-                - configuration management
-                - requirements management
-                - sub-contract management
-                - software quality assurance
-            - **Level 3: Defined**: in this phase, software devs operate according to a set of formal, documented software development processes; marked by the presence of basic lifecycle management processes and reuse of code; includes the use of requirements management, software project planning, quality assurance, and configuration management
-                - documentation of standard guidelines and procedures takes place
-                - peer reviews
-                - intergroup coordination
-                - org process definition
-                - org process focus
-                - training programs
-            - **Level 4: Managed**: in this phase, there is better management of the software process; characterized by the use of quantitative software development measures
-                - quantitative goals are set for software products and process
-                - software quality management
-                - quantitative management
-            - **Level 5: Optimizing**: in this phase continuous improvement occurs
-                - process change management
-                - technology change management
-                - defect prevention
-    - **Software Assurance Maturity Model (SAMM)**: an open source project maintained by the Open Web Application Security Project (OWASP)
+        - **SW-CMM**: процесс управления, способствующий непрерывному и постоянному совершенствованию процессов и рабочих потоков организации по разработке, поддержке и использованию ПО
+        - вся разработка ПО последовательно проходит ряд фаз зрелости, а CMM описывает принципы и практики, лежащие в основе зрелости процессов разработки, с целью помочь повысить зрелость и качество этих процессов
+        - обратите внимание, что CMM явным образом не рассматривает безопасность
+        - этапы CMM:
+            - **Уровень 1: Начальный (Initial)**: процесс неорганизован; обычно мало или вообще нет определённого процесса разработки ПО
+                - нет KPI
+                - процессы ad hoc и незрелые
+                - нет основы для прогнозирования качества проекта, сроков завершения и т.д.
+                - ограниченное управление проектами
+                - ограниченные инструменты или автоматизация разработки
+                - высокая зависимость от навыков и знаний отдельных людей
+            - **Уровень 2: Повторяемый (Repeatable)**: на этом этапе вводятся базовые процессы управления жизненным циклом
+                - акцент на установлении базовых правил управления проектами
+                - планирование проекта
+                - управление конфигурацией
+                - управление требованиями
+                - управление субподрядом
+                - гарантия качества ПО
+            - **Уровень 3: Определённый (Defined)**: на этом этапе разработчики работают в соответствии с набором формальных, задокументированных процессов разработки; отмечается наличие базовых процессов управления жизненным циклом и повторное использование кода; включает использование управления требованиями, планирования программных проектов, гарантии качества и управления конфигурацией
+                - документирование стандартных руководств и процедур
+                - пиринговые обзоры
+                - межгрупповая координация
+                - определение процессов организации
+                - фокус на процессах организации
+                - программы обучения
+            - **Уровень 4: Управляемый (Managed)**: на этом этапе процесс разработки управляется лучше; характеризуется использованием количественных мер разработки ПО
+                - количественные цели задаются для продуктов и процессов разработки
+                - управление качеством ПО
+                - количественное управление
+            - **Уровень 5: Оптимизирующий (Optimizing)**: на этом этапе происходит непрерывное совершенствование
+                - управление изменениями процессов
+                - управление технологическими изменениями
+                - предотвращение дефектов
+    - **Модель зрелости гарантии ПО (SAMM, Software Assurance Maturity Model)**: открытый проект, поддерживаемый Открытым проектом безопасности веб-приложений (OWASP)
         
-        - provides a framework for integrating security into the software development and maintenance processes and provides orgs with the ability to assess their maturity
-        - SAMM associates software development with 5 business functions:
-            - Governance: the activities needed to manage software development processes
-                - this function includes practices for:
-                    - strategy
-                    - metrics
-                    - policy
-                    - compliance
-                    - education
-                    - guidance
-            - Design: process used to define software requirements and develop software
-                - this function includes practices for:
-                    - threat modeling
-                    - threat assessment
-                    - security requirements
-                    - security architecture
-            - Implementation: process of building and deploying software components and managing flaws
-                - this function includes:
-                    - secure build
-                    - secure deployment
-                    - defect management practices
-            - Verification: activities undertaken to confirm code meets business and security requirements
-                - this function includes:
-                    - architecture assessment
-                    - requirements-driven testing
-                    - security testing
-            - Operations: actions taken to maintain security throughout the software lifecycle after code is released
-                - function includes:
-                    - incident management
-                    - environment management
-                    - operational management
-    - **IDEAL Model**: developed by SEI, a model for software development that uses many of the SW-CMM attributes, using 5 phases:
+        - предоставляет рамки для интеграции безопасности в процессы разработки и сопровождения ПО и даёт организациям возможность оценивать свою зрелость
+        - SAMM связывает разработку ПО с 5 бизнес-функциями:
+            - Управление (Governance): деятельность, необходимая для управления процессами разработки ПО
+                - эта функция включает практики для:
+                    - стратегии
+                    - метрик
+                    - политик
+                    - соответствия (compliance)
+                    - образования
+                    - руководства
+            - Проектирование (Design): процесс определения требований к ПО и разработки ПО
+                - эта функция включает практики:
+                    - моделирования угроз
+                    - оценки угроз
+                    - требований безопасности
+                    - архитектуры безопасности
+            - Реализация (Implementation): процесс построения и развёртывания компонентов ПО и управления дефектами
+                - эта функция включает:
+                    - безопасную сборку (secure build)
+                    - безопасное развёртывание (secure deployment)
+                    - практики управления дефектами
+            - Верификация (Verification): деятельность по подтверждению того, что код соответствует бизнес- и требованиям безопасности
+                - эта функция включает:
+                    - оценку архитектуры
+                    - тестирование на основе требований
+                    - тестирование безопасности
+            - Эксплуатация (Operations): действия по поддержанию безопасности на протяжении всего жизненного цикла ПО после выпуска кода
+                - функция включает:
+                    - управление инцидентами
+                    - управление средой
+                    - операционное управление
+    - **Модель IDEAL**: разработана SEI, модель разработки ПО, использующая многие атрибуты SW-CMM, с 5 фазами:
         
-        - Initiating: business reasons for the change are outlined, support is built, and applicable infrastructure is allocated
-        - Diagnosing: in this phase, engineers analyze the current state of the org and make general recommendations for change
-        - Establishing: development of a specific plan of action based on the diagnosing phase recommendations
-        - Acting: in this phase, the org develops solutions and then tests, refines, and implements them
-        - Learning: continuously analyze efforts to achieve these goals, and propose new actions as required
-    - IDEAL vs SW-CMM: remember that IDEAL is a process improvement model (how to improve), while SW-CMM is a maturity assessment model (where you currently are); the table below shows approximate conceptual alignment
+        - Initiating (инициирование): обосновываются бизнес-причины изменений, формируется поддержка и выделяется применимая инфраструктура
+        - Diagnosing (диагностика): на этой фазе инженеры анализируют текущее состояние организации и дают общие рекомендации по изменениям
+        - Establishing (установка): разработка конкретного плана действий на основе рекомендаций диагностической фазы
+        - Acting (действие): организация разрабатывает решения, а затем тестирует, дорабатывает и внедряет их
+        - Learning (обучение): непрерывный анализ усилий по достижению этих целей и выдвижение новых действий по мере необходимости
+    - IDEAL против SW-CMM: запомните, что IDEAL — это модель улучшения процессов (как улучшать), а SW-CMM — модель оценки зрелости (где вы находитесь сейчас); таблица ниже показывает приблизительное концептуальное соответствие
         
         |IDEAL|SW-CMM|
         |---|---|
@@ -333,236 +333,236 @@
         |Acting|Managed|
         |Learning|Optimizing|
         
-- 8.1.3 Operations and maintenance
+- 8.1.3 Эксплуатация и обслуживание
     
-    - Once delivered to the production environment, software devs must make any additional changes to accommodate unexpected bugs, vulnerabilities, or interoperability issues
-    - They must also keep pace with changing business processes, and work closely with the operations team (typically IT), to ensure reliable operations
-        - together, ops and development transition a new system to production and management of the system's config
-    - The dev team must continually provide hotfixes, patches, and new releases to address discovered security issues and identified coding errors
-- 8.1.4 Change management
+    - После передачи в среду эксплуатации разработчики ПО должны вносить необходимые изменения для устранения неожиданных ошибок, уязвимостей или проблем совместимости
+    - Они также должны идти в ногу с меняющимися бизнес-процессами и тесно работать с командой эксплуатации (обычно ИТ), чтобы обеспечить надёжную работу
+        - вместе эксплуатация и разработка переводят новую систему в эксплуатацию и управляют её конфигурацией
+    - Команда разработки должна непрерывно предоставлять хотфиксы, патчи и новые релизы для устранения выявленных проблем безопасности и найденных ошибок кодирования
+- 8.1.4 Управление изменениями
     
-    - Change management (AKA control management) plays an important role when monitoring systems in a controlled environment, and has 3 basic components:
-        - **Request Control**: process that provides an organized framework within which users can request modifications, managers can conduct cost/benefit analysis, and developers can prioritize tasks
-        - **Change Control**: the process of controlling specific changes that need to take place during the life cycle of a system, serving to document the necessary change-related activities; or the process of providing an organized framework within which multiple devs can create and test a solution prior to rolling it out in a production environment
-            - where change management is the project manager’s responsibility for the overarching process, change control is what devs do to ensure the software or environment doesn’t break when changed
-            - change control is basically the process used by devs to re-create a situation encountered by a user and analyze the appropriate changes; it provides a framework where multiple devs can create and test a solution prior to rolling it out into a prod environment
-        - **Release Control**: once changes are finalized, they must be approved for release through the release control procedure
-            - one of the responsibilities of release control is ensuring that the process includes acceptance testing, confirming that any alterations to end-user work tasks are understood and functional prior to code release
-- 8.1.5 Integrated Product Team (IPT)
+    - Управление изменениями (также control management) играет важную роль при мониторинге систем в контролируемой среде и имеет 3 основных компонента:
+        - **Контроль запросов (Request Control)**: процесс, предоставляющий организованные рамки, в рамках которых пользователи могут запрашивать изменения, менеджеры — проводить анализ затрат и выгод, а разработчики — определять приоритеты задач
+        - **Контроль изменений (Change Control)**: процесс управления конкретными изменениями, которые должны происходить в течение жизненного цикла системы, служащий для документирования необходимых мероприятий, связанных с изменениями; или процесс предоставления организованных рамок, в которых несколько разработчиков могут создать и протестировать решение до его развёртывания в среде эксплуатации
+            - если управление изменениями — ответственность менеджера проекта за общим процессом, то контроль изменений — это то, что делают разработчики, чтобы гарантировать, что ПО или среда не сломаются при изменении
+            - контроль изменений — по сути процесс, который разработчики используют для воссоздания ситуации, с которой столкнулся пользователь, и анализа соответствующих изменений; он предоставляет рамки, в которых несколько разработчиков могут создать и протестировать решение до его развёртывания в продакшен-среде
+        - **Контроль выпуска (Release Control)**: после завершения изменений они должны быть одобрены к выпуску через процедуру контроля выпуска
+            - одна из обязанностей контроля выпуска — убедиться, что процесс включает приёмочное тестирование и что любые изменения рабочих задач конечных пользователей понятны и функциональны до выпуска кода
+- 8.1.5 Интегрированная продуктовая команда (IPT)
     
-    - **Integrated Product Team (IPT)**: Introduced by the US Department of Defense (DoD) as an approach to bring together multifunctional teams with a single goal of delivering a product or developing a process or policy, and fostering parallel, rather than sequential, decisions
-    - Essentially, IPT is used to ensure that all aspects of a product, process, or policy are considered during the development process
+    - **Интегрированная продуктовая команда (IPT, Integrated Product Team)**: введена Министерством обороны США (DoD) как подход к объединению многофункциональных команд с единственной целью — поставить продукт или разработать процесс или политику и обеспечить параллельные, а не последовательные, решения
+    - По сути IPT используется для того, чтобы все аспекты продукта, процесса или политики учитывались в ходе разработки
 
-## [8.2](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#82-identify-and-apply-security-controls-in-development-ecosystems-osg-10-chpts-152021) Identify and apply security controls in development ecosystems (OSG-10 Chpts 15,20,21)
+## [8.2](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#82-identify-and-apply-security-controls-in-development-ecosystems-osg-10-chpts-152021) Выявление и применение средств контроля безопасности в средах разработки (OSG-10 гл. 15, 20, 21)
 
 [](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#82-identify-and-apply-security-controls-in-development-ecosystems-osg-10-chpts-152021)
 
-- Applications, including custom systems, can present significant risks and vulnerabilities, and to protect against these it's important to introduce security controls into the entire system’s development lifecycle
+- Приложения, включая кастомные системы, могут представлять значительные риски и уязвимости, и для защиты от них важно внедрять средства контроля безопасности во весь жизненный цикл разработки системы
     
-- 8.2.1 Programming languages
+- 8.2.1 Языки программирования
     
-    - Computers understand 1s and 0s (binary), and each CPU has its own (machine) language
-    - **Assembly language**: a way of using mnemonics to represent the basic instruction set of a CPU
-    - **Assemblers**: tools that convert assembly language source code into machine code
-    - Third-generation programming languages, such as C/C++, Java, and Python, are known as high-level languages
-        - high-level languages allow developers to write instructions that better approximate human communication
-    - **Compiled language**: converts source code into machine-executable format
-        - compiled code is generally less prone to manipulation by a third party; however, because the source code is not visible in compiled form, it is also harder for reviewers to detect embedded backdoors or other security flaws
-    - **Decompilers**: convert binary executable back into source code
-    - **Disassemblers**: convert back into machine-readable assembly language (an intermediate step during the compilation process)
-    - **Interpreted language**: uses an interpreter to execute; sourcecode is viewable; e.g. Python, R, JavaScript, VBScript
-    - **Object-oriented programming (OOP)**: defines an object to be set of a software that offers one or more methods, internal to the object, that software external to that object can request to access; each method may require specific inputs and resources and may produce a specified set of outputs; focuses on the objects involved in an interaction
-        - OOP languages include C++, Java, and C#
-        - think of OOP as a group of objects that can be requested to perform certain operations or exhibit certain behaviors, working together to provide a system’s functionality or capabilities
-        - OOP has the potential to be more reliable and to reduce the propagation of program change errors, and is better suited to modeling or mimicking the real world
-        - each object in the OOP model has methods that correspond to specific actions that can be taken on the object
-        - objects can also be subclasses of other objects and inherit methods from their parent class; the subclasses can use all the methods of the parent class and have additional class-specific methods
-        - from a security standpoint, object-oriented programming provides a black-box approach to abstraction
-        - OOP terms:
-            - **message**: a communication to or input of an object
-            - **method**: internal code that defines the actions of an object
-            - **behavior**: results or output exhibited by an object
-                - behaviors are the results of a message being processed through a method
-            - **class**: a collection of the common methods, from a set of objects that defines the behavior of those objects
-            - **instance**: objects are instances of or examples of classes that contain their methods
-            - **inheritance**: occurs when the methods from a class (parent or superclass) are inherited by another subclass (child) or object
-            - **delegation**: the forwarding of a request by an object to another object or delegate
-            - **polymorphism**: the characteristic of an object that allows it to respond with different behaviors to the same message or method because of changes in external conditions
-            - **cohesion**: describes the strength of the relationship between the purposes of the methods within the same class
-                - if all methods have similar purposes, there is high cohesion, and a sign of good design
-            - **coupling**: the level of interaction between objects
-                - lower coupling: means less interaction
-                - lower coupling provides better software design because objects are more independent, and code is easier to troubleshoot and update
-- 8.2.2 Libraries
+    - Компьютеры понимают единицы и нули (двоичный код), и каждый ЦП имеет свой (машинный) язык
+    - **Ассемблер (Assembly language)**: способ использования мнемоник для представления базового набора инструкций ЦП
+    - **Ассемблирующие программы (Assemblers)**: инструменты, преобразующие исходный код на ассемблере в машинный код
+    - Языки программирования третьего поколения, такие как C/C++, Java и Python, известны как языки высокого уровня
+        - языки высокого уровня позволяют разработчикам писать инструкции, более приближённые к человеческой коммуникации
+    - **Скомпилированный язык (Compiled language)**: преобразует исходный код в исполняемый формат
+        - скомпилированный код в целом менее подвержен манипуляциям со стороны третьих лиц; однако, поскольку исходный код в скомпилированной форме не виден, рецензентам также сложнее обнаружить встроенные бэкдоры или другие ошибки безопасности
+    - **Декомпиляторы (Decompilers)**: преобразуют исполняемый двоичный файл обратно в исходный код
+    - **Дизассемблеры (Disassemblers)**: преобразуют обратно в читаемый машинный код ассемблер (промежуточный шаг в процессе компиляции)
+    - **Интерпретируемый язык (Interpreted language)**: выполняется с помощью интерпретатора; исходный код доступен для просмотра; например, Python, R, JavaScript, VBScript
+    - **Объектно-ориентированное программирование (ООП)**: определяет объект как набор программного обеспечения, предлагающий один или несколько методов, внутренних для объекта, к которым ПО вне этого объекта может запросить доступ; каждый метод может требовать конкретных входных данных и ресурсов и может производить заданный набор выходных данных; делает упор на объекты, участвующие во взаимодействии
+        - к языкам ООП относятся C++, Java и C#
+        - представляйте ООП как группу объектов, к которым можно обращаться с запросами выполнить определённые операции или проявить определённое поведение, совместно обеспечивающих функциональность или возможности системы
+        - ООП потенциально более надёжно и снижает распространение ошибок при изменении программы, а также лучше подходит для моделирования или имитации реального мира
+        - каждый объект в модели ООП имеет методы, соответствующие конкретным действиям, которые можно выполнить с объектом
+        - объекты также могут быть подклассами других объектов и наследовать методы от родительского класса; подклассы могут использовать все методы родительского класса и иметь дополнительные специфические методы
+        - с точки зрения безопасности объектно-ориентированное программирование предоставляет подход «чёрного ящика» к абстракции
+        - термины ООП:
+            - **сообщение (message)**: коммуникация к объекту или входные данные объекта
+            - **метод (method)**: внутренний код, определяющий действия объекта
+            - **поведение (behavior)**: результаты или выходные данные, проявляемые объектом
+                - поведение — это результат обработки сообщения через метод
+            - **класс (class)**: совокупность общих методов набора объектов, определяющая поведение этих объектов
+            - **экземпляр (instance)**: объекты — это экземпляры или примеры классов, содержащих их методы
+            - **наследование (inheritance)**: происходит, когда методы класса (родительского или суперкласса) наследуются другим подклассом (потомком) или объектом
+            - **делегирование (delegation)**: переадресация запроса объектом другому объекту или делегату
+            - **полиморфизм (polymorphism)**: характеристика объекта, позволяющая ему отвечать разным поведением на одно и то же сообщение или метод из-за изменений во внешних условиях
+            - **связность (cohesion)**: описывает силу связи между целями методов внутри одного класса
+                - если все методы имеют похожие цели — высокая связность, что признак хорошего дизайна
+            - **сцепление (coupling)**: уровень взаимодействия между объектами
+                - низкое сцепление: означает меньше взаимодействия
+                - низкое сцепление обеспечивает лучший дизайн ПО, так как объекты более независимы, а код проще диагностировать и обновлять
+- 8.2.2 Библиотеки
     
-    - **Software library**: a pre-written collection of components (classes, procedures, scripts etc) that do specific tasks, useful to other components (e.g. software libraries for encryption algorithms, managing network connections, or displaying graphics)
-    - Shared software libraries contain reusable code, improving developers efficiency, and reducing the need to write well-known algorithms from scratch; often available as open source
-        - shared libraries can also include many security issues (e.g. Heartbleed), and devs should be aware of the origins of the shared code that they use, and keep informed about any security vulns that might be discovered in these libraries
-- 8.2.3 Tool sets
+    - **Программная библиотека (Software library)**: заранее написанный набор компонентов (классов, процедур, скриптов и т.д.), выполняющих конкретные задачи и полезных другим компонентам (например, библиотеки ПО для алгоритмов шифрования, управления сетевыми подключениями или отображения графики)
+    - Общие (разделяемые) программные библиотеки содержат повторно используемый код, повышая эффективность разработчиков и сокращая необходимость писать общеизвестные алгоритмы с нуля; часто доступны как open source
+        - общие библиотеки также могут содержать множество проблем безопасности (например, Heartbleed), и разработчики должны знать происхождение используемого общего кода и быть в курсе возможных уязвимостей, обнаруженных в этих библиотеках
+- 8.2.3 Наборы инструментов
     
-    - Forcing all devs to use the same toolset can reduce productivity and job satisfaction; however letting every dev choose their own tools and environment widens an organization's attack surface
-        - a better approach is to use a change advisory board to validate developer tool requirements, assess associated risks; if approved, the sec team monitors controls
-    - Developers use a variety of tools, and one of the most important is the IDE (defined below)
-- 8.2.4 Integrated Development Environment
+    - Требование от всех разработчиков использовать один и тот же набор инструментов может снизить производительность и удовлетворённость от работы; однако позволять каждому разработчику выбирать собственные инструменты и среду расширяет поверхность атаки организации
+        - лучший подход — использовать совет по изменениям (CAB) для проверки требований разработчиков к инструментам и оценки связанных рисков; в случае одобрения команда безопасности контролирует средства
+    - Разработчики используют разнообразные инструменты, и один из важнейших — IDE (определена ниже)
+- 8.2.4 Интегрированная среда разработки
     
-    - **Integrated Development Environment (IDE)**: software applications, their control procedures, supporting databases, libraries and toolsets that provide a programmer or team what they need to specify, code, compile, test, and integrate code; IDEs provide developers with a single environment where they can write their code, test and debug, and compile it
-- 8.2.5 Runtime
+    - **Интегрированная среда разработки (IDE, Integrated Development Environment)**: программные приложения, их процедуры управления, вспомогательные базы данных, библиотеки и наборы инструментов, предоставляющие программисту или команде всё необходимое для спецификации, написания, компиляции, тестирования и интеграции кода; IDE предоставляют разработчикам единую среду, где они могут писать код, тестировать и отлаживать его и компилировать
+- 8.2.5 Среда выполнения
     
-    - **RunTime Environments (RTE)**: allows the portable execution of code across different operating systems or platforms without recompiling (e.g. Java Virtual Machine (JVM))
-        - this is known as portable code, which needs translation between each environment, the role of the RTE
-- 8.2.6 Continuous Integration and Continuous Delivery (CI/CD)
+    - **Среды выполнения (RTE, RunTime Environments)**: позволяют переносимое выполнение кода на разных операционных системах или платформах без перекомпиляции (например, виртуальная машина Java, JVM)
+        - это известно как переносимый код, которому требуется перевод между каждой средой — роль RTE
+- 8.2.6 Непрерывная интеграция и непрерывная поставка (CI/CD)
     
-    - **Continuous Integration and Continuous Delivery**: workflow automation processes and tools that help reduce, if not eliminate, the need for manual communication and coordination between the steps of a software development process
-    - **Continuous integration (CI)**: all new code is integrated into the rest of the system as soon as the developer writes it, merging it into a shared repo
-        - this merge triggers a batch of unit tests
-        - if it merges without error, it's subjected to integration tests
-        - CI improves software development efficiency by identifying errors early and often
-        - CI also allows the practice of continuous delivery (CD)
-    - **Continuous Delivery (CD)**: incrementally building a software product that can be released at any time; because all processes and tests are automated, code can be released to production daily or more often
-        - Note that continuous delivery and continuous deployment are both automation-heavy DevOps practices that build on CI; the key difference is in the final step of the release process: human intervention
-        - Continuous Delivery: code is always in a deployable state, but deployment to production requires a manual approval step
-        - Continuous Deployment: every change that passes automated testing is automatically deployed to production with no manual intervention
-    - CI/CD relies on automation and often third-party tools which can have vulnerabilities or be compromised
-    - Secure practices such as threat modeling, least privilege, defense in depth, and zero trust can help reduce possible threats to these tools and systems
-- 8.2.7 Software Configuration Management
+    - **Непрерывная интеграция и непрерывная поставка**: процессы и инструменты автоматизации рабочих процессов, помогающие снизить, если не устранить, потребность в ручной коммуникации и координации между шагами процесса разработки ПО
+    - **Непрерывная интеграция (CI)**: весь новый код интегрируется в остальную часть системы, как только разработчик его пишет, слиянием в общий репозиторий
+        - это слияние запускает пакет модульных тестов
+        - если слияние прошло без ошибок, код подвергается интеграционным тестам
+        - CI повышает эффективность разработки ПО за счёт раннего и частого выявления ошибок
+        - CI также позволяет практиковать непрерывную поставку (CD)
+    - **Непрерывная поставка (CD)**: поэтапное построение программного продукта, который можно выпустить в любой момент; поскольку все процессы и тесты автоматизированы, код может выпускаться в продакшен ежедневно или чаще
+        - Обратите внимание: непрерывная поставка и непрерывное развёртывание — обе практики DevOps с высокой степенью автоматизации, построенные на CI; ключевое различие — в последнем шаге процесса выпуска: вмешательстве человека
+        - Непрерывная поставка (Continuous Delivery): код всегда находится в состоянии, пригодном для развёртывания, но развёртывание в продакшен требует ручного шага согласования
+        - Непрерывное развёртывание (Continuous Deployment): каждое изменение, прошедшее автоматическое тестирование, автоматически развёртывается в продакшен без ручного вмешательства
+    - CI/CD полагается на автоматизацию и часто на сторонние инструменты, которые могут иметь уязвимости или быть скомпрометированы
+    - Такие безопасные практики, как моделирование угроз, наименьшие привилегии, глубинная защита и нулевое доверие, могут помочь снизить возможные угрозы этим инструментам и системам
+- 8.2.7 Управление конфигурацией ПО
     
-    - **Software Configuration Management (SCM)**: a product that identifies the attributes of software at various points in time and performs methodical change control for the purpose of maintaining software integrity and traceability throughout the SDLC
-        - SCM tracks config changes, and verifies that the delivered software includes all approved changes
-        - SCM systems manage and track revisions made by multiple people against a single master software repository, providing concurrency management, versioning, and synchronization
-        - auditing and logging of software changes mitigates risk to the organization by:
-            - providing a detailed record of all modifications made to software applications
-            - allowing security teams to identify suspicious activity
-            - quickly detect unauthorized changes and investigate potential security breaches
-            - and take corrective actions, ultimately protecting the integrity and confidentiality of the org's data and systems
-- 8.2.8 Code repositories
+    - **Управление конфигурацией ПО (SCM, Software Configuration Management)**: средство, идентифицирующее атрибуты ПО в различные моменты времени и выполняющее методичный контроль изменений с целью поддержания целостности и прослеживаемости ПО на протяжении всего SDLC
+        - SCM отслеживает изменения конфигурации и проверяет, что поставляемое ПО включает все одобренные изменения
+        - системы SCM управляют и отслеживают ревизии, вносимые несколькими людьми в единый мастер-репозиторий ПО, обеспечивая управление конкурентностью, версионирование и синхронизацию
+        - аудит и журналирование изменений ПО снижают риск для организации:
+            - предоставляя детальную запись всех модификаций, выполненных с приложениями
+            - позволяя командам безопасности выявлять подозрительную активность
+            - быстро обнаруживая неавторизованные изменения и расследуя потенциальные нарушения безопасности
+            - и принимая корректирующие действия, в конечном итоге защищая целостность и конфиденциальность данных и систем организации
+- 8.2.8 Репозитории кода
     
-    - Software development is a collaborative effort, and larger projects require teams of devs working simultaneously on different parts
-    - Code repositories support collaborations, acting as a central storage point for source code
-        - GitHub, Bitbucket, and SourceForge are examples of systems that provide version control, bug tracking, web hosting, release management, and communications functionality
-- 8.2.9 Application security testing (e.g., static application security testing (SAST), dynamic application security testing (DAST), software composition analysis, Interactive Application Security Test (IAST))
+    - Разработка ПО — коллективный труд, а более крупные проекты требуют команд разработчиков, работающих одновременно над разными частями
+    - Репозитории кода поддерживают сотрудничество, служа центральным хранилищем исходного кода
+        - GitHub, Bitbucket и SourceForge — примеры систем, обеспечивающих контроль версий, отслеживание ошибок, веб-хостинг, управление релизами и средства коммуникации
+- 8.2.9 Тестирование безопасности приложений (например, статическое тестирование безопасности приложений (SAST), динамическое тестирование безопасности приложений (DAST), анализ состава программного обеспечения, интерактивное тестирование безопасности приложений (IAST))
     
-    - **Static Application Security Testing (SAST)**: AKA static analysis, tools and technique to help identify software defects (e.g. data type errors, loop/structure bounds violations, unreachable code) or security policy violations and is carried out by examining the code without executing the program (or before the program is compiled)
-        - the term SAST is generally reserved for automated tools that assist analysts and developers, whereas manual inspection by humans is generally referred to as code review
-        - SAST allows devs to scan source code for flaws and vulns; it also provides a scalable method of security code review and ensuring that devs are following secure coding policies
-    - **Dynamic Application Security Testing (DAST)**: AKA dynamic analysis, is the evaluation of a program while running in real time
-        - tools that execute the software unit, application or system under test, in ways that attempt to drive it to reveal a potentially exploitable vulnerability
-        - DAST is usually performed once a program has cleared SAST and basic code flaws have been fixed
-        - DAST enables devs to trace subtle logical errors that are likely to cause security problems, without the need to create artificial error-inducing scenarios
-        - dynamic analysis is also effective for compatibility testing, detecting memory leakages, identifying dependencies, and analyzing software without accessing the software’s actual source code
-    - **Software Composition Analysis (SCA)**: tools and techniques that identify open-source and third-party components in a codebase, catalog their versions and licenses, and flag known vulnerabilities; SCA is critical for managing software supply chain risk
-    - **Interactive Application Security Testing (IAST)**: the combination of SAST and DAST such application testing is done on the running system (DAST), with access to source code (SAST)
+    - **Статическое тестирование безопасности приложений (SAST)**: также статический анализ — инструменты и техники для выявления дефектов ПО (например, ошибок типов данных, нарушений границ циклов/структур, недостижимого кода) или нарушений политик безопасности; выполняется путём изучения кода без выполнения программы (или до компиляции программы)
+        - термин SAST обычно зарезервирован для автоматизированных инструментов, помогающих аналитикам и разработчикам, тогда как ручная проверка людьми обычно называется ревью кода (code review)
+        - SAST позволяет разработчикам сканировать исходный код на предмет ошибок и уязвимостей; он также предоставляет масштабируемый метод ревью кода на безопасность и обеспечивает следование разработчиков политикам безопасного программирования
+    - **Динамическое тестирование безопасности приложений (DAST)**: также динамический анализ — оценка программы в реальном времени во время её выполнения
+        - инструменты, выполняющие программный модуль, приложение или систему под тестированием такими способами, которые пытаются побудить её выявить потенциально эксплуатируемую уязвимость
+        - DAST обычно выполняется после того, как программа прошла SAST и базовые ошибки кода исправлены
+        - DAST позволяет разработчикам отслеживать тонкие логические ошибки, вероятно вызывающие проблемы безопасности, без необходимости создавать искусственные сценарии, вызывающие ошибки
+        - динамический анализ также эффективен для тестирования совместимости, обнаружения утечек памяти, выявления зависимостей и анализа ПО без доступа к реальному исходному коду
+    - **Анализ состава ПО (SCA, Software Composition Analysis)**: инструменты и техники, выявляющие компоненты open source и сторонние компоненты в базе кода, каталогизирующие их версии и лицензии и помечающие известные уязвимости; SCA критически важен для управления рисками цепочки поставок ПО
+    - **Интерактивное тестирование безопасности приложений (IAST, Interactive Application Security Testing)**: сочетание SAST и DAST — тестирование приложения выполняется на работающей системе (DAST) с доступом к исходному коду (SAST)
 
-## [8.3](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#83-assess-the-effectiveness-of-software-security-osg-10-chpts-2021) Assess the effectiveness of software security (OSG-10 Chpts 20,21)
+## [8.3](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#83-assess-the-effectiveness-of-software-security-osg-10-chpts-2021) Оценка эффективности безопасности ПО (OSG-10 гл. 20, 21)
 
 [](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#83-assess-the-effectiveness-of-software-security-osg-10-chpts-2021)
 
-- 8.3.1 Auditing and logging of changes
+- 8.3.1 Аудит и журналирование изменений
     
-    - Applications should be configured to log details of errors and other security events to a centralized log repository
-    - The Open Web Application Security Project (OWASP) Secure Coding Practices suggest logging the following events:
-        - input/output validation failures
-        - authentication attempts, especially failures
-        - access control failures
-        - tampering attempts
-        - use of invalid or expired session tokens
-        - exceptions raised by the OS or applications
-        - use of admin privileges
-        - Transport Layer Security (TLS) failures
-        - cryptographic errors
-        - high-risk functionality (admin actions or use of admin privileges, access to sensitive data, creation/deletion of system-level objects, data import/export etc.)
-- 8.3.2 Risk analysis and mitigation
+    - Приложения должны быть настроены на журналирование деталей ошибок и других событий безопасности в централизованное хранилище журналов
+    - Практики безопасного программирования OWASP (Open Web Application Security Project) рекомендуют журналировать следующие события:
+        - сбои проверки ввода/вывода
+        - попытки аутентификации, особенно неудачные
+        - сбои контроля доступа
+        - попытки подделки
+        - использование недействительных или просроченных токенов сессии
+        - исключения, возбуждённые ОС или приложениями
+        - использование административных привилегий
+        - сбои протокола TLS (Transport Layer Security)
+        - криптографические ошибки
+        - функции повышенного риска (административные действия или использование админ-привилегий, доступ к конфиденциальным данным, создание/удаление объектов уровня системы, импорт/экспорт данных и т.д.)
+- 8.3.2 Анализ и митигация рисков
     
-    - Risk management is at the center of secure software development, in particular regarding the mapping of identified risks and implemented controls
-        - this is a difficult part of secure software dev, especially related to auditing
-    - Threat modeling is important to dev teams, and particularly in DevSecOps
-    - Assessors are also interested in the linkages between the software dev and risk management programs
-        - software projects should be tracked in the org’s risk matrix, to ensure the dev team is connected to the broader risk management efforts, and not working in isolation
+    - Управление рисками находится в центре безопасной разработки ПО, в частности в части сопоставления выявленных рисков и внедрённых средств контроля
+        - это трудная часть безопасной разработки ПО, особенно связанная с аудитом
+    - Моделирование угроз важно для команд разработки и особенно в DevSecOps
+    - Оценщики также интересуются связями между программами разработки ПО и управления рисками
+        - программные проекты должны отслеживаться в матрице рисков организации, чтобы гарантировать, что команда разработки связана с более широкими усилиями по управлению рисками, а не работает в изоляции
 
-## [8.4](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#84-assess-security-impact-of-acquired-software-osg-10-chpts-1620) Assess security impact of acquired software (OSG-10 Chpts 16,20)
+## [8.4](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#84-assess-security-impact-of-acquired-software-osg-10-chpts-1620) Оценка влияния на безопасность приобретённого ПО (OSG-10 гл. 16, 20)
 
 [](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#84-assess-security-impact-of-acquired-software-osg-10-chpts-1620)
 
-- Note that an SBOM has become increasingly important for assessing the security impact of acquired software; recall from Domain 1 that an SBOM provides a formal record of all components, libraries, and dependencies within a software product, enabling organizations to quickly identify affected systems when new vulnerabilities are disclosed
+- Обратите внимание, что SBOM (манифест состава программного обеспечения) приобретает всё большее значение для оценки влияния на безопасность приобретаемого ПО; вспомните из Домена 1, что SBOM предоставляет формальную запись обо всех компонентах, библиотеках и зависимостях в программном продукте, позволяя организациям быстро выявлять затронутые системы при появлении новых уязвимостей
     
-- 8.4.1 Commercial-off-the-shelf (COTS)
+- 8.4.1 Коммерческое готовое ПО (COTS)
     
-    - **Commercial Off-the-Shelf (COTS)**: software elements, usually apps, that are provided as finished products (not intended for alteration by or for the end-user)
-    - Most widely used COTS software products have been tested by security researchers (both benign and malicious)
-        - researching discovered vulnerabilities and exploits can help us understand how seriously the vendor takes security
-        - for niche products, you should research vendor certifications, such as ISO/IEC 27034 Application Security
-        - other than secure coding certification, you can look for overall information security management system (ISMS) certifications such as ISO/IEC 27001 and FedRAMP (which are difficult to obtain, and show that the vendor is serious about security)
-    - If you can talk with a vendor, look for processes like defensive programming, which is a software development best practice that means as code is developed or reviewed, they are constantly looking for opportunities for things to go badly
-        - e.g. treating all input routines as untrusted until proven otherwise
-- 8.4.2 Open source
+    - **Коммерческое готовое ПО (COTS, Commercial Off-the-Shelf)**: программные компоненты, обычно приложения, предоставляемые в виде готовых продуктов (не предполагающие изменения конечным пользователем)
+    - Наиболее широко используемые продукты COTS протестированы исследователями безопасности (как добросовестными, так и вредоносными)
+        - изучение обнаруженных уязвимостей и эксплойтов может помочь понять, насколько серьёзно поставщик подходит к безопасности
+        - для нишевых продуктов следует изучать сертификации поставщика, например ISO/IEC 27034 «Безопасность приложений»
+        - помимо сертификации безопасного программирования, можно искать сертификации системы управления информационной безопасностью (ISMS), такие как ISO/IEC 27001 и FedRAMP (их трудно получить, и они показывают, что поставщик относится к безопасности серьёзно)
+    - Если есть возможность поговорить с поставщиком, ищите процессы вроде защитного программирования — это лучшая практика разработки ПО, означающая, что при написании или ревью кода они постоянно ищут возможности, как всё может пойти не так
+        - например, отношение ко всем подпрограммам ввода как к недоверенным, пока не доказано обратное
+- 8.4.2 Открытый исходный код
     
-    - Open source is typically released with licensing allowing code access and inspection so devs can look for security issues
-        - typically, however, this means that there is no service or support that comes with the software and requires in-house support for configuration, and security testing
-        - it also means that both open-source devs as well as adversaries are able to review the code for vulns
-        - the greatest risk of open-source software is relying on outdated versions -- especially true of shared libraries
-        - an org should develop processes to ensure that all open-source software is periodically updated, likely in a way that differs from the process for updating COTS
-- 8.4.3 Third-party
+    - Open source, как правило, выпускается с лицензией, допускающей доступ и инспекцию кода, чтобы разработчики могли искать проблемы безопасности
+        - однако обычно это означает, что с ПО не поставляется сервис или поддержка, и требуется внутренняя поддержка для конфигурации и тестирования безопасности
+        - это также означает, что и разработчики open source, и противники могут изучать код на предмет уязвимостей
+        - главный риск ПО с открытым исходным кодом — опора на устаревшие версии — особенно это касается общих библиотек
+        - организация должна выработать процессы, гарантирующие периодическое обновление всего open source, скорее всего отличающиеся от процесса обновления COTS
+- 8.4.3 Стороннее ПО
     
-    - **Third-party software**: (AKA outsourced software) is software made specifically for an org by a third party
-        - third-party software is not considered COTS, since the software is custom or customized
-        - third-party software may rely on open-source software, but since it's customized, it may have different or additional vulns
-        - it's best practice to use a third-party to do an external audit and security assessment; this should be built into the vendor's contract, with passing the audit conditional for finalizing software purchase
-- 8.4.4 Managed services (e.g., enterprise applications)
+    - **Стороннее ПО (Third-party software)**: (также аутсорсинговое ПО) — ПО, созданное специально для организации третьей стороной
+        - стороннее ПО не считается COTS, поскольку оно кастомное или кастомизированное
+        - стороннее ПО может опираться на open source, но поскольку оно кастомизировано, может иметь другие или дополнительные уязвимости
+        - лучшая практика — привлекать третью сторону для внешнего аудита и оценки безопасности; это должно быть заложено в договор с поставщиком, а успешное прохождение аудита — условием завершения покупки ПО
+- 8.4.4 Управляемые услуги (например, корпоративные приложения)
     
-    - **Managed services**: can include services and assets that are available from on-premises resources (e.g. within the organization) or cloud-based; as organizations move more functionality to the cloud, they reap cloud-based conveniences (e.g. pay only for on-demand resource use, easy scalability etc.) but lose a degree of control since a portion of cloud-based resources are outside the org's control
-- 8.4.5 Cloud services (e.g., Software as a Service (SaaS), Infrastructure as a Service (IaaS), Platform as a Service (PaaS))
+    - **Управляемые услуги (Managed services)**: могут включать сервисы и активы, доступные из on-premises ресурсов (например, внутри организации) или облачных; по мере того как организации переносят всё больше функциональности в облако, они получают удобства облачных решений (например, оплата только за реально использованные ресурсы, простое масштабирование и т.д.), но теряют степень контроля, поскольку часть облачных ресурсов находится вне контроля организации
+- 8.4.5 Облачные сервисы (например, SaaS — ПО как сервис, IaaS — инфраструктура как сервис, PaaS — платформа как сервис)
     
-    - As orgs continue to migrate to the cloud (SaaS, IaaS, PaaS), they should increase the security assessment of those services
-    - The top reasons for cloud breaches continue to be misconfigurations, lack of visibility into access settings, and poor access controls
-        - cloud service providers have tools to help mitigate these issues, and orgs should consider bringing in third-party experts to help if they don't have the internal expertise
-    - **Anything as a Service (XaaS)**: catchall term referring to any type of computing service that provides value to customers via a cloud solution
+    - По мере продолжения миграции в облако (SaaS, IaaS, PaaS) организации должны наращивать оценку безопасности этих сервисов
+    - Главными причинами нарушений безопасности в облаке по-прежнему остаются некорректная конфигурация, отсутствие прозрачности настроек доступа и слабый контроль доступа
+        - облачные провайдеры имеют инструменты для помощи в митигации этих проблем, и организации должны рассмотреть привлечение сторонних экспертов, если у них нет внутренней экспертизы
+    - **Всё как сервис (XaaS, Anything as a Service)**: собирательный термин, относящийся к любому типу вычислительного сервиса, создающего ценность для клиентов посредством облачного решения
 
-## [8.5](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#85-define-and-apply-secure-coding-guidelines-and-standards-osg-10-chpts-2021) Define and apply secure coding guidelines and standards (OSG-10 Chpts 20,21)
+## [8.5](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#85-define-and-apply-secure-coding-guidelines-and-standards-osg-10-chpts-2021) Определение и применение руководств и стандартов безопасного программирования (OSG-10 гл. 20, 21)
 
 [](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-8-2024%2BObjectives.md#85-define-and-apply-secure-coding-guidelines-and-standards-osg-10-chpts-2021)
 
-- **Secure Coding Guidelines and Standards**: best practices identified by a variety of software and security professionals, that when used correctly can dramatically reduce the number of exploitable vulnerabilities introduced during development
+- **Руководства и стандарты безопасного программирования**: лучшие практики, выявленные различными специалистами по ПО и безопасности, которые при правильном использовании могут радикально сократить количество эксплуатируемых уязвимостей, вносимых в ходе разработки
     
-- 8.5.1 Security weaknesses and vulnerabilities at the source-code level
+- 8.5.1 Ошибки и уязвимости безопасности на уровне исходного кода
     
-    - A source code vulnerability is a code defect providing a threat actor with an opportunity to compromise the security of a software system
-        - source code vulns are caused by design or implementation flaws
-        - **design flaw**: if dev did everything correctly, there would still be a vulnerability
-        - **implementation flaw**: dev incorrectly implemented part of a good design
-    - the OWASP top 10 vulnerabilities ([2025 edition](https://owasp.org/Top10/2025/)):
-        - Broken access control
-        - Security misconfiguration
-        - Software supply chain failures
-        - Cryptographic failures
-        - Injection
-        - Insecure design
-        - Authentication failures
-        - Software or data integrity failures
-        - Security logging and alerting failures
-        - Mishandling of exceptional conditions
-- 8.5.2 Security of Application Programming Interfaces (APIs)
+    - Уязвимость исходного кода — это дефект кода, дающий субъекту угроз возможность скомпрометировать безопасность программной системы
+        - уязвимости исходного кода вызваны ошибками проектирования или реализации
+        - **ошибка проектирования (design flaw)**: если бы разработчик всё сделал правильно, уязвимость всё равно существовала бы
+        - **ошибка реализации (implementation flaw)**: разработчик неправильно реализовал часть хорошего проекта
+    - десять главных уязвимостей OWASP ([издание 2025](https://owasp.org/Top10/2025/)):
+        - Нарушения контроля доступа (Broken access control)
+        - Некорректная конфигурация безопасности (Security misconfiguration)
+        - Сбои цепочки поставок ПО (Software supply chain failures)
+        - Ошибки криптографии (Cryptographic failures)
+        - Инъекции (Injection)
+        - Небезопасное проектирование (Insecure design)
+        - Ошибки аутентификации (Authentication failures)
+        - Сбои целостности ПО или данных (Software or data integrity failures)
+        - Сбои журналирования и оповещений о безопасности (Security logging and alerting failures)
+        - Ненадлежащая обработка исключительных условий (Mishandling of exceptional conditions)
+- 8.5.2 Безопасность интерфейсов программного приложения (API)
     
-    - **Application Programming Interface (API)**: specifies the manner in which a software component interacts with other components
-        - APIs reduce the effort of providing secure component interactions by providing easy implementation for security controls
-        - APIs reduce code maintenance by encouraging software reuse, and keeping the location of changes in one place
-        - **Parameter validation**: ensuring that any API parameter is checked against being malformed, invalid, or malicious helps ensure API secure use; validation confirms that the parameter values being received by an app are within defined limits before they are processed by the system
-- 8.5.3 Security coding practices
+    - **Интерфейс программного приложения (API, Application Programming Interface)**: определяет способ взаимодействия программного компонента с другими компонентами
+        - API снижают трудозатраты на обеспечение безопасного взаимодействия компонентов, предоставляя простую реализацию средств контроля безопасности
+        - API снижают затраты на сопровождение кода, поощряя повторное использование ПО и концентрируя места изменений в одном месте
+        - **Валидация параметров (Parameter validation)**: проверка любого параметра API на некорректность, недействительность или вредоносность способствует безопасному использованию API; валидация подтверждает, что поступающие в приложение значения параметров находятся в пределах определённых ограничений, прежде чем они будут обработаны системой
+- 8.5.3 Практики безопасного программирования
     
-    - Secure coding practices can be summarized as standards and guidelines
-        - **standards**: mandatory activities, actions, or rules
-        - **guidelines**: recommended actions or ops guidelines that provide flexibility for unforeseen circumstances
-        - orgs greatly reduce source code vulns by enforcing secure coding standards and maintaining coding guidelines that reflect best practices
-    - To be considered a standard, coding practice must meet the following:
-        - reduces the risk of a particular type of vuln
-        - enforceable across all of an org's software development efforts
-        - verifiably implemented
-    - Note: secure coding standards, rigorously applied, is the best way to reduce source code vulns; coding standards ensure devs always do certain things in a certain way, while avoiding others
-    - Secure coding guidelines are recommended practices that tend to be less specific than standards
-        - e.g. consistently formatted code comments, or keeping code functions short/tight
-- 8.5.4 Software-defined security
+    - Практики безопасного программирования можно свести к стандартам и руководствам
+        - **стандарты**: обязательные мероприятия, действия или правила
+        - **руководства**: рекомендуемые действия или операционные рекомендации, предоставляющие гибкость для непредвиденных обстоятельств
+        - организации радикально сокращают уязвимости исходного кода, применяя стандарты безопасного программирования и поддерживая руководства по кодированию, отражающие лучшие практики
+    - Чтобы практика кодирования считалась стандартом, она должна:
+        - снижать риск определённого типа уязвимостей
+        - применяться ко всем усилиям по разработке ПО в организации
+        - быть проверяемо реализуемой
+    - Примечание: строго применяемые стандарты безопасного программирования — лучший способ сократить уязвимости исходного кода; стандарты кодирования гарантируют, что разработчики всегда делают определённые вещи определённым образом, избегая других
+    - Руководства по безопасному программированию — рекомендуемые практики, которые, как правило, менее конкретны, чем стандарты
+        - например, единообразно форматированные комментарии к коду или краткие/компактные функции кода
+- 8.5.4 Определяемая программным обеспечением безопасность
     
-    - **Software-defined security (SDS or SDSec)**: a security model in which security functions such as firewalling, IDS/IPS, and network segmentation are implemented in software within an SDN environment
-        - one of the advantages of this approach is that sensors (for systems like IDS/IPS) can be dynamically repositioned depending on the threat
-        - SDS provides a decoupling from physical devices, because it abstracts security functions into software that can run on any compatible physical or virtual infrastructure, critical for supporting cloud services dynamic scaling and virtualized data centers
-    - DevSecOps supports the concept of software-defined security, where security controls are actively managed into the CI/CD pipeline
+    - **Определяемая программным обеспечением безопасность (SDS или SDSec, Software-defined security)**: модель безопасности, в которой функции безопасности, такие как файролинг, IDS/IPS и сегментация сети, реализуются программно в среде SDN
+        - одно из преимуществ этого подхода в том, что датчики (для систем вроде IDS/IPS) могут динамически перемещаться в зависимости от угрозы
+        - SDS обеспечивает отвязку от физических устройств, поскольку абстрагирует функции безопасности в программное обеспечение, способное работать на любой совместимой физической или виртуальной инфраструктуре, что критически важно для поддержки динамического масштабирования облачных сервисов и виртуализированных дата-центров
+    - DevSecOps поддерживает концепцию определяемой программным обеспечением безопасности, при которой средства контроля безопасности активно управляются в конвейере CI/CD
 
-Also see Understanding CISSP Domain 8, Software Development Security - [part 1](https://blog.balancedsec.com/p/understanding-cissp-domain-8-software?r=1k08iw), and [part 2](https://blog.balancedsec.com/p/understanding-cissp-domain-8-software-597?r=1k08iw) on my blog, [The Cyber Leader](https://blog.balancedsec.com/) (note that some articles require a subscription)
+Также см. Understanding CISSP Domain 8, Software Development Security — [часть 1](https://blog.balancedsec.com/p/understanding-cissp-domain-8-software?r=1k08iw) и [часть 2](https://blog.balancedsec.com/p/understanding-cissp-domain-8-software-597?r=1k08iw) в моём блоге [The Cyber Leader](https://blog.balancedsec.com/) (заметьте, что некоторые статьи требуют подписки)
