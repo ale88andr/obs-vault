@@ -1,7 +1,5 @@
 # [Domain-2](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#domain-2-asset-security) **Безопасность активов (Asset Security)**
 
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#domain-2-asset-security)
-
 - Домен 2 экзамена CISSP посвящён безопасности активов и составляет ~10% теста
 - Безопасность активов включает концепции, принципы и стандарты мониторинга и защиты любого актива, важного для организации
 - Домен «Безопасность активов» сфокусирован на сборе, обработке и защите информации на протяжении её жизненного цикла; первый шаг — классификация информации на основе её ценности для организации
@@ -17,8 +15,6 @@
 - **TEMPEST (TEMPEST)**: класс технологий, предназначенных для минимизации электромагнитных излучений, создаваемых вычислительными устройствами; технология TEMPEST делает затруднительным, если не невозможным, нарушение конфиденциальности путём перехвата излучаемой информации; контрмеры TEMPEST против подслушивания Ван Эка (Van Eck phreaking), включая клетки Фарадея, белый шум, контрольные зоны и экранирование
 
 ## [2.1](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#21-identify-and-classify-information-and-assets-osg-10-chpt-5) Идентификация и классификация информации и активов (OSG-10, гл. 5)
-
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#21-identify-and-classify-information-and-assets-osg-10-chpt-5)
 
 - 2.1.1 Классификация данных
     
@@ -61,8 +57,6 @@
 
 ## [2.2](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#22-establish-information-and-asset-handling-requirements-osg-10-chpt-5) Установление требований к обращению с информацией и активами (OSG-10, гл. 5)
 
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#22-establish-information-and-asset-handling-requirements-osg-10-chpt-5)
-
 - **Обращение с активами (Asset handling)**: процедуры, снижающие риски, связанные с тем, кто и как перемещает, хранит и извлекает активы, обеспечивая использование надлежащих инструментов и технологий; требования к обращению основаны на классификации актива (не на типе носителя); обращение может включать безопасную транспортировку носителей на протяжении их срока службы
 - Ключевая цель обращения с данными и активами — предотвратить утечки данных, используя:
     - **Обслуживание данных (Data Maintenance)**: постоянные усилия по организации и уходу за данными на протяжении их жизненного цикла
@@ -76,8 +70,6 @@
 - Уничтожение данных: см. 2.4.7 ниже
 
 ## [2.3](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#23-provision-information-and-assets-securely-osg-10-chpt-16) Безопасное предоставление информации и активов (OSG-10, гл. 16)
-
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#23-provision-information-and-assets-securely-osg-10-chpt-16)
 
 - Основная цель практик безопасности операций — защита таких активов, как информация, системы, устройства, объекты и приложения; эти практики помогают выявлять угрозы и уязвимости и внедрять контроли для снижения рисков для этих активов
     
@@ -110,8 +102,6 @@
     - Для защиты нематериальных инвентарей (таких как интеллектуальная собственность, патенты, товарные знаки, репутация компании и авторские права) их необходимо отслеживать
 
 ## [2.4](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#24-manage-data-lifecycle-osg-10-chpt-5) Управление жизненным циклом данных (OSG-10, гл. 5)
-
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#24-manage-data-lifecycle-osg-10-chpt-5)
 
 - Жизненный цикл данных: комплексный процесс, через который проходят данные, от их создания до окончательной утилизации; для справки посмотрите эту версию жизненного цикла данных от [CSA](https://cloudsecurityalliance.org/artifacts/cybersecurity-and-the-data-lifecycle) как отправную точку
     
@@ -208,8 +198,6 @@
 
 ## [2.5](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#25-ensure-appropriate-asset-retention-eg-end-of-life-eol-end-of-support-osg-10-chpt-5) Обеспечение надлежащего хранения активов (например, End-of-Life (EOL), End-of-Support) (OSG-10, гл. 5)
 
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#25-ensure-appropriate-asset-retention-eg-end-of-life-eol-end-of-support-osg-10-chpt-5)
-
 - Оборудование: даже если вы храните данные в течение необходимого периода, от них не будет никакой пользы, если у вас нет оборудования, способного прочитать эти данные
     
 - Персонал: помимо хранения данных в течение требуемых периодов и обслуживания оборудования для чтения данных, вам нужен персонал, который умеет работать с оборудованием для выполнения процессов восстановления
@@ -222,8 +210,6 @@
     
 
 ## [2.6](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#26-determine-data-security-controls-and-compliance-requirements-osg-10-chpt-5) Определение контролей безопасности данных и требований соответствия (OSG-10, гл. 5)
-
-[](https://github.com/jefferywmoore/CISSP-Study-Resources/blob/main/CISSP-Domain-2-2024%2BObjectives.md#26-determine-data-security-controls-and-compliance-requirements-osg-10-chpt-5)
 
 - Вам нужны контроли безопасности, защищающие данные в каждом возможном состоянии: в покое, при передаче или в использовании
     
@@ -296,5 +282,3 @@
         - проверка: CCP отправляет токен в хранилище токенизации; хранилище отвечает данными кредитной карты, списание обрабатывается
         - завершение продажи: CCP отправляет ответ в POS, указывающий, что списание одобрено
         - эта система предотвращает кражу кредитных карт в POS-системе
-
-Также см. [Understanding CISSP Domain 2: Asset Security](https://blog.balancedsec.com/p/understanding-cissp-domain-2-asset) в моём блоге, [The Cyber Leader](https://blog.balancedsec.com/), для дополнительной информации
