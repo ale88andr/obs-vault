@@ -73,15 +73,6 @@ aliases:
 
 Практический вывод из устройства этой страницы: **один маппинг «T1070» не даёт детекта** — даёт детект связка «подтехника + платформа + data component», то есть `T1070.004` + Windows + File Deletion. И наоборот: правило «очищен журнал Security» — это конкретно `T1685.005` Clear Windows Event Logs, а не «что-то из удаления следов».
 
-## Что изменилось в v20 по техникам
-
-- **Новые техники (7):** `T1699` Direct Prompt Injection, `T1698` Indirect Prompt Injection, `T1700` AI-Enabled Exfiltration, `T1697` Steal Application Specific Passwords, `T1696` Anti-Automation Evasion (`.001` Automate CAPTCHA Completion, `.002` Avoid CAPTCHA), `T1608.007` AI Result Poisoning, `T1685.007` Impair Autonomous Defenses. Тема релиза — поведение вокруг ИИ-сервисов и автономных защитных механизмов.
-- **Консолидация в ICS:** появилась `T1701` Command and Scripting Interpreter с подтехниками, а старые `T0807` Command-Line Interface и `T0853` Scripting отправлены в deprecated.
-- **Перестройка дерева:** подтехники `T1070.001` Clear Windows Event Logs и `T1070.002` Clear Linux or Mac System Logs ушли из T1070 и живут теперь как `T1685.005` и `T1685.006`. Правило, помеченное старым ID, формально ссылается на несуществующий объект.
-- **Колебания статусов:** Mobile-техника `T1476` Deliver Malicious Application via Other Means вернулась из deprecated (была убрана в v11) — так что «deprecated» не всегда окончательно.
-
-Вывод для процессов: при каждом релизе прогонять changelog (`mitre/cti`, тег вида `ATT&CK-v20.0`) и сверять свои маппинги — иначе heatmap покрытия постепенно расходится с реальностью.
-
 ## Почему техник 227, а карточек в матрице 259
 
 Техника живёт в каждой тактике, к которой относится, поэтому сумма карточек по столбцам (259) больше числа уникальных техник (227): 32 техники стоят более чем в одной колонке. Отсюда два следствия:
