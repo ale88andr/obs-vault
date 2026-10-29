@@ -480,9 +480,7 @@ overlayfs (CVE-2023-0386) — обход прав SUID через FUSE + overlay
 ./poc
 ```
 
-**linux-exploit-suggester.sh — сопоставление версии ядра с известными эксплойтами.**
-
-(Обычно пишут просто «exploit suggester» — подбор подходящих эксплойтов по версии ядра.)
+linux-exploit-suggester.sh — подбор подходящих эксплойтов по версии ядра.
 
 ```
 # Automated kernel exploit suggester:
