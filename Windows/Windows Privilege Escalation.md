@@ -264,7 +264,7 @@ reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 # EnableLUA = 1 → mandatory UAC
 ```
 
-fodhelper.exe UAC bypass — auto-elevated binary that reads HKCU registry
+Обход UAC через fodhelper.exe — автоматически повышаемый бинарник, читающий реестр HKCU.
 
 ```
 # fodhelper.exe bypass (Windows 10):
@@ -275,7 +275,7 @@ fodhelper.exe
 reg delete HKCU\Software\Classes\ms-settings /f
 ```
 
-eventvwr.exe UAC bypass via HKCU hijacking
+Обход UAC через `eventvwr.exe` путём перехвата раздела HKCU.
 
 ```
 # eventvwr.exe bypass (Windows 7-10):
