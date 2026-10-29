@@ -400,7 +400,7 @@ $ExecutionContext.SessionState.LanguageMode
 powershell -version 2 -c "whoami"
 ```
 
-PowerShell and LOLBIN download cradles for file retrieval
+Cradles загрузки в PowerShell и LOLBIN для получения файлов.
 
 ```
 # Download cradle variants:
