@@ -285,7 +285,9 @@ eventvwr.exe
 reg delete HKCU\Software\Classes\mscfile /f
 ```
 
-sdclt.exe UAC bypass via App Paths hijacking
+Обход UAC через sdclt.exe путём перехвата раздела App Paths
+
+> `sdclt.exe` — авто-повышаемый бинарник Windows.
 
 ```
 # sdclt.exe bypass (Windows 10):
