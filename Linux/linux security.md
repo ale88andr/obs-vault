@@ -77,9 +77,9 @@
 
 ```bash
 journalctl -u ssh --since "1 day ago" | grep -i accepted   # успешные входы за сутки
-journalctl -u ssh -f                                      # live-режим, как tail -f
-journalctl -u sudo                                        # кто, что и откуда запускал
-w                                                         # кто сидит на сервере прямо сейчас
+journalctl -u ssh -f   # live-режим, как tail -f
+journalctl -u sudo     # кто, что и откуда запускал
+w                      # кто сидит на сервере прямо сейчас
 ```
 
 ### Время должно быть синхронизировано
