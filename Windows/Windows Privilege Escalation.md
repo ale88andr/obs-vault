@@ -155,7 +155,7 @@ sc start <ServiceName>
 sc config <ServiceName> binpath= "C:\Temp\evil.exe"
 ```
 
-Check if service binary file is writable — replace with malicious binary
+Проверка, доступен ли файл бинарника службы на запись, — замена его вредоносным бинарником.
 
 ```
 # Check service binary file permissions:
@@ -163,7 +163,7 @@ icacls "C:\path\to\service.exe"
 # If (F) or (M) for current user or group → replace binary
 ```
 
-Modify service ImagePath in registry if registry key is writable
+Изменение параметра ImagePath службы в реестре, если раздел реестра доступен на запись
 
 ```
 # Weak registry permissions on service:
