@@ -1,16 +1,16 @@
-# Enumeration and Credential Attacks
+# Перечисление и атаки на учетные данные
 
-Active Directory testing commands for domain enumeration, Kerberoasting, AS-REP roasting, pass-the-hash, DCSync and forged or reused tickets.
+Команды для тестирования Active Directory: перечисление ресурсов домена, Kerberoasting, AS-REP roasting, передача хэша (Pass-the-Hash), DCSync, а также использование поддельных или повторно использованных тикетов.
 
-## Active Directory & Kerberos — Cheat Sheet
+## Active Directory и Kerberos — Шпаргалка
 
-**What is Active Directory?**
+**Что такое Active Directory?**
 
-Active Directory is Microsoft's identity and policy platform for Windows domains. Its Kerberos tickets, directory permissions, and trust relationships create paths that can be mapped and assessed from a domain foothold.
+Active Directory — это платформа управления идентификацией и политиками Microsoft для доменов Windows. Ее тикеты Kerberos, разрешения каталога и отношения доверия создают векторы, которые можно проанализировать и оценить, получив первоначальный доступ (плацдарм) в домене.
 
-Replace `domain.com`, example identities, `192.0.2.20`, and uppercase hash or ticket values with the matching domain data. Impacket examples assume the named scripts are available locally; Rubeus and Mimikatz commands run from their executable directory. LDAP anonymous searches can be denied, and AD PowerShell cmdlets require the ActiveDirectory module. Replication, ticket impersonation, and remote execution each require the relevant account permissions and target configuration.
+Замените `domain.com`, примеры идентификаторов, `192.0.2.20` и значения хэшей или тикетов в верхнем регистре на соответствующие данные вашего домена. Примеры с Impacket предполагают, что указанные скрипты доступны локально; команды Rubeus и Mimikatz выполняются из каталога с их исполняемыми файлами. Анонимные поисковые запросы LDAP могут быть запрещены, а для командлетов AD PowerShell требуется модуль ActiveDirectory. Репликация, имперсонация тикетов и удаленное выполнение команд требуют соответствующих разрешений учетной записи и правильной конфигурации целевой системы.
 
-List all domain users
+Перечислить всех пользователей домена
 
 ```
 net user /domain
