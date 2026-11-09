@@ -173,7 +173,7 @@ nmap --host-timeout 5m --max-retries 2 192.168.1.10
 
 `--max-rate` ограничивает пакеты/сек, `--host-timeout` не даёт зависнуть на одном хосте, `--max-retries` уменьшает повторы.
 
-### Контроль изменений: Ndiff (1:08:24)
+### Контроль изменений: Ndiff
 
 ```
 ndiff scan_old.xml scan_new.xml
@@ -181,7 +181,7 @@ ndiff scan_old.xml scan_new.xml
 
 Сравнивает два XML-скана и показывает, что появилось/исчезло/изменилось (новые порты, смена версии). Это основа регулярного мониторинга своей сети.
 
-### Отчёт в HTML (1:10:09)
+### Отчёт в HTML
 
 ```
 xsltproc -o scan.html /usr/share/nmap/nmap.xsl scan.xml
@@ -189,11 +189,9 @@ xsltproc -o scan.html /usr/share/nmap/nmap.xsl scan.xml
 
 XML + штатная XSL-таблица → аккуратный HTML-отчёт, который можно приложить к задаче/отчёту.
 
----
+## 7. Глазами защитника
 
-## 7. Глазами защитника (1:12:26–1:21:18)
-
-### Почерк сканирования в tcpdump (1:13:03)
+### Почерк сканирования в tcpdump
 
 ```
 tcpdump -nn -i eth0 'tcp[tcpflags] & tcp-syn != 0'
