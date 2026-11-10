@@ -295,7 +295,7 @@ sudo nmap -sV -p 22,8080 192.168.1.3
 7. NSE — `http-title`, `ssl-cert`, `ssl-enum-ciphers`, `smb2-security-mode`;
 
 ```
-sudo nmap -p 139 --script  
+sudo nmap -p 139 --script  192.168.1.3
 ```
 
 8. `-oA` — сохранить, `xsltproc` — HTML-отчёт;
