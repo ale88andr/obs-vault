@@ -293,6 +293,11 @@ sudo nmap -sV -p 22,8080 192.168.1.3
 
 6. `-O` / `-A` — ОС и дополнительный контекст;
 7. NSE — `http-title`, `ssl-cert`, `ssl-enum-ciphers`, `smb2-security-mode`;
+
+```
+sudo nmap -p 139 --script  
+```
+
 8. `-oA` — сохранить, `xsltproc` — HTML-отчёт;
 9. повторить позже → `ndiff` — что изменилось.
 
