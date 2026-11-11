@@ -131,7 +131,7 @@ systemctl list-unit-files --state=enabled
 
 Плюс `/etc/cron.*`, systemd-таймеры — типовое место для закрепления.
 
-## 9. Ключи `journalctl` и хранение журнала (6:02)
+## 9. Ключи `journalctl` и хранение журнала
 
 ```
 journalctl -u ssh
