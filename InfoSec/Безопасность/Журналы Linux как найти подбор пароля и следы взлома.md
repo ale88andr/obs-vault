@@ -126,7 +126,7 @@ sudo ausearch -k sshkeys
 ```
 journalctl -u cron                 # Red Hat: -u crond
 sudo crontab -l -u ИМЯ
-systemctl list-unit-files --state=enabled
+systemctl list-unit-files --state=enabled # автозагрузка программ
 ```
 
 Плюс `/etc/cron.*`, systemd-таймеры — типовое место для закрепления.
