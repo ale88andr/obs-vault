@@ -35,3 +35,167 @@
 - **RFLAGS** — битовое поле условий; например, 6-й бит — zero flag. В пользовательском режиме доступна только часть `EFLAGS`.
 - **Сегментные регистры** остались от сегментации; теперь хранят указатели на структуры процесса/системы (`GS` важен для ядра).
 - **CR3** хранит физический адрес таблицы первого уровня текущего процесса.
+
+## Потоки и стек
+
+- **Поток** — контекст выполнения (состояние CPU + значения регистров). Потоки одного процесса могут выполняться параллельно на разных ядрах.
+- **Стек** — фиксированный по размеру RW-блок памяти потока для локальных переменных и аргументов. Формально LIFO, но каждая функция резервирует свой участок — **stack frame**.
+- **RSP** — вершина стека, **RBP** — база текущего фрейма.
+- Пример: `push rbp; mov rbp, rsp; ...; pop rbp; ret` — при вызове сначала кладётся адрес возврата, затем старый `rbp`; `ret` забирает адрес возврата в `RIP`.
+- Стек обнуляют, чтобы не читать «мусор» от предыдущих фреймов. На Windows есть дополнительные детали (например, **shadow space**).
+- Крупные данные (изображения) в стек не кладут — для них есть **куча (heap)**.
+
+## Формат PE 
+
+- Исполняемый файл — **Portable Executable (PE)**, «portable» — потому что поддерживает разные архитектуры.
+- **DOS-заголовок** → **DOS stub** (16-битная программа, обычно печатает «This program cannot be run in DOS mode.») — дань обратной совместимости.
+- **NT headers:** _file header_ (архитектура, дата создания) и _optional header_ (вопреки названию важен: где начинается код и т.д.).
+- **Таблица секций:** имя, размеры, атрибуты (R/W/X). Атрибуты — механизм безопасности: запись в не-writable секцию кода вызывает access violation.
+- Типовые секции: **`.text`** (код), **`.data`** (изменяемые данные), **`.rdata`** (только чтение).
+
+## Windows API
+
+- Двойной клик по Notepad обрабатывает **`explorer.exe`** (рабочий стол, панель задач, проводник). Он вызывает **`CreateProcess`**.
+- Windows API разбит по библиотекам; линковка бывает **статическая** (код внутрь exe) и **динамическая** (общие **DLL** на диске, мапятся в процессы).
+- Ключевые DLL: **`kernel32.dll`** (легаси), **`kernelbase.dll`** (современная замена), **`ntdll.dll`**.
+- В NTDLL три вида функций:
+    - **`Nt*`** — обёртки системных вызовов;
+    - **`Zw*`** — те же вызовы для кода ядра (в user mode — алиасы `Nt*`);
+    - **`Rtl*`** — runtime-хелперы (могут, а могут и не делать syscall).
+- Программы редко зовут NTDLL напрямую: обёртки выше дают разбор аргументов, валидацию, обработку ошибок.
+
+## Архитектура Windows
+
+- **User mode:** пользовательские процессы → **subsystem DLL** (`kernel32`, `kernelbase`, `user32` — каждая даёт свой кусок API) → почти всё упирается в **NTDLL**.
+- **Service-процессы** (например, Windows Defender) работают вне контекста залогиненного пользователя; **system-процессы** (например, менеджер входа) имеют фиксированное назначение.
+- **Kernel mode:** **executive** (memory manager, object manager и др.) → **kernel** (планировщик и низкоуровневые функции) → **драйверы устройств** → **HAL** (аппаратно-зависимый слой, самый нижний).
+
+## CreateProcess и системные вызовы
+
+Цепочка вызовов:
+
+```
+explorer.exe
+  → kernelbase!CreateProcess
+    → CreateProcessInternalW   (собирает и форматирует аргументы)
+      → ntdll!NtCreateUserProcess
+        → syscall
+          → ntoskrnl.exe!KiSystemCall64(Shadow)
+```
+
+- `KiSystemCall64Shadow` — диспетчер системных вызовов (вариант с «shadow» смягчает **Meltdown**).
+- Что делает обработчик:
+    1. **`swapgs`** — меняет `GS` на `IA32_KERNEL_GS_BASE` MSR, указывающий на **KPCR** (структура на каждое ядро; внутри — **KPRCB**);
+    2. сохраняет用户-стек и переключается на **стек ядра**;
+    3. `KiSystemServiceStart` → **SSDT** → нужная функция по номеру сервиса (могут выполняться и логирующие процедуры);
+    4. после выполнения — инкремент счётчика syscall в KPRCB, восстановление регистров, обратный `swapgs`, **`sysret`**.
+
+## NtCreateUserProcess, часть 1
+
+Автор трассировал вызов, захукав диспетчер и остановившись только на syscall `NtCreateUserProcess` из `explorer.exe`, затем запустил `notepad.exe`.
+
+- Сначала **`IoCreateFileEx`** открывает файл образа.
+- Затем **`MmCreateSpecialImageSection`** создаёт **section object**, чтобы отобразить файл в память.
+
+## Объекты Windows
+
+- Объект — представление ресурса (процесс, файл, поток…). У всех есть **object header**: счётчик ссылок, счётчик хэндлов, флаги (в т.ч. permanent).
+- **Object manager** управляет жизненным циклом: когда оба счётчика = 0, объект уничтожается (если не permanent).
+- Из user mode объекты напрямую недоступны — нужен **хэндл** (ключ с правами). Хэндлы хранятся в таблице процесса, закрываются через **`CloseHandle`**.
+- В kernel mode объекты доступны напрямую, вместо хэндлов — **`ObReferenceObject` / `ObDereferenceObject`** (счётчик ссылок).
+
+## Дескрипторы безопасности
+
+- У объекта есть **security descriptor**: владелец + два списка ACL:
+    - **SACL** — что и кем должно попадать в аудит-логи;
+    - **DACL** — кто какие права имеет.
+- ACL состоит из **ACE** (access control entries). Основные типы: **access allowed** и **access denied**.
+- **Маска прав (access mask):** 16 бит объектных прав, 8 бит стандартных (delete, change owner…), 4 бита игнорируются, 4 бита generic (read/write/execute/all).
+- **SID** (`S-1-5-21-3272137373-...-1001`): `S`, ревизия (сейчас только 1), **authority** (48 бит; 5 = Windows security subsystem), **subauthorities** (например, 21 + domain ID + **RID**). RID идентифицирует конкретного субъекта. В AD domain ID — идентификатор домена, в standalone — устройства.
+
+## Section objects
+
+Два типа:
+
+- **File-backed** — отображает файл в память: `CreateFileA` → `CreateFileMappingA` (внутри `NtCreateSection`) → `MapViewOfFile` → работа с памятью → `FlushViewOfFile` → `UnmapViewOfFile` + `CloseHandle`. Автор отдельно отмечает несогласованность API: `CreateFile` при ошибке возвращает `INVALID_HANDLE_VALUE` (-1), а `CreateFileMappingA` — `nullptr` (0). Суффиксы **`A`/`W`** — ANSI/wide-строки (`A` обычно конвертирует в wide внутри).
+- **Page-backed** — не связан с файлом, служит для **разделения памяти между процессами**. Указывается имя; тогда перед object header появляется **object name info header**. Второй процесс открывает через `OpenFileMappingA` и читает данные (пример: первый пишет «Hello, World!», второй его печатает).
+
+## NtCreateUserProcess, часть 2
+
+- **`PspAllocateProcess`** создаёт **EPROCESS** (executive-объект процесса; вверху — **KPROCESS** с данными только для ядра) через **`ObCreateObjectEx`**.
+- Назначается **access token** (набор прав; при логине его выдаёт **LSASS**, дочерние процессы получают копию).
+- **`MmCreateProcessAddressSpace`**:
+    - `MiInitializeWorkingSetList` — инициализация **working set**;
+    - создаются **VAD** (`MiAllocateProcessVads`);
+    - в адресное пространство мапятся section образа и **NTDLL**.
+- **`MmCreatePeb` → `MiCreatePebOrTeb`** создаёт **PEB** (Process Environment Block): список загруженных DLL, база образа, флаг «отлаживается ли».
+
+**Working sets :** набор страниц процесса, реально находящихся в физической памяти; есть гарантированный минимум и максимум. Свои working set есть у ядра (system) и у каждой сессии (session).
+
+**Сессии:** создаются при входе (и даже на экране блокировки); внутри — **window stations**, в них — **desktops** (окна, меню, хуки) и состояние буфера обмена. Сессия 0 всегда существует для системных процессов; сессии изолируют графические интерфейсы.
+
+**VAD (35:00):** дерево, где каждый узел описывает выделенный регион памяти. `VirtualAlloc`:
+
+- `MEM_RESERVE` — зарезервировать диапазон без списания памяти (запись → access violation);
+- `MEM_COMMIT` — реально выделить/списать;
+- можно оба сразу. Узел VAD создаётся, а запись в таблице страниц — только при первом обращении (page fault → обход VAD → создание PTE).
+
+## NtCreateUserProcess, часть 3
+
+Создание первого потока:
+
+- **`PspAllocateThread`** → **ETHREAD**;
+- **`PspSetupUserStack`** — пользовательский стек;
+- **`MmCreateTeb`** → **TEB** (у каждого потока свой);
+- **`KeInitThread`** → **KTHREAD**, стек ядра, контекст потока (хранится на стеке ядра), список APC, точка входа `KxStartUserThread`;
+- **`PspInsertProcess`** (`ObInsertObject` — хэндл процесса) и **`PspInsertThread`** → **`KeStartThread`** (счётчик потоков в EPROCESS, вставка в список) → хэндл потока → **`KeReadyThread`** (deferred ready: готов, но ещё не выполняется).
+
+Возврат в `CreateProcessInternalW`:
+
+- **`CsrClientCallServer`** отправляет сообщение процессу **`csrss`** (client-server runtime subsystem) через **ALPC** — undocumented IPC. В сообщении: хэндлы процесса/потока, адрес PEB, хэндл section.
+- Поток возобновляется: **`KxStartUserThread`** (в документации `KiStartUserThread`; префикс `Kx` = архитектурно-зависимая реализация) → **`PspUserThreadStartup`** вручную строит **trap frame** (поток ещё не переключался через syscall) → `iretq` → старт в user mode.
+
+## Image loader
+
+- Trap frame указывает на **`LdrInitializeThunk`** в NTDLL — загрузчик образа.
+- Создаёт **loader database** (поле `Ldr` в PEB) — список всех загруженных DLL.
+- Парсит **IDT (import directory table)** из optional header → data directories: смещение + размер → секция `.idata` или часть `.rdata`.
+- **`IMAGE_IMPORT_DESCRIPTOR`**: `Name` (имя библиотеки), `OriginalFirstThunk` → **INT** (имена/ординалы импортируемых функций), `FirstThunk` → **IAT**.
+- **`IMAGE_THUNK_DATA`** — запись о функции; после разрешения импорта `Function` в IAT указывает на реальный адрес функции в памяти (адреса DLL непредсказуемы из-за ASLR).
+- Импорты разрешаются по **таблице экспорта** загруженной библиотеки (аналогично). DLL могут импортировать другие DLL — загрузчик делает это рекурсивно, параллельно worker-потоками.
+- Кроме этого: инициализация кучи, shims, релокации и многое другое (обещано во второй части). Завершается вызовом **точки входа** приложения.
+
+---
+
+## Ключевая цепочка создания процесса
+
+```
+explorer.exe
+ → CreateProcess (kernelbase)
+   → CreateProcessInternalW
+     → NtCreateUserProcess (ntdll) → syscall
+       → KiSystemCall64Shadow (ntoskrnl) → SSDT
+         → NtCreateUserProcess (ядро)
+           → IoCreateFileEx → MmCreateSpecialImageSection
+           → PspAllocateProcess → ObCreateObjectEx → EPROCESS/KPROCESS
+             → MmCreateProcessAddressSpace → working set + VAD + NTDLL
+             → MmCreatePeb → PEB
+           → PspAllocateThread → ETHREAD/TEB → KeInitThread → KTHREAD
+           → PspInsertProcess / PspInsertThread → KeReadyThread
+     → CsrClientCallServer (ALPC → csrss)
+     → resume → KxStartUserThread → PspUserThreadStartup → trap frame → iretq
+       → LdrInitializeThunk → IDT → IAT → entry point
+```
+
+## Структуры, которые стоит запомнить
+
+|Структура|Где|Назначение|
+|---|---|---|
+|**KPCR / KPRCB**|на каждое ядро|состояние процессора, счётчик syscall|
+|**SSDT**|ядро|таблица обработчиков системных вызовов по номеру|
+|**EPROCESS / KPROCESS**|ядро|объект процесса; KPROCESS — «ядровая» часть|
+|**ETHREAD / KTHREAD**|ядро|объект потока; KTHREAD — «ядровая» часть|
+|**PEB / TEB**|user mode|данные процесса/потока для пользовательского кода (DLL, база образа, BeingDebugged)|
+|**VAD**|ядро|дерево выделенных регионов виртуальной памяти|
+|**Section object**|ядро/объекты|file-backed и page-backed отображения памяти|
+|**Security descriptor / ACL / ACE / SID**|объекты|права доступа и аудит|
