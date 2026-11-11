@@ -25,7 +25,7 @@ journalctl --since yesterday
 journalctl -f                # следить в реальном времени
 ```
 
-## 3. Три типа строк о входе по SSH (1:25)
+## 3. Три типа строк о входе по SSH
 
 1. **`Failed password for …`** — неудачная попытка входа (пароль не подошёл).
 2. **`Invalid user …`** — попытка войти под **несуществующим** пользователем. Почти всегда признак перебора или сканера.
@@ -33,7 +33,7 @@ journalctl -f                # следить в реальном времени
 
 Вокруг них полезны и сопутствующие строки: `Connection closed by authenticating user`, `session opened for user`, `Disconnected from invalid user`.
 
-## 4. Как за минуту посчитать, кто подбирает пароль (2:07)
+## 4. Как понять, кто подбирает пароль
 
 ```
 sudo grep 'Failed password' /var/log/auth.log \
@@ -42,7 +42,7 @@ sudo grep 'Failed password' /var/log/auth.log \
 
 Как читать конвейер:
 
-- `grep` — оставить только неудачные попытки;
+- `grep 'Failed password'` — оставить только неудачные попытки;
 - `awk '{print $(NF-3)}'` — вытащить IP (в строке вида `Failed password for root from 1.2.3.4 port 22 ssh2` адрес стоит за три поля до конца);
 - `sort | uniq -c` — посчитать повторы;
 - `sort -rn | head` — показать топ источников.
